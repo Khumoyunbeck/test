@@ -34,8 +34,8 @@ function UserLogin() {
                     }
                 ).then(
                     e => {
-                        localStorage.setItem("user_id", e?.data?.data?._id)
-                        localStorage.setItem("user_token", e.data.data?.token)
+                        localStorage.setItem("user_id", e?.data?._id)
+                        localStorage.setItem("user_token", e.data?.token)
                         localStorage.removeItem("bank_token")
                         localStorage.removeItem("admin_token")
                         navigate('/admin/cards')
@@ -43,15 +43,31 @@ function UserLogin() {
                 ).catch(e => console.log(e))
             }
             if (values?.value === 2) {
-                axios.post("maderator/login",
+                axios.post("xodim/login",
                     {
                         email: values?.email,
                         password: values?.password,
                     }
                 ).then(e => {
-                        localStorage.setItem("bank_token", e.data.data?.token)
+                        localStorage.setItem("bank_token", e.data?.token)
+                        localStorage.setItem("bank_id", e?.data?._id)
                         localStorage.removeItem("user_token")
                         localStorage.removeItem("admin_token")
+                        navigate('/admin/applications')
+                    }
+                ).catch(e => console.log(e))
+            }
+            if (values?.value === 3) {
+                axios.post("auth/login",
+                    {
+                        email: values?.email,
+                        password: values?.password,
+                    }
+                ).then(e => {
+                        localStorage.setItem("admin_id", e?.data?._id)
+                        localStorage.setItem("admin_token", e.data?.token)
+                        localStorage.removeItem("user_token")
+                        localStorage.removeItem("bank_token")
                         navigate('/admin/applications')
                     }
                 ).catch(e => console.log(e))
@@ -63,7 +79,7 @@ function UserLogin() {
     }, [token])
 
     return (
-        <>
+        <div className="wr100">
             <div className='accountbg'></div>
             <div className='home-btn d-none d-sm-block'>
                 <a href='/' className='text-white'>
@@ -124,6 +140,7 @@ function UserLogin() {
                             <Radio.Group onChange={onChange} value={values.value}>
                                 <Radio value={1}>User</Radio>
                                 <Radio value={2}>Bank</Radio>
+                                <Radio value={3}>Admin</Radio>
                             </Radio.Group>
 
                             <div className='form-group text-center m-t-20'>
@@ -140,7 +157,7 @@ function UserLogin() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

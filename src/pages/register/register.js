@@ -11,7 +11,9 @@ function Register() {
     const [values, setValues] = useState({
         name: "",
         email: "",
-        password: ""
+        password: "",
+        phone: "",
+        region: ""
     })
 
     let navigate = useNavigate()
@@ -100,6 +102,34 @@ function Register() {
                                         name='password'
                                         placeholder='Password'
                                         onChange={event => setValues({...values, password: event.target.value})}
+                                    />
+                                </div>
+                            </div>
+                            <div className='form-group'>
+                                <div className='col-12'>
+                                    <label>Phone</label>
+                                    <input
+                                        ref={password}
+                                        className='form-control'
+                                        type='number'
+                                        required
+                                        name='phone'
+                                        placeholder='phone'
+                                        onChange={event => setValues({...values, phone: event.target.value})}
+                                    />
+                                </div>
+                            </div>
+                            <div className='form-group'>
+                                <div className='col-12'>
+                                    <label>Region</label>
+                                    <input
+                                        ref={password}
+                                        className='form-control'
+                                        type='region'
+                                        required
+                                        name='region'
+                                        placeholder='region'
+                                        onChange={event => setValues({...values, region: event.target.value})}
                                     />
                                 </div>
                             </div>

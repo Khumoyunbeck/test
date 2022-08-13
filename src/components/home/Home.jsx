@@ -21,7 +21,8 @@ import CardCar from "../card_car/Card_car";
 import {injectStyle} from "react-toastify/dist/inject-style";
 import {useSelector} from "react-redux";
 import {MainApi} from "../../api";
-import {Col, Row} from "antd";
+import {Col, Input, Row, Slider} from "antd";
+import {StyledModal, Wrapper} from "./home.e";
 
 if (typeof window !== "undefined") {
     injectStyle();
@@ -29,9 +30,16 @@ if (typeof window !== "undefined") {
 
 function Home({addCompare}) {
     const [num, setNum] = useState("");
-
+    const [fCars, setFCars] = useState([]);
     const [cars, setCars] = useState([]);
     const [clients, setClients] = useState([]);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [data, setData] = useState({
+        kuzov: "",
+        yili: 2000,
+        yurgani: 0,
+        narxi: 0
+    })
 
     const {lang} = useSelector((state) => state.lang);
 
@@ -68,12 +76,24 @@ function Home({addCompare}) {
         AKSIYALAR_CHEGIRMALAR,
         Batafsil,
         BARCHA_TAKLIFLAR,
+        yili
     } = Language;
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+        setFCars([])
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+        setFCars([])
+    };
+
 
     const getCars = async () => {
         await axios
             .get(`${MainApi}/car/all`)
-            .then((res) => setCars(res.data?.getAllmowin))
+            .then((res) => setCars(res.data?.data))
             .catch((err) => new Error(err));
     };
 
@@ -84,16 +104,55 @@ function Home({addCompare}) {
             .catch((err) => new Error(err));
     };
 
+    const onChange = (value) => {
+        setData({...data, yili: value})
+    };
+
+    const onChange1 = (value) => {
+        setData({...data, yurgani: value})
+    };
+
+    const onChange2 = (value) => {
+        setData({...data, narxi: value})
+    };
+
     useEffect(() => {
         getCars();
         getClients();
     }, []);
 
+    const handleModal = async () => {
+        await axios.get(`${MainApi}/car/v1?yili=${data.yili}&yurgani=${data.yurgani}&narxi=${data.narxi}&&madel=`).then(r => {
+            setFCars(r?.data)
+        }).catch(err => console.log("err", err))
+    }
+
     cars.length > 0 &&
     cars.forEach((item) => !!!num && !!item.aksiya && setNum("aksiya"));
+    useEffect(() => {
+        if (!!fCars.length)
+            setIsModalVisible(true);
+    }, [fCars, data])
 
     return (
         <div className="wrapper">
+            <Wrapper className="wr100">
+                <StyledModal title="Saralangan moshinalar" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}
+                             className="w100" style={{width: "100%", resize: "auto"}}>
+                    <Row style={{width: "100%"}}>
+                        {fCars.length > 0 &&
+                        fCars.map((car, index) => {
+                                return (
+                                    <Col xl={8} md={12} sm={24}>
+                                        <CardCar key={index} car={car} addCompare={addCompare}/>
+                                    </Col>
+                                )
+                            }
+                        )}
+                    </Row>
+                </StyledModal>
+            </Wrapper>
+
             <main>
                 <section className="slider">
                     <div className="slider__title">
@@ -206,117 +265,70 @@ function Home({addCompare}) {
                                 <h3 className="form__title">{thirdteen[lang]}</h3>
                                 <h4 className="form__item-name">{ten[lang]}</h4>
                                 <div className="form__item">
-                                    <select name="met">
-                                        <option value="1">Хетчбек</option>
-                                        <option value="2">Кроссовер</option>
-                                        <option value="3">Седан</option>
+                                    <select name="met"
+                                            onChange={event => setData({
+                                                ...data,
+                                                kuzov: event.target.value
+                                            })}
+                                    >
+                                        <option value="Хетчбек">Хетчбек</option>
+                                        <option value="Кроссовер">Кроссовер</option>
+                                        <option value="Седан">Седан</option>
                                         <option selected value="4">
                                             Универсал
                                         </option>
                                     </select>
                                 </div>
                                 <h4 className="form__item-name">{eleven[lang]}</h4>
-                                <div className="renge-wrapper">
-                                    <div className="slider">
-                                        <div className="progress"></div>
+                                <div>
+                                    <div>
+                                        {data.yili}
                                     </div>
-                                    <div className="range-input">
-                                        <input
-                                            type="range"
-                                            className="range-min"
-                                            min="0"
-                                            max="2022"
-                                            value="2019"
-                                            step="1"
-                                        />
-                                        <input
-                                            type="range"
-                                            className="range-max"
-                                            min="0"
-                                            max="2022"
-                                            value="2019"
-                                            step="1"
-                                        />
-                                    </div>
-                                    <div className="price-input">
-                                        <div className="field">
-                                            <span>{twelve[lang]}</span>
-                                            <input type="number" className="input-min" value="2500"/>
-                                        </div>
-                                        <div className="field">
-                                            <span>{Gacha[lang]}</span>
-                                            <input type="number" className="input-max" value="7500"/>
-                                        </div>
-                                    </div>
+                                    <Slider min={2000} max={2023} onChange={onChange} value={data?.yili}/>
+                                    <Row gutter={16}>
+                                        <Col span={24}>
+                                            <Input value={data?.yili} addonAfter='yil' onChange={value => setData({
+                                                ...data,
+                                                yili: value?.target?.value
+                                            })}
+                                            />
+                                        </Col>
+                                    </Row>
                                 </div>
                                 <h4 className="form__item-name">{Kilometr[lang]}</h4>
                                 <div className="renge-wrapper">
-                                    <div className="slider">
-                                        <div className="progress"></div>
+                                    <div>
+                                        {data.yurgani}
                                     </div>
-                                    <div className="range-input">
-                                        <input
-                                            type="range"
-                                            className="range-min"
-                                            min="0"
-                                            max="10000"
-                                            value="2500"
-                                            step="100"
-                                        />
-                                        <input
-                                            type="range"
-                                            className="range-max"
-                                            min="0"
-                                            max="10000"
-                                            value="7500"
-                                            step="100"
-                                        />
-                                    </div>
-                                    <div className="price-input">
-                                        <div className="field">
-                                            <span>{twelve[lang]}</span>
-                                            <input type="number" className="input-min" value="2500"/>
-                                        </div>
-                                        <div className="field">
-                                            <span>{Gacha[lang]}</span>
-                                            <input type="number" className="input-max" value="7500"/>
-                                        </div>
-                                    </div>
+                                    <Slider min={0} max={1000000} onChange={onChange1} value={data.yurgani}/>
+                                    <Row gutter={16}>
+                                        <Col span={24}>
+                                            <Input value={data?.yurgani} addonAfter='yil' onChange={value => setData({
+                                                ...data,
+                                                yurgani: value?.target?.value
+                                            })}
+                                            />
+                                        </Col>
+                                    </Row>
                                 </div>
                                 <h4 className="form__item-name">{Narxi[lang]}</h4>
                                 <div className="renge-wrapper">
-                                    <div className="slider">
-                                        <div className="progress"></div>
+                                    <div>
+                                        {data.narxi} so'm
                                     </div>
-                                    <div className="range-input">
-                                        <input
-                                            type="range"
-                                            className="range-min"
-                                            min="0"
-                                            max="10000"
-                                            value="2500"
-                                            step="100"
-                                        />
-                                        <input
-                                            type="range"
-                                            className="range-max"
-                                            min="0"
-                                            max="10000"
-                                            value="7500"
-                                            step="100"
-                                        />
-                                    </div>
-                                    <div className="price-input">
-                                        <div className="field">
-                                            <span>{twelve[lang]}</span>
-                                            <input type="number" className="input-min" value="2500"/>
-                                        </div>
-                                        <div className="field">
-                                            <span>{Gacha[lang]}</span>
-                                            <input type="number" className="input-max" value="7500"/>
-                                        </div>
-                                    </div>
-                                    <button className="form__button">{nine[lang]}</button>
+                                    <Slider min={0} max={1000000} onChange={onChange2} value={data.narxi}/>
+                                    <Row gutter={16}>
+                                        <Col span={24}>
+                                            <Input value={data?.narxi} addonAfter='yil' onChange={value => setData({
+                                                ...data,
+                                                narxi: value?.target?.value
+                                            })}
+                                            />
+                                        </Col>
+                                    </Row>
+                                </div>
+                                <div style={{marginTop: "50px"}}>
+                                    <button className="form__button" onClick={() => handleModal()}>{nine[lang]}</button>
                                 </div>
                             </div>
                             <div className="form">
@@ -389,8 +401,8 @@ function Home({addCompare}) {
                                 pagination={{clickable: true}}
                                 className="cards-slider__cadrs swiper-wrapper"
                             >
-                                {cars.length &&
-                                cars.map(
+                                {cars?.length &&
+                                cars?.map(
                                     (item, index) => {
                                         if (!!item.aksiya)
                                             return (
@@ -479,15 +491,15 @@ function Home({addCompare}) {
                                 pagination={{clickable: true}}
                                 className="swiper-wrapper"
                             >
-                                {clients &&
+                                {clients.length &&
                                 clients?.map((item, index) => (
                                     <SwiperSlide className="swiper-slide" key={index}>
                                         <div className="clients__item">
                                             <div className="clients__img">
-                                                <img src={item.photo} alt="icons"/>
+                                                <img src={item?.photo} alt="icons"/>
                                             </div>
-                                            <div className="clients__name">{item.ismizuz}</div>
-                                            <div className="clients__name">{item.ismizru}</div>
+                                            <div className="clients__name">{item?.ismizuz}</div>
+                                            <div className="clients__name">{item?.ismizru}</div>
                                         </div>
                                     </SwiperSlide>
                                 ))}

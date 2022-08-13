@@ -24,7 +24,7 @@ function Statistics() {
 
 
     useEffect(() => {
-        axios.get(`${MainApi}/car/all`)
+        axios.get(`${MainApi}/car/user/all`)
             .then((data) => {
                 setCar(data?.data?.getAllmowin?.length)
             });

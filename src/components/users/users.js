@@ -1,20 +1,26 @@
 import React from 'react';
 import {Button, Table} from "antd";
 
-function Users({dataSource, isbank = false, deleteBank}) {
+function Users({dataSource, isbank = false, deleteBank, updateBank}) {
     const columns = [
         isbank ? {
             title: 'Bank nomi',
-            dataIndex: 'bank_name',
-            key: 'bank_name',
-            render: () => {
-                return (
-                    <div>
-                        Hamkorbank
-                    </div>
-                )
-            }
-        } : {},
+            dataIndex: 'bank',
+            key: 'bank'
+        } : {
+            title: 'Region',
+            dataIndex: 'region',
+            key: 'region'
+        },
+        isbank ? {
+            title: 'Phone',
+            dataIndex: 'phone',
+            key: 'phone'
+        } : {
+            title: 'Phone',
+            dataIndex: 'phone',
+            key: 'phone'
+        },
         {
             title: 'Name',
             dataIndex: 'name',
@@ -51,7 +57,7 @@ function Users({dataSource, isbank = false, deleteBank}) {
             key: '_id',
             render: (props) => {
                 return (
-                    <Button type="ghost">Edit</Button>
+                    <Button type="ghost" onClick={() => updateBank(props)}>Edit</Button>
                 )
             }
         } : {},

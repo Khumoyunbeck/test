@@ -1,9 +1,8 @@
-import {Col, Row, Spin, Table} from 'antd'
+import {Col, Image, Row, Table} from 'antd'
 import {useParams} from "react-router";
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {MainApi} from "../../api";
-import { Image } from 'antd';
 
 const Application_page = () => {
     const {id} = useParams()
@@ -66,7 +65,7 @@ const Application_page = () => {
         await axios
             .get(`${MainApi}/bank/${id}`)
             .then((res) => {
-                setBank([res.data?.bank])
+                setBank([res.data?.data])
             })
             .catch((err) => {
                     new Error(err)
@@ -80,6 +79,8 @@ const Application_page = () => {
         }
     }, [id])
 
+    console.log(bank)
+
     return (
         <>
             {
@@ -90,19 +91,19 @@ const Application_page = () => {
                             <Col span={4}>
                                 <Image
                                     width={200}
-                                    src={bank[0].photo?.[0]}
+                                    src={bank[0]?.photo?.[0]}
                                 />
                             </Col>
                             <Col span={4}>
                                 <Image
                                     width={200}
-                                    src={bank[0].photo?.[1]}
+                                    src={bank[0]?.photo?.[1]}
                                 />
                             </Col>
                             <Col span={4}>
                                 <Image
                                     width={200}
-                                    src={bank[0].photo?.[2]}
+                                    src={bank[0]?.photo?.[2]}
                                 />
                             </Col>
                         </Row>

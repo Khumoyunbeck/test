@@ -17,7 +17,7 @@ function CardsAdmin() {
     const getBanks = async () => {
         await axios
             .get(`${MainApi}/bank/all`)
-            .then((res) => setBanks(res.data?.bank))
+            .then((res) => setBanks(res.data?.data))
             .catch((err) => new Error(err));
     };
 
@@ -52,9 +52,9 @@ function CardsAdmin() {
             surname: item?.surname,
             father_name: item?.father_name,
             phone: item?.phone,
-            viloyat: item?.viloyat,
-            tumani: item?.tumani,
-            mahalla: item?.mahalla,
+            relative_number: item?.relative_number,
+            house_number: item?.house_number,
+            relative_number2: item?.relative_number2,
             maosh: item?.maosh,
             data: {_id: item?._id, pending: item?.pending}
         }))
@@ -79,9 +79,13 @@ function CardsAdmin() {
                                 Search
                             </Button>
                         </form>
-                        <Button className='rounded' type='primary' danger>
-                            <Link to='/'>Asosiyga qaytish</Link>
-                        </Button>
+                        <div>
+                            <Button type='primary' danger>
+                                <Link to='/'>Asosiyga qaytish</Link>
+                            </Button>
+                            {" "}
+                            {" "}
+                        </div>
                     </Col>
                     <div style={{width: "100%"}}>
                         {location.pathname === '/admin/applications' ? (

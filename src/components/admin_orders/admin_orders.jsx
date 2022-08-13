@@ -2,16 +2,19 @@ import axios from 'axios'
 import {useEffect, useState} from 'react'
 import Orders from "../orders/orders";
 import {MainApi} from "../../api";
-import {Modal} from "antd";
+import {Button, Modal} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
+import {Link} from "react-router-dom";
+import {useNavigate} from "react-router";
 
 function AdminOrders() {
+    const navigate = useNavigate()
     const [orders, setOrders] = useState([])
     const getOrders = () => {
         axios
             .get(`${MainApi}/order/all`)
             .then(res => {
-                setOrders(res.data)
+                setOrders(res.data.data)
             })
             .catch(err => {
                 console.log(err)
@@ -55,9 +58,15 @@ function AdminOrders() {
                             <span className='deff'>Search</span>
                         </form>
                     </div>
-                    <a href='/admin/orders' className='btn btn-danger btn-sm float-right'>
-                        Asosiy sahifaga o'tish
-                    </a>
+                    {" "}
+                    <div className="fg">
+                        <Button onClick={() => navigate("")} type="danger">
+                            Asosiy sahifaga o'tish
+                        </Button>
+                        <Button onClick={() => navigate("/admin/orders/create")} type="primary">
+                            Buyurtma yaratish
+                        </Button>
+                    </div>
                     <h4 className='mt-0 mb-4'>Buyurtma beruvchilar ro'yhati</h4>
                     <div className='table-responsive'>
                         <Orders dataSource={orders} deleteOrder={deleteOrder}/>

@@ -59,6 +59,17 @@ function AdminHeader() {
                                 </li>
                             }
                             {
+                                type === "user" &&
+                                <li>
+                                    <Link to="/admin/applications/create" className="waves-effect">
+                                        <i className="mdi  mdi-message-text-outline text-white bg-warning">
+                                            <img src={order} alt="" width={20}/>
+                                        </i>
+                                        <span>Kredit qo'shish</span>
+                                    </Link>
+                                </li>
+                            }
+                            {
                                 (type === "user" || type === "admin") &&
                                 <li>
                                     <Link to="/admin/cards" className="waves-effect">

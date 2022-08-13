@@ -6,7 +6,6 @@ import {toast, ToastContainer} from "react-toastify";
 import {PhoneFilled} from "@ant-design/icons";
 import {Button, Modal} from "antd";
 import {Language} from "./lang/Languages";
-import Admin from "./pages/login/login";
 import OrdersAdmin from "./pages/orders_admin/orders_admin";
 import EditNews from "./pages/edit_clients/edit_clients";
 import CardsAdmin from "./pages/cards/cards";
@@ -40,14 +39,21 @@ import Quality from "./pages/quality/quality";
 import Vacancy from "./pages/vacancy/vacancy";
 import Ourteam from "./pages/ourteam/ourteam";
 import Ourclients from "./pages/ourclients/ourclients";
-import UserLogin from "./pages/user_login/user_login";
-import Register from "./pages/register/register";
 import RequireAuth from "./utils/privateRoute";
 import UsersAdmin from "./pages/Users/Users";
 import BanksAdmin from "./pages/banks/Banks";
 import ModeratorsAdmin from "./pages/moderator/moderator";
 import SingleCar from "./pages/SingleCar/SingleCar"
 import InfoPage from "./pages/InfoPage/InfoPage";
+import AdminPage from "./components/admin_page/admin_page";
+import CreateModerator from "./pages/create_moderator/create_moderator";
+import UpdateModerator from "./pages/update_moderator/update_moderator";
+import UpdateApplication from "./pages/update_application/update_application";
+import CreateApplication from "./pages/create_application/create_application";
+import CreateOrder from "./pages/create_order/create_order";
+import UpdateOrder from "./pages/update_order/update_order";
+import UpdateCar from "./pages/update_car/update_car";
+import UpdateClients from "./pages/update_client/update_client";
 
 function App() {
     const location = useLocation();
@@ -80,18 +86,18 @@ function App() {
             !/login/g.test(location.pathname) && <Header/>}
             <ToastContainer/>
             <Routes>
-                <Route path="/admin" element={<Admin/>}/>
-                <Route path="/sign-in" element={<UserLogin/>}/>
-                <Route path="/sign-up" element={<Register/>}/>
-                <Route path="/admin/orders" element={<OrdersAdmin/>}/>
+                <Route path="/admin" element={<AdminPage/>}/>
+                <Route path="/admin/orders" element={<RequireAuth><OrdersAdmin/></RequireAuth>}/>
+                <Route path="/admin/orders/:id" element={<UpdateOrder/>}/>
+                <Route path="/admin/orders/create" element={<CreateOrder/>}/>
                 <Route path="/admin/news_edit/:id" element={<EditNews/>}/>
                 <Route path="/admin/cards" element={<RequireAuth><CardsAdmin/></RequireAuth>}/>
-                <Route path="/admin/card/:id" element={<RequireAuth><SingleCar/></RequireAuth>}/>
+                <Route path="/admin/card/:id" element={<RequireAuth><UpdateCar/></RequireAuth>}/>
                 <Route path="/admin/card/add" element={<AddCard/>}/>
                 <Route path="/admin/card/edit/:id" element={<AddCard/>}/>
                 <Route path="/admin/clients" element={<AdminClient/>}/>
                 <Route path="/admin/clients/add" element={<AddClients/>}/>
-                <Route path="/admin/clients/edit/:id" element={<AddClients/>}/>
+                <Route path="/admin/clients/:id" element={<UpdateClients/>}/>
                 <Route path="/admin/statistic/all" element={<StatisticsPage/>}/>
                 <Route path="/admin/info" element={<InfoPage/>}/>
                 <Route path="/aboutus" element={<Aboutus/>}/>
@@ -119,9 +125,12 @@ function App() {
                 <Route path="/admin/applications" element={<Applications/>}/>
                 <Route path="/admin/users" element={<UsersAdmin/>}/>
                 <Route path="/admin/moderators" element={<ModeratorsAdmin/>}/>
+                <Route path="/admin/moderators/create" element={<CreateModerator/>}/>
+                <Route path="/admin/moderators/:id" element={<UpdateModerator/>}/>
                 <Route path="/admin/banks" element={<BanksAdmin/>}/>
                 <Route path="/useful" element={<Polezniy/>}/>
-                <Route path="/admin/applications/:id" element={<Applications/>}/>
+                <Route path="/admin/applications/:id" element={<UpdateApplication/>}/>
+                <Route path="/admin/applications/create" element={<CreateApplication/>}/>
             </Routes>
             <Button
                 shape="circle"

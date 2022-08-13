@@ -17,10 +17,11 @@ const client = createSlice({
             state.isError = false
         },
         getClients: (state, { payload }) => {
+            console.log(payload,"pay")
             state.code = ''
             state.isLoading = false
             state.isError = false
-            state.clients = payload
+            state.clients = payload.data
         },
         getClient: (state, { payload }) => {
             state.code = ''

@@ -13,6 +13,16 @@ body {
     font-size: 15px;
 }
 
+.wr100 {
+    width: 100%;
+    height: 100vh !important;
+    overflow: hidden;
+}
+
+.ant-modal .w100 {
+    width: 100%;
+}
+
 .s-contain {
     width: 100%;
     padding: 20px;
@@ -2415,8 +2425,18 @@ table.focus-on tbody tr.focused td {
     /* background-color: #dbc33c; */
 }
 
+.accountbg1 {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    background-position: center center;
+    height: 100% !important;
+    width: 100% !important;
+    top: 0;
+    /* background-color: #dbc33c; */
+}
+
 .wrapper-page {
-    margin: 7.5% auto;
+    margin: 2% auto;
     width: 420px;
     position: relative;
 }
@@ -2591,6 +2611,10 @@ table.focus-on tbody tr.focused td {
     /* grayscale / black */
     color: midnightblue;
     margin-top: 45px;
+}
+
+.w100 {
+
 }
 
 .files a {
@@ -2858,6 +2882,7 @@ ul.show {
 .sp-img {
     width: 250px;
 }
+
 .App {
     text-align: center;
 }
@@ -2961,12 +2986,37 @@ TH {
 .restrict-card {
     /*height: 175px;*/
 }
-.invisible{
-    display: none!important;
+
+.invisible {
+    display: none !important;
 }
 
-.wre{
+.wre {
     padding-top: 100px;
     width: 80%;
     margin-left: 250px !important;
+}
+
+.cn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.fg {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-end;
+}
+
+.buttons {
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.ml200 {
+    margin-left: 300px !important;
 }

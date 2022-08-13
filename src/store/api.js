@@ -10,7 +10,7 @@ export const getclient = 'client/' // :id
 export const editclient = 'client/' // :id
 
 // car
-export const getcars = 'Car/all'
+export const getcars = 'car/user/all'
 export const getcar = 'Car/' // :id
 export const addcar = `${MainApi}/car/add`
 export const editcar = 'Car/' // :id

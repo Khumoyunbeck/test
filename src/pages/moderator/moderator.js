@@ -1,4 +1,4 @@
-import {useLocation} from "react-router";
+import {useLocation, useNavigate} from "react-router";
 import {Link} from 'react-router-dom'
 import {Button, Col, Form, Input, Modal, Row} from 'antd'
 import AdminHeader from '../../components/admin_header/admin_header'
@@ -7,17 +7,27 @@ import {MainApi} from "../../api";
 import {useEffect, useState} from "react";
 import Users from "../../components/users/users";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
+import {toast} from "react-toastify";
 
 function ModeratorsAdmin() {
     const location = useLocation()
     const [users, setUsers] = useState([])
+    const navigate = useNavigate()
 
     const geUsers = async () => {
         await axios
-            .get(`${MainApi}/maderator/all`)
+            .get(`${MainApi}/xodim/all`)
             .then((res) => console.log(res, setUsers(res?.data?.data)))
             .catch((err) => new Error(err));
     };
+
+    const handleNavigate = () => {
+        navigate("/admin/moderators/create")
+    }
+
+    const handleNavigateUpdate = (id) => {
+        navigate(`/admin/moderators/${id}`)
+    }
 
     const deleteBank = id => {
         Modal.confirm({
@@ -26,9 +36,10 @@ function ModeratorsAdmin() {
             icon: <ExclamationCircleOutlined/>,
             onOk() {
                 axios
-                    .delete(`${MainApi}/maderator/${id}`)
+                    .delete(`${MainApi}/xodim/${id}`)
                     .then(res => {
                         geUsers()
+                        toast.success("Muvafaqiyali o'chirildi")
                     })
                     .catch(err => {
                         console.log(err)
@@ -65,13 +76,13 @@ function ModeratorsAdmin() {
                                 <Link to='/'>Asosiyga qaytish</Link>
                             </Button>
                             {" "}
-                            <Button className='rounded' type='primary'>
+                            <Button className='rounded' type='primary' onClick={() => handleNavigate()}>
                                 Xodim yaratish
                             </Button>
                         </Col>
                     </Col>
                     <div style={{width: "100%"}}>
-                        <Users dataSource={users} isbank={true} deleteBank={deleteBank}/>
+                        <Users dataSource={users} isbank={true} deleteBank={deleteBank} updateBank={handleNavigateUpdate}/>
                     </div>
                 </Row>
             </div>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
-import {Link, useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 import axios from 'axios'
 import {Language} from '../../lang/Languages'
 import star_img from '../../assets/icons/star.png'
@@ -21,31 +21,36 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import {Button} from 'antd'
 import {MainApi} from "../../api";
+import {toast} from "react-toastify";
 
 function More() {
     const {id} = useParams()
-    const [data, setData] = useState({ismiz: '', phone: ''})
+    const [data, setData] = useState({name: '', phone: ''})
     const [car, setCar] = useState(null)
 
     const {lang} = useSelector(state => state.lang)
 
     const {mark, m7, m8, m9, m10, m11, m12, m13, m14, m5, m1, m2, m3, m4, kredit} = Language
 
-    const order = async () => {
-        await axios
-            .post('http://185.196.214.145:5000/order/add', {...data, id})
-            .then(res => setData({ismiz: ' ', phone: ' '}))
-            .catch(err => new Error(err))
-    }
-
     function createMarkup() {
         return {__html: lang === '0' ? car.opisaniya : car.opisaniyaru}
+    }
+
+    const createOrder = async () => {
+        await axios
+            .post(`${MainApi}/order/add`, data)
+            .then(res => {
+                    setData({name: ' ', phone: ' '})
+                    toast.success("Muvafaqiyatli buyurtma berildi.")
+                }
+            )
+            .catch(err => new Error(err))
     }
 
     useEffect(() => {
         axios
             .get(`${MainApi}/car/${id}`)
-            .then(res => setCar(res.data))
+            .then(res => setCar(res.data.data))
             .catch(err => console.log(err))
     }, [])
 
@@ -125,8 +130,8 @@ function More() {
                             <div className='input-wrap'>
                                 <span className='material-symbols-outlined'>person</span>
                                 <input
-                                    onChange={e => setData({...data, ismiz: e.target.value})}
-                                    value={data.ismiz}
+                                    onChange={e => setData({...data, name: e.target.value})}
+                                    value={data.name}
                                     type='text'
                                     className='form-control page_title_uz'
                                     name='auto_price'
@@ -148,11 +153,8 @@ function More() {
                             </div>
                         </div>
                         <div className='d-flex justify-content-center'>
-                            <Button className='me-2'>
-                                <Link to={`/credit/${car._id}`}>{kredit[lang]}</Link>
-                            </Button>
-                            <Button className='me-2'>
-                                <Link to={`/credit/${car._id}`}>{m3[lang]}</Link>
+                            <Button className='me-2' onClick={() => createOrder()}>
+                                {m3[lang]}
                             </Button>
                         </div>
                     </div>

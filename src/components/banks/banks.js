@@ -5,7 +5,7 @@ import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {MainApi} from "../../api";
 import axios from "axios";
 
-function Banks({dataSource, getBanks,deleteApplication}) {
+function Banks({dataSource, getBanks, deleteApplication}) {
     const [type, setType] = useState(null)
 
     useEffect(() => {
@@ -24,7 +24,7 @@ function Banks({dataSource, getBanks,deleteApplication}) {
         if (type === "bank") {
             Modal.confirm({
                 centered: true,
-                title: "Moshina o'chirish",
+                title: "Rostan ham status o'zgartirmoqchimisiz",
                 icon: <ExclamationCircleOutlined/>,
                 onOk() {
                     axios
@@ -94,10 +94,17 @@ function Banks({dataSource, getBanks,deleteApplication}) {
             dataIndex: 'data',
             key: 'data',
             render: (value) => {
-                return (
-                    <Checkbox onChange={e => onChange(e, value?._id)} checked={value?.pending}
-                              disabled={value?.pending}/>
-                )
+                if (type === "admin") {
+                    return (
+                        <Button>
+                            {value?.pending ? "Active" : "Inactive"}
+                        </Button>
+                    )
+                } else
+                    return (
+                        <Checkbox onChange={e => onChange(e, value?._id)} checked={value?.pending}
+                                  disabled={value?.pending}/>
+                    )
             }
         },
         {
@@ -126,7 +133,6 @@ function Banks({dataSource, getBanks,deleteApplication}) {
         },
     ];
     console.log(dataSource)
-
     return (
         <div>
             <Table dataSource={dataSource} columns={columns} scroll={{x: "max-content"}}/>

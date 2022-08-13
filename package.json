@@ -31,6 +31,7 @@
     "react-scripts": "5.0.0",
     "react-toastify": "^9.0.2",
     "reactstrap": "^9.1.2",
+    "styled-components": "^5.3.5",
     "swiper": "^8.1.6",
     "tinymce": "^6.0.1",
     "web-vitals": "^2.1.4"

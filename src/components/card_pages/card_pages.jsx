@@ -29,7 +29,7 @@ function AdminCards() {
     const getCars = async () => {
         await axios
             .get(`${MainApi}/car/all`)
-            .then((res) => setCars(res.data?.getAllmowin))
+            .then((res) => setCars(res?.data?.data))
             .catch((err) => new Error(err));
     };
 
@@ -93,9 +93,9 @@ function AdminCards() {
                         {
                             type === "user" ?
                                 <Cars
-                                    dataSource={cars?.filter(i => i?.userId?.toLowerCase()
+                                    dataSource={cars?.filter(i => i?.userId?._id
                                         ===
-                                        localStorage?.getItem("user_id").toLowerCase())}/>
+                                        localStorage?.getItem("user_id"))}/>
                                 :
                                 <Cars
                                     dataSource={cars} deleteCar={deleteCar}/>

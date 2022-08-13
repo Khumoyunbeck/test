@@ -7,7 +7,7 @@ function Admin() {
     let navigate = useNavigate()
 
     return (
-        <>
+        <div className="wr100">
             <div className='accountbg'></div>
             <div className='home-btn d-none d-sm-block'>
                 <a href='/' className='text-white'>
@@ -81,7 +81,7 @@ function Admin() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

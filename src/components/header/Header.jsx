@@ -599,23 +599,12 @@ const Header = (props) => {
                 </span>
                                 <span className="headers__nav-link">{Kontaktlar[lang]}</span>
                             </a>
-                            <Link to={"/"} className="headers__nav-item">
+                            <Link to={"/admin"} className="headers__nav-item">
                 <span className="headers__nav-icon">
                   <span className="material-symbols-outlined">person</span>
                 </span>
                                 <span className="headers__nav-link tooltips">
                                     {Kirish[lang]}
-                                    <ul className="tooltipstexttt">
-                    <Link to="/sign-in">
-                      <li className="menu-item">{f10[lang]}</li>
-                    </Link>
-                    <Link to="/sign-up">
-                      <li className="menu-item">{f11[lang]}</li>
-                    </Link>
-                    <Link to="/admin">
-                      <li className="menu-item">{f12[lang]}</li>
-                    </Link>
-                  </ul>
                 </span>
                             </Link>
                         </nav>

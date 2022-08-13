@@ -32,7 +32,7 @@ const Car = ({addCompare}) => {
 
     useEffect(() => {
         if (!!cars) {
-            setCarsData(cars?.getAllmowin)
+            setCarsData(cars?.data)
         }
     }, [cars])
 

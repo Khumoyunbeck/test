@@ -2,10 +2,6 @@ import axios from 'axios'
 
 export const MainApi = "http://localhost:5000"
 
-export const GetToken = () => {
-    return localStorage.getItem('token')
-}
-
 const instance = axios.create({
     baseURL: MainApi,
 })
