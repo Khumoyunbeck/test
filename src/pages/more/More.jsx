@@ -30,7 +30,7 @@ function More() {
 
     const {lang} = useSelector(state => state.lang)
 
-    const {mark, m7, m8, m9, m10, m11, m12, m13, m14, m5, m1, m2, m3, m4, kredit} = Language
+    const {mark, m7, m8, m9, m10, m11, m12, m13, m14, m5, m1, m2, m3, m4, kreditcal} = Language
 
     function createMarkup() {
         return {__html: lang === '0' ? car.opisaniya : car.opisaniyaru}
@@ -47,6 +47,9 @@ function More() {
             .catch(err => new Error(err))
     }
 
+    const handleNav = () => {
+        window.location.href = "http://rauto-calculator.uz"
+    }
     useEffect(() => {
         axios
             .get(`${MainApi}/car/${id}`)
@@ -155,6 +158,9 @@ function More() {
                         <div className='d-flex justify-content-center'>
                             <Button className='me-2' onClick={() => createOrder()}>
                                 {m3[lang]}
+                            </Button>
+                            <Button className='me-2' onClick={() => handleNav()}>
+                                {kreditcal[lang]}
                             </Button>
                         </div>
                     </div>

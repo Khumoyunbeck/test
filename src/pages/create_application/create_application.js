@@ -25,14 +25,9 @@ function CreateApplication(props) {
                 formData.append(key, values[key])
         )
         file.forEach(file => formData.append('photo', file))
+
         if (!!localStorage.getItem("user_id")) {
             formData.append("userId", localStorage.getItem("user_id"))
-        }
-        if (!!localStorage.getItem("admin_id")) {
-            formData.append("userId", localStorage.getItem("admin_id"))
-        }
-        if (!!localStorage.getItem("bank_id")) {
-            formData.append("userId", localStorage.getItem("admin_id"))
         }
         axios.post(`${MainApi}/bank/add`, formData).then(res => {
             toast.success("Muvafaqiyali yaratildi")

@@ -22,7 +22,7 @@ import {injectStyle} from "react-toastify/dist/inject-style";
 import {useSelector} from "react-redux";
 import {MainApi} from "../../api";
 import {Col, Input, Row, Slider} from "antd";
-import {StyledModal, Wrapper} from "./home.e";
+import {StyledModal} from "./home.e";
 
 if (typeof window !== "undefined") {
     injectStyle();
@@ -100,7 +100,7 @@ function Home({addCompare}) {
     const getClients = async () => {
         await axios
             .get(`${MainApi}/client/all`)
-            .then((res) => setClients(res.data))
+            .then((res) => setClients(res?.data?.data))
             .catch((err) => new Error(err));
     };
 
@@ -129,6 +129,8 @@ function Home({addCompare}) {
 
     cars.length > 0 &&
     cars.forEach((item) => !!!num && !!item.aksiya && setNum("aksiya"));
+
+
     useEffect(() => {
         if (!!fCars.length)
             setIsModalVisible(true);
@@ -136,8 +138,9 @@ function Home({addCompare}) {
 
     return (
         <div className="wrapper">
-            <Wrapper className="wr100">
-                <StyledModal title="Saralangan moshinalar" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}
+            <>
+                <StyledModal title="Saralangan moshinalar" visible={isModalVisible} onOk={handleOk}
+                             onCancel={handleCancel}
                              className="w100" style={{width: "100%", resize: "auto"}}>
                     <Row style={{width: "100%"}}>
                         {fCars.length > 0 &&
@@ -151,7 +154,7 @@ function Home({addCompare}) {
                         )}
                     </Row>
                 </StyledModal>
-            </Wrapper>
+            </>
 
             <main>
                 <section className="slider">
@@ -303,7 +306,7 @@ function Home({addCompare}) {
                                     <Slider min={0} max={1000000} onChange={onChange1} value={data.yurgani}/>
                                     <Row gutter={16}>
                                         <Col span={24}>
-                                            <Input value={data?.yurgani} addonAfter='yil' onChange={value => setData({
+                                            <Input value={data?.yurgani} addonAfter='km' onChange={value => setData({
                                                 ...data,
                                                 yurgani: value?.target?.value
                                             })}
@@ -316,10 +319,10 @@ function Home({addCompare}) {
                                     <div>
                                         {data.narxi} so'm
                                     </div>
-                                    <Slider min={0} max={1000000} onChange={onChange2} value={data.narxi}/>
+                                    <Slider min={0} max={1000000000} onChange={onChange2} value={data.narxi}/>
                                     <Row gutter={16}>
                                         <Col span={24}>
-                                            <Input value={data?.narxi} addonAfter='yil' onChange={value => setData({
+                                            <Input value={data?.narxi} addonAfter="so'm" onChange={value => setData({
                                                 ...data,
                                                 narxi: value?.target?.value
                                             })}
@@ -393,7 +396,7 @@ function Home({addCompare}) {
                                         slidesPerView: 2,
                                     },
                                     1300: {
-                                        slidesPerView: 3,
+                                        slidesPerView: 4,
                                     },
                                 }}
                                 spaceBetween={30}
@@ -498,8 +501,8 @@ function Home({addCompare}) {
                                             <div className="clients__img">
                                                 <img src={item?.photo} alt="icons"/>
                                             </div>
-                                            <div className="clients__name">{item?.ismizuz}</div>
-                                            <div className="clients__name">{item?.ismizru}</div>
+                                            <div className="clients__name">{item?.name}</div>
+                                            <div className="clients__name">{item?.region}</div>
                                         </div>
                                     </SwiperSlide>
                                 ))}

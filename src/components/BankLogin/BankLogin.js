@@ -3,74 +3,46 @@ import {useNavigate} from 'react-router-dom'
 import {Radio} from 'antd';
 import axios from "../../api";
 
-function UserLogin() {
+function BankLogin() {
     const email = useRef()
     const password = useRef()
     const [values, setValues] = useState({
         email: "",
         password: "",
-        value: 1
     });
 
     let navigate = useNavigate()
+
+    const onChange = (e) => {
+        setValues({
+            ...values,
+            value: e.target.value
+        });
+    };
 
     let token = localStorage.getItem('token')
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (values?.email !== "" || values?.password !== "" || values?.value !== "") {
-            if (values?.value === 1) {
-                axios.post("user/login",
-                    {
-                        email: values?.email,
-                        password: values?.password,
-                    }
-                ).then(
-                    e => {
-                        localStorage.setItem("user_id", e?.data?._id)
-                        localStorage.setItem("user_token", e.data?.token)
-                        localStorage.removeItem("bank_token")
-                        localStorage.removeItem("admin_token")
-                        localStorage.removeItem("admin_id")
-                        localStorage.removeItem("bank_id")
-                        navigate('/admin/cards')
-                    }
-                ).catch(e => console.log(e))
-            }
-            if (values?.value === 2) {
+        if (values?.email !== "" || values?.password !== "") {
                 axios.post("xodim/login",
                     {
                         email: values?.email,
                         password: values?.password,
                     }
                 ).then(e => {
-                        console.log(e?.data, "xodim")
                         localStorage.setItem("bank_token", e.data?.token)
                         localStorage.setItem("bank_id", e?.data?._id)
                         localStorage.removeItem("user_token")
+                        localStorage.removeItem("user_id")
                         localStorage.removeItem("admin_token")
+                        localStorage.removeItem("admin_id")
                         navigate('/admin/applications')
                     }
                 ).catch(e => console.log(e))
             }
-            if (values?.value === 3) {
-                axios.post("auth/login",
-                    {
-                        email: values?.email,
-                        password: values?.password,
-                    }
-                ).then(e => {
-                        console.log(e?.data, "admin")
-                        localStorage.setItem("admin_id", e?.data?._id)
-                        localStorage.setItem("admin_token", e.data?.token)
-                        localStorage.removeItem("user_token")
-                        localStorage.removeItem("bank_token")
-                        navigate('/admin/applications')
-                    }
-                ).catch(e => console.log(e))
-            }
-        }
     }
+
     useEffect(() => {
         if (!!token) navigate('/admin/cards')
     }, [token])
@@ -133,6 +105,7 @@ function UserLogin() {
                                     />
                                 </div>
                             </div>
+
                             <div className='form-group text-center m-t-20'>
                                 <div className='col-12'>
                                     <button
@@ -151,4 +124,4 @@ function UserLogin() {
     )
 }
 
-export default UserLogin
+export default BankLogin

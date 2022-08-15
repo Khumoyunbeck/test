@@ -49,7 +49,13 @@ function AddCardForm() {
                 formData.append(key, values[key])
         )
         file.forEach(file => formData.append('photo', file))
-        formData.append("userId", localStorage.getItem("user_id"))
+
+        if (!!localStorage.getItem("user_id")) {
+            formData.append("userId", localStorage.getItem("user_id"))
+        }
+        if (!!localStorage.getItem("admin_id")) {
+            formData.append("adminId", localStorage.getItem("admin_id"))
+        }
         if (!!id) dispatch(editCar(formData, id))
         else dispatch(addCar(formData))
     }

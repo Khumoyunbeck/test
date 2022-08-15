@@ -395,7 +395,7 @@ const Header = (props) => {
                                         </div>
                                     </div>
                                     <div className="menu__link">
-                                        <Link to={"/"}>{Kirish[lang]}</Link>
+                                        <Link to={"/user"}>{Kirish[lang]}</Link>
                                     </div>
                                     <div className="menu__link">
                                         <button
@@ -599,7 +599,7 @@ const Header = (props) => {
                 </span>
                                 <span className="headers__nav-link">{Kontaktlar[lang]}</span>
                             </a>
-                            <Link to={"/admin"} className="headers__nav-item">
+                            <Link to={"/user"} className="headers__nav-item">
                 <span className="headers__nav-icon">
                   <span className="material-symbols-outlined">person</span>
                 </span>

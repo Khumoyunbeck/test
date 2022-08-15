@@ -4,7 +4,6 @@ import Orders from "../orders/orders";
 import {MainApi} from "../../api";
 import {Button, Modal} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
-import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 
 function AdminOrders() {
@@ -60,7 +59,7 @@ function AdminOrders() {
                     </div>
                     {" "}
                     <div className="fg">
-                        <Button onClick={() => navigate("")} type="danger">
+                        <Button onClick={() => navigate("/")} type="danger">
                             Asosiy sahifaga o'tish
                         </Button>
                         <Button onClick={() => navigate("/admin/orders/create")} type="primary">

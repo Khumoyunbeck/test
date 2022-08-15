@@ -43,7 +43,6 @@ import RequireAuth from "./utils/privateRoute";
 import UsersAdmin from "./pages/Users/Users";
 import BanksAdmin from "./pages/banks/Banks";
 import ModeratorsAdmin from "./pages/moderator/moderator";
-import SingleCar from "./pages/SingleCar/SingleCar"
 import InfoPage from "./pages/InfoPage/InfoPage";
 import AdminPage from "./components/admin_page/admin_page";
 import CreateModerator from "./pages/create_moderator/create_moderator";
@@ -54,6 +53,8 @@ import CreateOrder from "./pages/create_order/create_order";
 import UpdateOrder from "./pages/update_order/update_order";
 import UpdateCar from "./pages/update_car/update_car";
 import UpdateClients from "./pages/update_client/update_client";
+import AdminLogin from "./components/AdminLogin/AdminLogin";
+import BankLogin from "./components/BankLogin/BankLogin";
 
 function App() {
     const location = useLocation();
@@ -83,10 +84,15 @@ function App() {
             {!/admin/g.test(location.pathname) &&
             !/sign-in/g.test(location.pathname) &&
             !/sign-up/g.test(location.pathname) &&
-            !/login/g.test(location.pathname) && <Header/>}
+            !/bank/g.test(location.pathname) &&
+            !/user/g.test(location.pathname) &&
+            !/login/g.test(location.pathname) && <Header/>
+            }
             <ToastContainer/>
             <Routes>
-                <Route path="/admin" element={<AdminPage/>}/>
+                <Route path="/user" element={<AdminPage/>}/>
+                <Route path="/admin" element={<AdminLogin/>}/>
+                <Route path="/bank" element={<BankLogin/>}/>
                 <Route path="/admin/orders" element={<RequireAuth><OrdersAdmin/></RequireAuth>}/>
                 <Route path="/admin/orders/:id" element={<UpdateOrder/>}/>
                 <Route path="/admin/orders/create" element={<CreateOrder/>}/>
@@ -184,6 +190,8 @@ function App() {
             {!/admin/g.test(location.pathname) &&
             !/sign-in/g.test(location.pathname) &&
             !/sign-up/g.test(location.pathname) &&
+            !/bank/g.test(location.pathname) &&
+            !/user/g.test(location.pathname) &&
             !/login/g.test(location.pathname) && <Footer/>}
         </Fragment>
     );
