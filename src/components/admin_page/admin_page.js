@@ -9,8 +9,8 @@ function AdminPage(props) {
     let Content = () =>
         ({
             enter: <SignOptions setStep={setStep}/>,
-            sign_up: <Register/>,
-            sign_in: <UserLogin/>,
+            register: <Register/>,
+            login: <UserLogin/>,
         }[step])
 
     return (

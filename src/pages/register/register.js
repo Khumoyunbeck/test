@@ -2,6 +2,9 @@ import {useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import axios from "../../api";
 import {message} from "antd";
+import {Language} from "../../lang/Languages";
+import {useSelector} from "react-redux";
+
 
 // import {MainApi} from "../../config";
 
@@ -35,6 +38,9 @@ function Register() {
             message.warn("Fill the form completely")
         }
     }
+    const {name,mail,phone,region} = Language
+
+    const {lang} = useSelector((state) => state.lang);
 
     useEffect(() => {
         if (!!token) navigate('/admin/cards')
@@ -63,14 +69,14 @@ function Register() {
                         >
                             <div className='form-group'>
                                 <div className='col-12'>
-                                    <label>Name</label>
+                                    <label>{name[lang]}</label>
                                     <input
                                         ref={email}
                                         className='form-control'
                                         type='text'
                                         required
                                         name='name'
-                                        placeholder='Name'
+                                        placeholder={name[lang]}
                                         value={values?.name}
                                         onChange={event => setValues({...values, name: event.target.value})}
                                     />
@@ -78,14 +84,14 @@ function Register() {
                             </div>
                             <div className='form-group'>
                                 <div className='col-12'>
-                                    <label>Email</label>
+                                    <label>{mail[lang]}</label>
                                     <input
                                         ref={email}
                                         className='form-control email_input'
                                         type='email'
                                         required
                                         name='email'
-                                        placeholder='Email'
+                                        placeholder={mail[lang]}
                                         value={values?.email}
                                         onChange={event => setValues({...values, email: event.target.value})}
                                     />
@@ -93,42 +99,42 @@ function Register() {
                             </div>
                             <div className='form-group'>
                                 <div className='col-12'>
-                                    <label>Password</label>
+                                    <label>{pass[lang]}</label>
                                     <input
                                         ref={password}
                                         className='form-control password_input'
                                         type='password'
                                         required
                                         name='password'
-                                        placeholder='Password'
+                                        placeholder={pass[lang]}
                                         onChange={event => setValues({...values, password: event.target.value})}
                                     />
                                 </div>
                             </div>
                             <div className='form-group'>
                                 <div className='col-12'>
-                                    <label>Phone</label>
+                                    <label>{phone[lang]}</label>
                                     <input
                                         ref={password}
                                         className='form-control'
                                         type='number'
                                         required
                                         name='phone'
-                                        placeholder='phone'
+                                        placeholder={phone[lang]}
                                         onChange={event => setValues({...values, phone: event.target.value})}
                                     />
                                 </div>
                             </div>
                             <div className='form-group'>
                                 <div className='col-12'>
-                                    <label>Region</label>
+                                    <label>{region[lang]}</label>
                                     <input
                                         ref={password}
                                         className='form-control'
                                         type='region'
                                         required
                                         name='region'
-                                        placeholder='region'
+                                        placeholder={region[lang]}
                                         onChange={event => setValues({...values, region: event.target.value})}
                                     />
                                 </div>

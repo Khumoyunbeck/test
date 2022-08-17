@@ -19,6 +19,8 @@ export const Language = {
   opisaniya: ["Mashina haqida batafsil:", "Подробнее о машине:"],
   opisaniyaru: ["Подробнее о машине:", "Mashina haqida batafsil:"],
   photo: ["Avto rasmini yuklash", "Загрузка изображения авто"],
+  phone: ["Telefon", "Telefonru"],
+  region: ["Region", "Region ru"],
   aksiya: ["Aksiya", "Aksiya ru"],
   status: ["Holati", "Holati ru"],
 
@@ -488,6 +490,8 @@ export const Language = {
   sername: ["Familiya", "Фамилия"],
   req_surname: ["Familiyani to'ldiring", "Заполните фамилию"],
   name: ["Ism", "Имя"],
+  mail: ["Email", "Emailru"],
+  pass: ["Password", "Password ru"],
   req_name: ["Ismni to'ldiring", "Введите имя"],
   father_name: ["Otasining ismi", "Имя его отца"],
   req_father_name: ["Otasining ismini to'ldiring", "Заполните имя отца"],

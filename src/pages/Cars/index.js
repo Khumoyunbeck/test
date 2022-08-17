@@ -273,7 +273,7 @@ const Car = ({addCompare}) => {
                     carsData?.map((car, index) => {
                             // if (!car.aksiya) {
                             return (
-                                <Col xl={12} md={12} sm={24}>
+                                <Col xl={8} l ={8} md={12} sm={24}>
                                     <CardCar key={index} car={car} addCompare={addCompare}/>
                                 </Col>
                             )
