@@ -36,9 +36,12 @@ function Home({addCompare}) {
 
     const [data, setData] = useState({
         kuzov: "",
-        yili: 2000,
-        yurgani: 0,
-        narxi: 0
+        yili_from: 2005,
+        yurgani_from: 0,
+        narxi_from: 0,
+        yili_to: 2012,
+        yurgani_to: 200000,
+        narxi_to: 500000000
     })
 
     const {lang} = useSelector((state) => state.lang);
@@ -104,17 +107,18 @@ function Home({addCompare}) {
             .catch((err) => new Error(err));
     };
 
-    const onChange = (value) => {
-        setData({...data, yili: value})
-    };
-
     const onChange1 = (value) => {
-        setData({...data, yurgani: value})
+        setData({...data, yili_to: value[1], yili_from: value[0]})
     };
 
     const onChange2 = (value) => {
-        setData({...data, narxi: value})
+        setData({...data, yurgani_to: value[1], yurgani_from: value[0]})
     };
+
+    const onChange3 = (value) => {
+        setData({...data, narxi_to: value[1], narxi_from: value[0]})
+    };
+    ;
 
     useEffect(() => {
         getCars();
@@ -122,7 +126,7 @@ function Home({addCompare}) {
     }, []);
 
     const handleModal = async () => {
-        await axios.get(`${MainApi}/car/v1?yili=${data.yili}&yurgani=${data.yurgani}&narxi=${data.narxi}&&madel=`).then(r => {
+        await axios.get(`${MainApi}/car/v1?yili=${data.yili_from}&yurgani=${data.yurgani_from}&narxi=${data.narxi_from}&&madel=`).then(r => {
             setFCars(r?.data)
         }).catch(err => console.log("err", err))
     }
@@ -287,48 +291,95 @@ function Home({addCompare}) {
                                 <h4 className="form__item-name">{eleven[lang]}</h4>
                                 <div>
                                     <div>
-                                        {data.yili}
+                                        {data.yili_from} {"-"} {data.yili_to}
                                     </div>
-                                    <Slider min={2000} max={2023} onChange={onChange} value={data?.yili}/>
+                                    <Slider range min={2000} max={2023} onChange={onChange1} value={[data.yili_from,data.yili_to]}/>
                                     <Row gutter={16}>
-                                        <Col span={24}>
-                                            <Input value={data?.yili} addonAfter='yil' onChange={value => setData({
-                                                ...data,
-                                                yili: value?.target?.value
-                                            })}
-                                            />
+                                        <Col span={12}>
+                                            <label htmlFor="">Dan</label>
+                                            <div>
+                                                <Input value={data?.yili_from} addonAfter='yil' onChange={value => setData({
+                                                    ...data,
+                                                    yili_from: value?.target?.value
+                                                })}
+                                                />
+                                            </div>
+                                        </Col>
+                                        <Col span={12}>
+                                            <label htmlFor="">Dan</label>
+                                            <div>
+                                                <Input value={data?.yili_to} addonAfter='yil' onChange={value => setData({
+                                                    ...data,
+                                                    yili_to: value?.target?.value
+                                                })}
+                                                />
+                                            </div>
                                         </Col>
                                     </Row>
                                 </div>
                                 <h4 className="form__item-name">{Kilometr[lang]}</h4>
                                 <div className="renge-wrapper">
                                     <div>
-                                        {data.yurgani}
+                                        {data.yurgani_from} {"-"} {data.yurgani_to}
                                     </div>
-                                    <Slider min={0} max={1000000} onChange={onChange1} value={data.yurgani}/>
+                                    <Slider range min={0} max={1000000} onChange={onChange2} value={[data.yurgani_from,data.yurgani_to]}/>
                                     <Row gutter={16}>
-                                        <Col span={24}>
-                                            <Input value={data?.yurgani} addonAfter='km' onChange={value => setData({
-                                                ...data,
-                                                yurgani: value?.target?.value
-                                            })}
-                                            />
+                                        <Col span={12}>
+                                            <div>
+                                                <label htmlFor="">
+                                                    Dan
+                                                </label>
+                                                <Input value={data?.yurgani_from} addonAfter='km'
+                                                       onChange={value => setData({
+                                                           ...data,
+                                                           yurgani_from: value?.target?.value
+                                                       })}
+                                                />
+                                            </div>
+                                        </Col>
+                                        <Col span={12}>
+                                            <div>
+                                                <label htmlFor="">
+                                                    Gacha
+                                                </label>
+                                                <Input value={data?.yurgani_to} addonAfter='km'
+                                                       onChange={value => setData({
+                                                           ...data,
+                                                           yurgani_to: value?.target?.value
+                                                       })}
+                                                />
+                                            </div>
                                         </Col>
                                     </Row>
                                 </div>
                                 <h4 className="form__item-name">{Narxi[lang]}</h4>
                                 <div className="renge-wrapper">
                                     <div>
-                                        {data.narxi} so'm
+                                        {data.narxi_from} - {data.narxi_to} so'm
                                     </div>
-                                    <Slider min={0} max={1000000000} onChange={onChange2} value={data.narxi}/>
+                                    <Slider range min={0} max={1000000000} onChange={onChange3} value={[data.narxi_from,data.narxi_to]}/>
                                     <Row gutter={16}>
-                                        <Col span={24}>
-                                            <Input value={data?.narxi} addonAfter="so'm" onChange={value => setData({
-                                                ...data,
-                                                narxi: value?.target?.value
-                                            })}
-                                            />
+                                        <Col span={12}>
+                                            <div>
+                                                <label>Dan</label>
+                                                <Input value={data?.narxi_from} addonAfter="so'm"
+                                                       onChange={value => setData({
+                                                           ...data,
+                                                           narxi_from: value?.target?.value
+                                                       })}
+                                                />
+                                            </div>
+                                        </Col>
+                                        <Col span={12}>
+                                            <div>
+                                                <label>Gacha</label>
+                                                <Input value={data?.narxi_to} addonAfter="so'm"
+                                                       onChange={value => setData({
+                                                           ...data,
+                                                           narxi_to: value?.target?.value
+                                                       })}
+                                                />
+                                            </div>
                                         </Col>
                                     </Row>
                                 </div>
