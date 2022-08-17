@@ -19,6 +19,21 @@ body {
     overflow: hidden;
 }
 
+.wrapperClassName {
+    width: 80%;
+    margin-inline: auto;
+    border: 1px solid black;
+    overflow: hidden;
+    /*height: 500px;*/
+}
+.pb50{
+    padding-bottom: 50px;
+}
+/*.rdw-editor-main {*/
+/*    height: fit-content;*/
+/*    overflow: hidden;*/
+/*}*/
+
 .ant-modal .w100 {
     width: 100%;
 }
@@ -2791,7 +2806,9 @@ table.focus-on tbody tr.focused td {
 }
 
 .team-img-two {
-    max-width: 370px;
+    width: 100%;
+    object-position: center;
+    object-fit: cover;
 }
 
 .upload_button_3 a {

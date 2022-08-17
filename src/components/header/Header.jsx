@@ -120,7 +120,7 @@ const Header = (props) => {
     }
 
     useEffect(() => {
-        if (!!!lang) localStorage.setItem("lang", 0);
+        if (!lang) localStorage.setItem("lang", 0);
     }, [lang]);
 
     return (

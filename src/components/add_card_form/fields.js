@@ -18,6 +18,7 @@ const {
     yurgani,
     narxi,
     aksiya,
+    status
 } = Language
 
 export const fields = [
@@ -315,8 +316,16 @@ export const fields = [
         key: 'aksiya',
         label: aksiya,
         select: [
-            { value: '', name: 'Kerak emas' },
-            { value: 'Aksiya', name: 'Aksiya' },
+            { value: 'Kerak emas', name: 'Kerak emas' },
+            { value: '', name: 'Aksiya' },
+        ],
+    },
+    {
+        key: 'status',
+        label: status,
+        select: [
+            { value: 'Yangi', name: 'Yangi' },
+            { value: 'Eski', name: 'Eski' },
         ],
     },
 ]

@@ -20,6 +20,7 @@ export const Language = {
   opisaniyaru: ["Подробнее о машине:", "Mashina haqida batafsil:"],
   photo: ["Avto rasmini yuklash", "Загрузка изображения авто"],
   aksiya: ["Aksiya", "Aksiya ru"],
+  status: ["Holati", "Holati ru"],
 
   //header menu
   adres: ["Toshkent sh, Usmon Nosir 113", "г.Ташкент, ул. Усмона Носира 113"],

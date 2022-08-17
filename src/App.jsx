@@ -55,6 +55,10 @@ import UpdateCar from "./pages/update_car/update_car";
 import UpdateClients from "./pages/update_client/update_client";
 import AdminLogin from "./components/AdminLogin/AdminLogin";
 import BankLogin from "./components/BankLogin/BankLogin";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 function App() {
     const location = useLocation();

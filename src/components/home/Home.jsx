@@ -13,9 +13,8 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import "../style.css";
 import "swiper/css";
 import "swiper/css/navigation";
-
 // import required modules
-import {Autoplay, Navigation, Pagination} from "swiper";
+import SwiperCore, {A11y, Autoplay, Navigation, Pagination, Scrollbar} from "swiper";
 import {Link} from "react-router-dom";
 import CardCar from "../card_car/Card_car";
 import {injectStyle} from "react-toastify/dist/inject-style";
@@ -34,6 +33,7 @@ function Home({addCompare}) {
     const [cars, setCars] = useState([]);
     const [clients, setClients] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
+
     const [data, setData] = useState({
         kuzov: "",
         yili: 2000,
@@ -130,6 +130,8 @@ function Home({addCompare}) {
     cars.length > 0 &&
     cars.forEach((item) => !!!num && !!item.aksiya && setNum("aksiya"));
 
+// install Swiper modules
+    SwiperCore.use([Navigation]);
 
     useEffect(() => {
         if (!!fCars.length)
@@ -241,13 +243,13 @@ function Home({addCompare}) {
                         <Row style={{width: "100%"}}>
                             {cars.length > 0 &&
                             cars.filter(y => y.aksiya === "").map((car, index) => {
-                                    // if (!car.aksiya) {
-                                    return (
-                                        <Col xl={8} md={12} sm={24}>
-                                            <CardCar key={index} car={car} addCompare={addCompare}/>
-                                        </Col>
-                                    )
-                                    // }
+                                    if (index < 8) {
+                                        return (
+                                            <Col xl={6} md={12} sm={24}>
+                                                <CardCar key={index} car={car} addCompare={addCompare}/>
+                                            </Col>
+                                        )
+                                    }
                                 }
                             )}
                         </Row>
@@ -400,7 +402,7 @@ function Home({addCompare}) {
                                     },
                                 }}
                                 spaceBetween={30}
-                                modules={[Pagination]}
+                                modules={[Navigation, Pagination, Scrollbar, A11y]}
                                 pagination={{clickable: true}}
                                 className="cards-slider__cadrs swiper-wrapper"
                             >
@@ -490,7 +492,10 @@ function Home({addCompare}) {
                             <Swiper
                                 slidesPerView={4}
                                 spaceBetween={30}
-                                modules={[Pagination]}
+                                autoplay={{delay: 3000, disableOnInteraction: false}}
+                                loop={true}
+                                modules={[Autoplay, Pagination, Navigation]}
+                                navigation={true}
                                 pagination={{clickable: true}}
                                 className="swiper-wrapper"
                             >

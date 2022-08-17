@@ -9,9 +9,9 @@ function SignOptions({setStep}) {
             <div className='accountbg1'></div>
             <div className="buttons">
                 <Button type="primary" block onClick={() => setStep("sign_in")}>
-                    Sign in
+                    Kirish
                 </Button>
-                <Button block onClick={() => setStep("sign_up")}>Sign up</Button>
+                <Button block onClick={() => setStep("sign_up")}>Registratsiya</Button>
             </div>
         </div>
     );

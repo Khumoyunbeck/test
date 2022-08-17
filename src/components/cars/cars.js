@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Table} from "antd";
 import {useNavigate} from "react-router";
 
-function Cars({dataSource,deleteCar}) {
+function Cars({dataSource, deleteCar}) {
 
     const navigate = useNavigate()
 
@@ -100,11 +100,17 @@ function Cars({dataSource,deleteCar}) {
             title: 'Opisaniya',
             dataIndex: 'opisaniya',
             key: 'opisaniya',
+            render: function (html) {
+                return <div dangerouslySetInnerHTML={{__html: html}}/>
+            }
         },
         {
             title: 'Opisaniyaru',
             dataIndex: 'opisaniyaru',
             key: 'opisaniyaru',
+            render: function (html) {
+                return <div dangerouslySetInnerHTML={{__html: html}}/>
+            }
         },
         {
             title: 'Batafsil',
