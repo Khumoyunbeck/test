@@ -844,7 +844,7 @@ address {
 }
 
 .swiper-slide img {
-  max-width: 540px;
+  /*max-width: 540px;*/
   display: block;
   margin-left: auto;
 }
@@ -1230,6 +1230,7 @@ button.slider__body-button:active {
   margin-bottom: 20px;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
+  padding: 0 5%;
 }
 
 .cards__card {
@@ -1269,24 +1270,17 @@ button.slider__body-button:active {
 
 .card__info {
   font-size: 14px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+  align-items: flex-start;
   margin-bottom: 20px;
   line-height: 180%;
+  flex-direction: column;
+  row-gap: 10px;
 }
 
 .card__item {
   line-height: 150%;
-  margin: 0 15px;
+  margin: 0 0;
 }
 
 .card__item strong {
@@ -2355,10 +2349,15 @@ main .social .container {
 }
 
 .about__slider {
-  background-color: #fff;
-  width: 38%;
+  width: 42%;
+  padding-left: 40px;
 }
-
+.im{
+  width: 100%;
+}
+.pt50{
+  padding-top: 50px;
+}
 .about__title span {
   width: 100%;
   height: 1px;

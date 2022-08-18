@@ -24,19 +24,17 @@ const Compare = ({ compare, setCompare }) => {
     }
 
     return (
-        <Layout>
+        <div className="wcw">
             <table className='table table-hover'>
                 <thead>
                     <tr>
                         <th>Parametrlar</th>
                         {compare.map(car => (
-                            <th>
+                            <th className="thw">
                                 <img
                                     src={car.photo[0]}
                                     alt='rasm'
-                                    width='150px'
-                                    height='150px'
-                                    style={{ objectFit: 'contain' }}
+                                    className="cimg"
                                 />
                             </th>
                         ))}
@@ -63,7 +61,7 @@ const Compare = ({ compare, setCompare }) => {
                     )}
                 </tbody>
             </table>
-        </Layout>
+        </div>
     )
 }
 

@@ -10,7 +10,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 //     // <React.StrictMode>
 //     <Provider store={store}>
 //         <BrowserRouter>
-//             <App />
+//             <Calc />
 //         </BrowserRouter>
 //     </Provider>,
 //     // </React.StrictMode>

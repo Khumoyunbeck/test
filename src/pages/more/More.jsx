@@ -22,15 +22,16 @@ import 'swiper/css/pagination'
 import {Button} from 'antd'
 import {MainApi} from "../../api";
 import {toast} from "react-toastify";
+import {useNavigate} from "react-router";
 
 function More() {
     const {id} = useParams()
     const [data, setData] = useState({name: '', phone: ''})
     const [car, setCar] = useState(null)
-
+    const navigate = useNavigate()
     const {lang} = useSelector(state => state.lang)
 
-    const {mark, m7, m8, m9, m10, m11, m12, m13, m14, m5, m1, m2, m3, m4, kreditcal} = Language
+    const {mark, m7, m8, m9, m10, m11, m12, m13, m14, m5, m1, m2, m3, m4, kreditcal, kredit} = Language
 
     function createMarkup() {
         return {__html: lang === '0' ? car.opisaniya : car.opisaniyaru}
@@ -49,6 +50,10 @@ function More() {
 
     const handleNav = () => {
         window.location.href = "http://rauto-calculator.uz"
+    }
+
+    const handleNav1 = () => {
+        navigate("/applications/create")
     }
     useEffect(() => {
         axios
@@ -78,7 +83,7 @@ function More() {
                         >
                             {car?.photo?.map(photo => (
                                 <SwiperSlide>
-                                    <img src={photo} alt='img'/>
+                                    <img src={photo} alt='img' className="im"/>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
@@ -121,7 +126,7 @@ function More() {
                             . . . . . {car?.yurgani}
                         </p>
                     </div>
-                    <div className='sale-card'>
+                    <div className='sale-card pt50p'>
                         <div className='sale-card_wrapper'>
                             <span className='card-price card-price_sum'>
                                 {m5[lang]}
@@ -161,6 +166,11 @@ function More() {
                             </Button>
                             <Button className='me-2' onClick={() => handleNav()}>
                                 {kreditcal[lang]}
+                            </Button>
+                        </div>
+                        <div className='d-flex m-t-5'>
+                            <Button className='wb100' onClick={() => handleNav1()}>
+                                {kredit[lang]}
                             </Button>
                         </div>
                     </div>

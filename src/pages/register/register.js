@@ -38,7 +38,7 @@ function Register() {
             message.warn("Fill the form completely")
         }
     }
-    const {name,mail,phone,region} = Language
+    const {name,mail,phone,region,pass} = Language
 
     const {lang} = useSelector((state) => state.lang);
 

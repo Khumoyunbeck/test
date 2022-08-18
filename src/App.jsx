@@ -140,7 +140,7 @@ function App() {
                 <Route path="/admin/banks" element={<BanksAdmin/>}/>
                 <Route path="/useful" element={<Polezniy/>}/>
                 <Route path="/admin/applications/:id" element={<UpdateApplication/>}/>
-                <Route path="/admin/applications/create" element={<CreateApplication/>}/>
+                <Route path="/applications/create" element={<CreditAuto/>}/>
             </Routes>
             <Button
                 shape="circle"

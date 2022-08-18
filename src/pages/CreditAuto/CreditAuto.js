@@ -197,7 +197,7 @@ const CreditAuto = () => {
                         {/* personal_num */}
                         <Form.Item
                             label={personal_num[lang]}
-                            name='personal_num'
+                            name='phone'
                             rules={[
                                 {
                                     required: true,
@@ -210,7 +210,7 @@ const CreditAuto = () => {
                         {/* qarindosh_num */}
                         <Form.Item
                             label={qarindosh_num[lang]}
-                            name='qarindosh_num'
+                            name='relative_number'
                             rules={[
                                 {
                                     required: true,
@@ -226,7 +226,7 @@ const CreditAuto = () => {
                         {/* home_num */}
                         <Form.Item
                             label={home_num[lang]}
-                            name='home_num'
+                            name='house_number'
                             rules={[
                                 {
                                     required: true,
@@ -237,7 +237,7 @@ const CreditAuto = () => {
                             <Input/>
                         </Form.Item>
                         {/* qarindosh_num */}
-                        <Form.Item label={qarindosh_num[lang]} name='qarindosh_num'>
+                        <Form.Item label={qarindosh_num[lang]} name='relative_number2'>
                             <Input/>
                         </Form.Item>
                     </Col>
@@ -255,7 +255,7 @@ const CreditAuto = () => {
                         {/* how_much */}
                         <Form.Item
                             label={how_much[lang]}
-                            name='how_much'
+                            name='maosh'
                             className='mt-4'
                             rules={[
                                 {

@@ -247,9 +247,9 @@ function Home({addCompare}) {
                         <Row style={{width: "100%"}}>
                             {cars.length > 0 &&
                             cars.filter(y => y.aksiya === "").map((car, index) => {
-                                    if (index < 8) {
+                                    if (index < 6) {
                                         return (
-                                            <Col xl={6} md={12} sm={24}>
+                                            <Col xxl={6} xl={8} l={8} md={12} sm={24}>
                                                 <CardCar key={index} car={car} addCompare={addCompare}/>
                                             </Col>
                                         )

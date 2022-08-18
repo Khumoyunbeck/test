@@ -177,7 +177,7 @@ export const Language = {
   m1: ["Ismingiz", "Ваше имя"],
   m2: ["Tel. raqamingiz", "Ваш номер"],
   m3: ["Buyurtma berish", "Заказать"],
-  kreditcal: ["Kreditni hisoblash", "Расчет кредита"],
+  kreditcal: ["Kalkulyator", "Калькулятор"],
   m4: ["TAVSIF", "ОПИСАНИЕ"],
   m5: ["Avtomashina narxi", "Стоимость автомобиля"],
   mark: ["Marka", "Марка"],

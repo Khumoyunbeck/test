@@ -23,28 +23,32 @@ const CardCar = ({ car, addCompare }) => {
             <p className='card__title'>
                 {car?.marka} {car?.madel} {car?.yili}{' '}
             </p>
-            <ul className='card__info'>
-                <li className='card__item'>
-                    <span className='material-symbols-outlined'>local_gas_station</span>
-                    <strong>{car1[lang]}</strong>
-                    {car?.yoqilgi}
-                </li>
-                <li className='card__item'>
-                    <span className='material-symbols-outlined'>settings</span>
-                    <strong> {car2[lang]}</strong>
-                    {car?.transmission}
-                </li>
-                <li className='card__item'>
-                    <span className='material-symbols-outlined'>album</span>
-                    <strong> {car3[lang]}</strong>
-                    {car?.perevod}
-                </li>
-                <li className='card__item'>
-                    <span className='material-symbols-outlined'>speed</span>
-                    <strong> {car4[lang]}</strong>
-                    {car?.yurgani}
-                </li>
-            </ul>
+            <div className="cf">
+                <div className='card__info'>
+                    <div className='card__item'>
+                        <span className='material-symbols-outlined'>local_gas_station</span>
+                        <strong>{car1[lang]}</strong>
+                        {car?.yoqilgi}
+                    </div>
+                    <div className='card__item'>
+                        <span className='material-symbols-outlined'>settings</span>
+                        <strong> {car2[lang]}</strong>
+                        {car?.transmission}
+                    </div>
+                </div>
+                <div className='card__info'>
+                    <div className='card__item'>
+                        <span className='material-symbols-outlined'>album</span>
+                        <strong> {car3[lang]}</strong>
+                        {car?.perevod}
+                    </div>
+                    <div className='card__item'>
+                        <span className='material-symbols-outlined'>speed</span>
+                        <strong> {car4[lang]}</strong>
+                        {car?.yurgani}
+                    </div>
+                </div>
+            </div>
             <div className='card__line'></div>
             <div className='card__price'>
                 Цена: <strong>{Number(car?.narxi).toLocaleString().replace(/,/g, ' ')}</strong>{' '}
