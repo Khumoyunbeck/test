@@ -33,6 +33,8 @@ function UserLogin() {
                         localStorage.removeItem("admin_token")
                         localStorage.removeItem("admin_id")
                         localStorage.removeItem("bank_id")
+                        localStorage.removeItem("moderator_id")
+                        localStorage.removeItem("moderator_id")
                         navigate('/admin/cards')
                     }
                 ).catch(e => console.log(e))

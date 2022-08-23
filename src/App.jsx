@@ -48,7 +48,6 @@ import AdminPage from "./components/admin_page/admin_page";
 import CreateModerator from "./pages/create_moderator/create_moderator";
 import UpdateModerator from "./pages/update_moderator/update_moderator";
 import UpdateApplication from "./pages/update_application/update_application";
-import CreateApplication from "./pages/create_application/create_application";
 import CreateOrder from "./pages/create_order/create_order";
 import UpdateOrder from "./pages/update_order/update_order";
 import UpdateCar from "./pages/update_car/update_car";
@@ -59,6 +58,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import ModeratorLogin from "./components/ModeratorLogin/ModeratorLogin";
 
 function App() {
     const location = useLocation();
@@ -90,12 +90,14 @@ function App() {
             !/sign-up/g.test(location.pathname) &&
             !/bank/g.test(location.pathname) &&
             !/user/g.test(location.pathname) &&
+            !/moderator/g.test(location.pathname) &&
             !/login/g.test(location.pathname) && <Header/>
             }
             <ToastContainer/>
             <Routes>
                 <Route path="/user" element={<AdminPage/>}/>
                 <Route path="/admin" element={<AdminLogin/>}/>
+                <Route path="/moderator" element={<ModeratorLogin/>}/>
                 <Route path="/bank" element={<BankLogin/>}/>
                 <Route path="/admin/orders" element={<RequireAuth><OrdersAdmin/></RequireAuth>}/>
                 <Route path="/admin/orders/:id" element={<UpdateOrder/>}/>
@@ -196,6 +198,7 @@ function App() {
             !/sign-up/g.test(location.pathname) &&
             !/bank/g.test(location.pathname) &&
             !/user/g.test(location.pathname) &&
+            !/moderator/g.test(location.pathname) &&
             !/login/g.test(location.pathname) && <Footer/>}
         </Fragment>
     );

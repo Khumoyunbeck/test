@@ -1,14 +1,54 @@
-import React from 'react';
-import {Button, Table} from "antd";
+import React, {useEffect, useState} from 'react';
+import {Button, Checkbox, Modal, Table} from "antd";
 import {useNavigate} from "react-router";
+import {ExclamationCircleOutlined} from "@ant-design/icons";
+import axios from "axios";
+import {MainApi} from "../../api";
 
-function Cars({dataSource, deleteCar}) {
+function Cars({dataSource, deleteCar, getCars}) {
 
     const navigate = useNavigate()
 
     const handleClick = (props) => {
         navigate(`/admin/card/${props}`)
     }
+
+    const [type, setType] = useState(null)
+
+
+    useEffect(() => {
+        if (!!localStorage.getItem("user_token")) {
+            setType("user")
+        }
+        if (!!localStorage.getItem("bank_token")) {
+            setType("bank")
+        }
+        if (!!localStorage.getItem("admin_token")) {
+            setType("admin")
+        }
+        if (!!localStorage.getItem("moderator_token")) {
+            setType("moderator")
+        }
+    }, [])
+
+
+    const onChange = (e, id) => {
+        if (type === "moderator") {
+            Modal.confirm({
+                centered: true,
+                title: "Rostan ham status o'zgartirmoqchimisiz",
+                icon: <ExclamationCircleOutlined/>,
+                onOk() {
+                    axios
+                        .put(`${MainApi}/car/a/${id}`)
+                        .then((res) => {
+                            getCars()
+                        })
+                        .catch((err) => console.log(err));
+                },
+            })
+        }
+    };
 
     const columns = [
         {
@@ -113,6 +153,27 @@ function Cars({dataSource, deleteCar}) {
             }
         },
         {
+            title: 'Status',
+            dataIndex: 'data',
+            key: 'data',
+            render: (value) => {
+                if (type === "moderator") {
+                    return (
+                        <Checkbox
+                            onChange={e => onChange(e, value?._id)}
+                            checked={value?.status}
+                            disabled={value?.status}
+                        />
+                    )
+                } else
+                    return (
+                        <Button>
+                            {value?.status ? "Active" : "Inactive"}
+                        </Button>
+                    )
+            }
+        },
+        {
             title: 'Batafsil',
             dataIndex: '_id',
             key: '_id',
@@ -122,7 +183,7 @@ function Cars({dataSource, deleteCar}) {
                 )
             }
         },
-        {
+        !(type === "moderator") ? {
             title: "O'chirish",
             dataIndex: '_id',
             key: '_id',
@@ -131,7 +192,7 @@ function Cars({dataSource, deleteCar}) {
                     <Button type="ghost" onClick={() => deleteCar(props)}>O'chirish</Button>
                 )
             }
-        },
+        } : {},
     ];
 
     return (

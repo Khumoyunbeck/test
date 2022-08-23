@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
@@ -60,6 +60,13 @@ function AdminCards() {
         getCars();
     }, []);
 
+    const data = useMemo(() => {
+        return cars?.map(item => ({
+            ...item,
+            data: {_id: item?._id, status: item?.status}
+        }))
+    }, [cars])
+
     return (
         <div className="row pt-5 page_list">
             <div className="col-xl-12">
@@ -93,12 +100,12 @@ function AdminCards() {
                         {
                             type === "user" ?
                                 <Cars
-                                    dataSource={cars?.filter(i => i?.userId?._id
+                                    dataSource={data?.filter(i => i?.userId?._id
                                         ===
-                                        localStorage?.getItem("user_id"))}/>
+                                        localStorage?.getItem("user_id"))} getCars={getCars}/>
                                 :
                                 <Cars
-                                    dataSource={cars} deleteCar={deleteCar}/>
+                                    dataSource={data} deleteCar={deleteCar} getCars={getCars}/>
                         }
                     </div>
                 </div>

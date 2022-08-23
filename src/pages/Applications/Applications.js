@@ -8,7 +8,6 @@ import axios from "axios";
 import {MainApi} from "../../api";
 import {useEffect, useMemo, useState} from "react";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
-import {getClients} from "../../store/client/client";
 
 function CardsAdmin() {
     const location = useLocation()
@@ -56,7 +55,8 @@ function CardsAdmin() {
             house_number: item?.house_number,
             relative_number2: item?.relative_number2,
             maosh: item?.maosh,
-            data: {_id: item?._id, pending: item?.pending}
+            data: {_id: item?._id, pending: item?.pending, status: item?.status},
+            mad: {_id: item?._id, status: item?.status, pending: item?.pending}
         }))
     }, [banks])
 

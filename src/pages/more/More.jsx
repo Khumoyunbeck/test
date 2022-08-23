@@ -164,12 +164,12 @@ function More() {
                             <Button className='me-2' onClick={() => createOrder()}>
                                 {m3[lang]}
                             </Button>
+                        </div>
+                        <div className="abs">
                             <Button className='me-2' onClick={() => handleNav()}>
                                 {kreditcal[lang]}
                             </Button>
-                        </div>
-                        <div className='d-flex m-t-5'>
-                            <Button className='wb100' onClick={() => handleNav1()}>
+                            <Button className='' onClick={() => handleNav1()}>
                                 {kredit[lang]}
                             </Button>
                         </div>
@@ -190,6 +190,7 @@ function More() {
                             />
                         </div>
                     </div>
+
                 </div>
             </section>
         </main>

@@ -247,7 +247,7 @@ function Home({addCompare}) {
                         <Row style={{width: "100%"}}>
                             {cars.length > 0 &&
                             cars.filter(y => y.aksiya === "").map((car, index) => {
-                                    if (index < 6) {
+                                    if (index < 6 && car?.status) {
                                         return (
                                             <Col xxl={6} xl={8} l={8} md={12} sm={24}>
                                                 <CardCar key={index} car={car} addCompare={addCompare}/>
@@ -293,25 +293,28 @@ function Home({addCompare}) {
                                     <div>
                                         {data.yili_from} {"-"} {data.yili_to}
                                     </div>
-                                    <Slider range min={2000} max={2023} onChange={onChange1} value={[data.yili_from,data.yili_to]}/>
+                                    <Slider range min={2000} max={2023} onChange={onChange1}
+                                            value={[data.yili_from, data.yili_to]}/>
                                     <Row gutter={16}>
                                         <Col span={12}>
                                             <label htmlFor="">Dan</label>
                                             <div>
-                                                <Input value={data?.yili_from} addonAfter='yil' onChange={value => setData({
-                                                    ...data,
-                                                    yili_from: value?.target?.value
-                                                })}
+                                                <Input value={data?.yili_from} addonAfter='yil'
+                                                       onChange={value => setData({
+                                                           ...data,
+                                                           yili_from: value?.target?.value
+                                                       })}
                                                 />
                                             </div>
                                         </Col>
                                         <Col span={12}>
                                             <label htmlFor="">Dan</label>
                                             <div>
-                                                <Input value={data?.yili_to} addonAfter='yil' onChange={value => setData({
-                                                    ...data,
-                                                    yili_to: value?.target?.value
-                                                })}
+                                                <Input value={data?.yili_to} addonAfter='yil'
+                                                       onChange={value => setData({
+                                                           ...data,
+                                                           yili_to: value?.target?.value
+                                                       })}
                                                 />
                                             </div>
                                         </Col>
@@ -322,7 +325,8 @@ function Home({addCompare}) {
                                     <div>
                                         {data.yurgani_from} {"-"} {data.yurgani_to}
                                     </div>
-                                    <Slider range min={0} max={1000000} onChange={onChange2} value={[data.yurgani_from,data.yurgani_to]}/>
+                                    <Slider range min={0} max={1000000} onChange={onChange2}
+                                            value={[data.yurgani_from, data.yurgani_to]}/>
                                     <Row gutter={16}>
                                         <Col span={12}>
                                             <div>
@@ -357,7 +361,8 @@ function Home({addCompare}) {
                                     <div>
                                         {data.narxi_from} - {data.narxi_to} so'm
                                     </div>
-                                    <Slider range min={0} max={1000000000} onChange={onChange3} value={[data.narxi_from,data.narxi_to]}/>
+                                    <Slider range min={0} max={1000000000} onChange={onChange3}
+                                            value={[data.narxi_from, data.narxi_to]}/>
                                     <Row gutter={16}>
                                         <Col span={12}>
                                             <div>
@@ -460,7 +465,7 @@ function Home({addCompare}) {
                                 {cars?.length &&
                                 cars?.map(
                                     (item, index) => {
-                                        if (!!item.aksiya)
+                                        if (!!item.aksiya && item?.status)
                                             return (
                                                 <SwiperSlide className="swiper-slide" key={index}>
                                                     <div className=" cards-slider__card card">

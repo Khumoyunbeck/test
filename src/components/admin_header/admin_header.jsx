@@ -26,6 +26,9 @@ function AdminHeader() {
         if (!!localStorage.getItem("admin_token")) {
             setType("admin")
         }
+        if (!!localStorage.getItem("moderator_token")) {
+            setType("moderator")
+        }
     }, [])
 
     return (
@@ -48,7 +51,7 @@ function AdminHeader() {
                         <ul className="metismenu" id="side-menu">
                             <li className="menu-title">Menu</li>
                             {
-                                type === "admin" &&
+                                (type === "admin" || type === "moderator") &&
                                 <li>
                                     <Link to="/admin/orders" className="waves-effect">
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
@@ -59,7 +62,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "user" || type === "admin") &&
+                                (type === "user" || type === "admin" || type ==="moderator") &&
                                 <li>
                                     <Link to="/admin/cards" className="waves-effect">
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
@@ -81,7 +84,7 @@ function AdminHeader() {
                                 // </li>
                             }
                             {
-                                type === "admin" &&
+                                (type === "admin" || type ==="moderator") &&
                                 <li>
                                     <Link to="/admin/clients" className="waves-effect">
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
@@ -92,7 +95,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                type === "admin" &&
+                                (type === "admin" || type ==="moderator") &&
                                 <li>
                                     <Link to="/admin/statistic/all" className="waves-effect">
                                         <i className="mdi mdi-trending-up bg-warning text-white">
@@ -103,7 +106,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "bank" || type === "admin") &&
+                                (type === "bank" || type === "admin" || type ==="moderator") &&
                                 <li>
                                     <Link
                                         to="/admin/applications"
@@ -119,7 +122,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                type === "admin" &&
+                               ( type === "admin" || type ==="moderator") &&
                                 <li>
                                     <Link
                                         to="/admin/moderators"
@@ -135,7 +138,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                type === "admin" &&
+                                (type === "admin" || type ==="moderator") &&
                                 <li>
                                     <Link
                                         to="/admin/users"
@@ -151,7 +154,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                type === "admin" &&
+                                (type === "admin" || type ==="moderator") &&
                                 <li>
                                     <Link
                                         to="/admin/info"

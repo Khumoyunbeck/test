@@ -1,9 +1,28 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Table} from "antd";
 import {useNavigate} from "react-router";
 
 function Clients({dataSource, deleteClient}) {
     const navigate = useNavigate()
+    const [type, setType] = useState(null)
+
+
+    useEffect(() => {
+        if (!!localStorage.getItem("user_token")) {
+            setType("user")
+        }
+        if (!!localStorage.getItem("bank_token")) {
+            setType("bank")
+        }
+        if (!!localStorage.getItem("admin_token")) {
+            setType("admin")
+        }
+        if (!!localStorage.getItem("moderator_token")) {
+            setType("moderator")
+        }
+    }, [])
+
+
     const columns = [
         {
             title: 'photo',
@@ -31,16 +50,6 @@ function Clients({dataSource, deleteClient}) {
             key: 'date',
         },
         {
-            title: "O'chirish",
-            dataIndex: '_id',
-            key: '_id',
-            render: (props) => {
-                return (
-                    <Button type="ghost" onClick={() => deleteClient(props)}>O'chirish</Button>
-                )
-            }
-        },
-        {
             title: "Batafsil",
             dataIndex: '_id',
             key: '_id',
@@ -50,6 +59,16 @@ function Clients({dataSource, deleteClient}) {
                 )
             }
         },
+        !(type === "moderator") ? {
+            title: "O'chirish",
+            dataIndex: '_id',
+            key: '_id',
+            render: (props) => {
+                return (
+                    <Button type="ghost" onClick={() => deleteClient(props)}>O'chirish</Button>
+                )
+            }
+        } : {},
     ];
 
     return (

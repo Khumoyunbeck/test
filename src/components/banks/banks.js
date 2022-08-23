@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {MainApi} from "../../api";
 import axios from "axios";
+import {toast} from "react-toastify";
 
 function Banks({dataSource, getBanks, deleteApplication}) {
     const [type, setType] = useState(null)
@@ -17,6 +18,9 @@ function Banks({dataSource, getBanks, deleteApplication}) {
         }
         if (!!localStorage.getItem("admin_token")) {
             setType("admin")
+        }
+        if (!!localStorage.getItem("moderator_token")) {
+            setType("moderator")
         }
     }, [])
 
@@ -35,6 +39,28 @@ function Banks({dataSource, getBanks, deleteApplication}) {
                         .catch((err) => console.log(err));
                 },
             })
+        }
+    };
+
+    const onChange1 = (e, id, pending) => {
+        if (type === "moderator") {
+            if (pending)
+                Modal.confirm({
+                    centered: true,
+                    title: "Rostan ham status o'zgartirmoqchimisiz",
+                    icon: <ExclamationCircleOutlined/>,
+                    onOk() {
+                        axios
+                            .put(`${MainApi}/bank/proccess/${id}`)
+                            .then((res) => {
+                                getBanks()
+                            })
+                            .catch((err) => console.log(err));
+                    },
+                })
+            else {
+                toast.warn("Malumot tekshirilmoqda")
+            }
         }
     };
 
@@ -90,20 +116,39 @@ function Banks({dataSource, getBanks, deleteApplication}) {
             key: 'maosh',
         },
         {
-            title: 'Status',
+            title: 'Pending',
             dataIndex: 'data',
             key: 'data',
             render: (value) => {
-                if (type === "admin") {
+                if (type === "bank") {
+                    return (
+                        <Checkbox onChange={e => onChange(e, value?._id, value.status)} checked={value?.pending}
+                                  disabled={value?.pending}/>
+                    )
+                } else
                     return (
                         <Button>
                             {value?.pending ? "Active" : "Inactive"}
                         </Button>
                     )
+            }
+        },
+        {
+            title: 'Status',
+            dataIndex: 'mad',
+            key: 'mad',
+            render: (value) => {
+                if (type === "moderator") {
+                    return (
+                        <Checkbox onChange={e => onChange1(e, value?._id,value.pending)} checked={value?.status}
+                                  disabled={value?.status}/>
+
+                    )
                 } else
                     return (
-                        <Checkbox onChange={e => onChange(e, value?._id)} checked={value?.pending}
-                                  disabled={value?.pending}/>
+                        <Button>
+                            {value?.status ? "Active" : "Inactive"}
+                        </Button>
                     )
             }
         },
@@ -121,7 +166,7 @@ function Banks({dataSource, getBanks, deleteApplication}) {
                 )
             }
         },
-        {
+        !(type === "moderator") ? {
             title: "O'chirish",
             dataIndex: '_id',
             key: '_id',
@@ -130,9 +175,9 @@ function Banks({dataSource, getBanks, deleteApplication}) {
                     <Button type="ghost" onClick={() => deleteApplication(props)}>O'chirish</Button>
                 )
             }
-        },
+        } : {},
     ];
-    console.log(dataSource)
+
     return (
         <div>
             <Table dataSource={dataSource} columns={columns} scroll={{x: "max-content"}}/>

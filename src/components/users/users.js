@@ -1,7 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Table} from "antd";
 
 function Users({dataSource, isbank = false, deleteBank, updateBank}) {
+    const [type, setType] = useState(null)
+
+    useEffect(() => {
+        if (!!localStorage.getItem("user_token")) {
+            setType("user")
+        }
+        if (!!localStorage.getItem("bank_token")) {
+            setType("bank")
+        }
+        if (!!localStorage.getItem("admin_token")) {
+            setType("admin")
+        }
+        if (!!localStorage.getItem("moderator_token")) {
+            setType("moderator")
+        }
+    }, [])
     const columns = [
         isbank ? {
             title: 'Bank nomi',
@@ -41,16 +57,6 @@ function Users({dataSource, isbank = false, deleteBank, updateBank}) {
             dataIndex: 'date',
             key: 'date',
         },
-        {
-            title: "O'chirish",
-            dataIndex: '_id',
-            key: '_id',
-            render: (props) => {
-                return (
-                    <Button type="ghost" onClick={() => deleteBank(props)}>O'chirish</Button>
-                )
-            }
-        },
         isbank ? {
             title: "O'zgartirish",
             dataIndex: '_id',
@@ -61,6 +67,17 @@ function Users({dataSource, isbank = false, deleteBank, updateBank}) {
                 )
             }
         } : {},
+        !(type === "moderator") ? {
+            title: "O'chirish",
+            dataIndex: '_id',
+            key: '_id',
+            render: (props) => {
+                return (
+                    <Button type="ghost" onClick={() => deleteBank(props)}>O'chirish</Button>
+                )
+            }
+        } : {},
+
     ];
 
     return (

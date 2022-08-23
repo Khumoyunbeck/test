@@ -37,6 +37,8 @@ function BankLogin() {
                         localStorage.removeItem("user_id")
                         localStorage.removeItem("admin_token")
                         localStorage.removeItem("admin_id")
+                        localStorage.removeItem("moderator_token")
+                        localStorage.removeItem("moderator_id")
                         navigate('/admin/applications')
                     }
                 ).catch(e => console.log(e))

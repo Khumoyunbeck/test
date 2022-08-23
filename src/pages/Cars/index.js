@@ -182,7 +182,8 @@ const Car = ({addCompare}) => {
                             />
                             <Row gutter={16}>
                                 <Col span={12}>
-                                    <Input value={kilometr} addonAfter='km' onChange={value => setKilometr(value?.target?.value)}
+                                    <Input value={kilometr} addonAfter='km'
+                                           onChange={value => setKilometr(value?.target?.value)}
                                     />
                                 </Col>
                             </Row>
@@ -271,13 +272,13 @@ const Car = ({addCompare}) => {
                 <Row style={{width: "100%"}}>
                     {carsData?.length > 0 &&
                     carsData?.map((car, index) => {
-                            // if (!car.aksiya) {
-                            return (
-                                <Col xl={8} l ={8} md={12} sm={24}>
-                                    <CardCar key={index} car={car} addCompare={addCompare}/>
-                                </Col>
-                            )
-                            // }
+                            if (car.status) {
+                                return (
+                                    <Col xl={8} l={8} md={12} sm={24}>
+                                        <CardCar key={index} car={car} addCompare={addCompare}/>
+                                    </Col>
+                                )
+                            }
                         }
                     )}
                 </Row>

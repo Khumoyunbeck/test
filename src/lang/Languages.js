@@ -484,7 +484,7 @@ export const Language = {
   ],
 
   yuborish: ["Yuborish", "Отправить"],
-  kredit: ["Kredit", "Кредит"],
+  kredit: ["Kreditga ariza", "Кредит"],
 
   // credit auto
   sername: ["Familiya", "Фамилия"],

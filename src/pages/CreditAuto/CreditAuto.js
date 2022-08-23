@@ -7,6 +7,10 @@ import {Language} from '../../lang/Languages'
 import {toast} from "react-toastify";
 import axios from "axios";
 import {MainApi} from "../../api";
+import img1 from "../../assets/img/credit/Group1.jpg"
+import img2 from "../../assets/img/credit/Group2.jpg"
+import img3 from "../../assets/img/credit/Group3.jpg"
+import img4 from "../../assets/img/credit/Group4.jpg"
 
 const CreditAuto = () => {
     const {id} = useParams()
@@ -16,7 +20,9 @@ const CreditAuto = () => {
 
     const {lang} = useSelector(state => state.lang)
     const {car} = useSelector(state => state.car)
-    const [images, setImages] = useState([])
+    const [images1, setImages1] = useState([])
+    const [images2, setImages2] = useState([])
+    const [images3, setImages3] = useState([])
     const [image1, setImage1] = useState([])
     const [image2, setImage2] = useState([])
     const [image3, setImage3] = useState([])
@@ -74,8 +80,8 @@ const CreditAuto = () => {
 
     const onFinish = values => {
         const formData = new FormData()
+            [images1, images2, images3].forEach(file => formData.append('photo', file));
         Object.entries(values).forEach(item => formData.append(item[0], item[1]))
-        images.forEach(file => formData.append('photo', file))
         axios.post(`${MainApi}/bank/add`, formData).then(r => {
             toast.success("Muvafaqiyatli yuklandi!")
         }).catch(e =>
@@ -89,15 +95,18 @@ const CreditAuto = () => {
         }, 0)
     }
 
-    let a = []
 
-    const handleChange = (info) => {
-        if (info.target.files.length === 3) {
-            for (let i = 0; i < 3; i++) {
-                a = [...a, info.target.files[i]]
-            }
-            setImages(a)
-        }
+    const handleChange1 = (info) => {
+        setImages1(info.target.files[0])
+        onImageChange(info.target.files[0], setImage1)
+    }
+    const handleChange2 = (info) => {
+        setImages2(info.target.files[0])
+        onImageChange(info.target.files[0], setImage2)
+    }
+    const handleChange3 = (info) => {
+        setImages3(info.target.files[0])
+        onImageChange(info.target.files[0], setImage3)
     }
 
     const onImageChange = (event, setImage) => {
@@ -109,16 +118,16 @@ const CreditAuto = () => {
             reader.readAsDataURL(event);
         }
     }
-
-    useEffect(() => {
-        if (images?.length === 3) {
-            for (let i = 0; i < images?.length; i++) {
-                if (i === 0) onImageChange(images[i], setImage1)
-                if (i === 1) onImageChange(images[i], setImage2)
-                if (i === 2) onImageChange(images[i], setImage3)
-            }
-        }
-    }, [images])
+    //
+    // useEffect(() => {
+    //     if (images?.length === 3) {
+    //         for (let i = 0; i < images?.length; i++) {
+    //             if (i === 0) onImageChange(images[i], setImage1)
+    //             if (i === 1) onImageChange(images[i], setImage2)
+    //             if (i === 2) onImageChange(images[i], setImage3)
+    //         }
+    //     }
+    // }, [images])
 
     return (
         <div className='container'>
@@ -269,15 +278,34 @@ const CreditAuto = () => {
                     </Col>
                     <Col span={16}/>
                     {/* photos */}
-                    <Col span={16}>
-                        <p className='text-center'>{passport[lang]}</p>
-                    </Col>
                     {/* select photo */}
+                    <p className='text-center'>{passport[lang]}</p>
                     <Col span={8}/>
-                    <Col span={8} className='text-end mb-2'>
-                        <input type="file" onChange={event => handleChange(event)} multiple/>
+
+                    <Col span={24} className='text-end mb-2 d-flex'>
+                        <div>
+                            <input type="file" onChange={event => handleChange1(event)}/>
+                        </div>
+                        <div>
+                            {passportid1[lang]}
+                        </div>
                     </Col>
-                    <Col span={16}>{passportid1[lang]}</Col>
+                    <Col span={24} className='text-end mb-2 d-flex'>
+                        <div>
+                            <input type="file" onChange={event => handleChange2(event)}/>
+                        </div>
+                        <div>
+                            {passportid2[lang]}
+                        </div>
+                    </Col>
+                    <Col span={24} className='text-end mb-2 d-flex'>
+                        <div>
+                            <input type="file" onChange={event => handleChange3(event)}/>
+                        </div>
+                        <div>
+                            {passportid3[lang]}
+                        </div>
+                    </Col>
                     <Col span={6}>
                         <div className='m-5'>
                             <img src={image1} alt='image1' width='100%'/>
@@ -299,13 +327,7 @@ const CreditAuto = () => {
                     {/*        <p dangerouslySetInnerHTML={createMarkup1()}/>*/}
                     {/*    </div>*/}
                     {/*</Col>*/}
-                    <Col span={6}>
-                        <div className='ms-5 mt-0'>
-                            <p style={{fontSize: 14}} dangerouslySetInnerHTML={createMarkup2()}/>
-                        </div>
-                    </Col>
                     <Col span={12} className='px-5'>
-                        <p dangerouslySetInnerHTML={createMarkup()}/>
                         <Checkbox>{check[lang]}</Checkbox>
                     </Col>
                     <Col span={12} className='text-end'>
@@ -319,6 +341,30 @@ const CreditAuto = () => {
                         </Button>
                     </Col>
                 </Row>
+                <Row>
+                    <Col span={6}>
+                        <div className='m-5'>
+                            <img src={img1} alt='image1' width='100%'/>
+                        </div>
+                    </Col>
+                    <Col span={6}>
+                        <div className='m-5'>
+                            <img src={img2} alt='image1' width='100%'/>
+                        </div>
+                    </Col>
+                    <Col span={6}>
+                        <div className='m-5'>
+                            <img src={img3} alt='image1' width='100%'/>
+                        </div>
+                    </Col>
+                    <Col span={6}>
+                        <div className='m-5'>
+                            <img src={img4} alt='image1' width='100%'/>
+                            <p style={{fontSize: 14}} dangerouslySetInnerHTML={createMarkup2()}/>
+                        </div>
+                    </Col>
+                </Row>
+
             </Form>
         </div>
     )
