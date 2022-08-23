@@ -59,6 +59,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import ModeratorLogin from "./components/ModeratorLogin/ModeratorLogin";
+import MadAdmin from "./pages/madAdmin/madAdmin";
+import CreateMad from "./pages/MadCreate/MadCreate";
 
 function App() {
     const location = useLocation();
@@ -114,6 +116,7 @@ function App() {
                 <Route path="/admin/info" element={<InfoPage/>}/>
                 <Route path="/aboutus" element={<Aboutus/>}/>
                 <Route path="/" element={<Home addCompare={addCompare}/>}/>
+                <Route path="/moderators" element={<MadAdmin/>}/>
                 <Route
                     path="/compare"
                     element={<Compare compare={compare} setCompare={setCompare}/>}
@@ -138,6 +141,7 @@ function App() {
                 <Route path="/admin/users" element={<UsersAdmin/>}/>
                 <Route path="/admin/moderators" element={<ModeratorsAdmin/>}/>
                 <Route path="/admin/moderators/create" element={<CreateModerator/>}/>
+                <Route path="/moderators/add" element={<CreateMad/>}/>
                 <Route path="/admin/moderators/:id" element={<UpdateModerator/>}/>
                 <Route path="/admin/banks" element={<BanksAdmin/>}/>
                 <Route path="/useful" element={<Polezniy/>}/>

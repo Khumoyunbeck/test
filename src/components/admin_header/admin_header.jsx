@@ -62,7 +62,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "user" || type === "admin" || type ==="moderator") &&
+                                (type === "user" || type === "admin" || type === "moderator") &&
                                 <li>
                                     <Link to="/admin/cards" className="waves-effect">
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
@@ -73,18 +73,18 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                // type === "user" &&
-                                // <li>
-                                //     <Link to="/admin/application/add" className="waves-effect">
-                                //         <i className="mdi  mdi-message-text-outline text-white bg-warning">
-                                //             <img src={newsIcon} alt="" width={20}/>
-                                //         </i>
-                                //         <span>Ariza qo'shish</span>
-                                //     </Link>
-                                // </li>
+                                type === "admin" &&
+                                <li>
+                                    <Link to="/moderators" className="waves-effect">
+                                        <i className="mdi  mdi-message-text-outline text-white bg-warning">
+                                            <img src={newsIcon} alt="" width={20}/>
+                                        </i>
+                                        <span>Moderatorlar</span>
+                                    </Link>
+                                </li>
                             }
                             {
-                                (type === "admin" || type ==="moderator") &&
+                                (type === "admin" || type === "moderator") &&
                                 <li>
                                     <Link to="/admin/clients" className="waves-effect">
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
@@ -95,7 +95,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "admin" || type ==="moderator") &&
+                                (type === "admin" || type === "moderator") &&
                                 <li>
                                     <Link to="/admin/statistic/all" className="waves-effect">
                                         <i className="mdi mdi-trending-up bg-warning text-white">
@@ -106,7 +106,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "bank" || type === "admin" || type ==="moderator") &&
+                                (type === "bank" || type === "admin" || type === "moderator") &&
                                 <li>
                                     <Link
                                         to="/admin/applications"
@@ -122,7 +122,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                               ( type === "admin" || type ==="moderator") &&
+                                (type === "admin" || type === "moderator") &&
                                 <li>
                                     <Link
                                         to="/admin/moderators"
@@ -138,7 +138,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "admin" || type ==="moderator") &&
+                                (type === "admin" || type === "moderator") &&
                                 <li>
                                     <Link
                                         to="/admin/users"
@@ -154,7 +154,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "admin" || type ==="moderator") &&
+                                (type === "admin" || type === "moderator") &&
                                 <li>
                                     <Link
                                         to="/admin/info"
