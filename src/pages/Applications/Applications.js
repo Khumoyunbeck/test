@@ -12,6 +12,22 @@ import {ExclamationCircleOutlined} from "@ant-design/icons";
 function CardsAdmin() {
     const location = useLocation()
     const [banks, setBanks] = useState([])
+    const [type, setType] = useState(null)
+
+    useEffect(() => {
+        if (!!localStorage.getItem("user_token")) {
+            setType("user")
+        }
+        if (!!localStorage.getItem("bank_token")) {
+            setType("bank")
+        }
+        if (!!localStorage.getItem("admin_token")) {
+            setType("admin")
+        }
+        if (!!localStorage.getItem("moderator_token")) {
+            setType("moderator")
+        }
+    }, [])
 
     const getBanks = async () => {
         await axios
@@ -89,7 +105,9 @@ function CardsAdmin() {
                     </Col>
                     <div style={{width: "100%"}}>
                         {location.pathname === '/admin/applications' ? (
-                            <Banks dataSource={data} getBanks={getBanks} deleteApplication={deleteApplication}/>
+                            <Banks dataSource={
+                                type === "bank" ? data?.filter(i => i?.data?.status) : data
+                            } getBanks={getBanks} deleteApplication={deleteApplication}/>
                         ) : (
                             <Application_page/>
                         )}
