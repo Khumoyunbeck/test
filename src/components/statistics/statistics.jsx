@@ -4,6 +4,8 @@ import priceTag from '../../images/price-tag.png'
 import order from '../../images/order.png'
 import axios from 'axios'
 import {MainApi} from "../../api";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 
 function Statistics() {
@@ -13,6 +15,9 @@ function Statistics() {
     const [bank, setBank] = useState(0)
     const [mad, setMad] = useState(0)
     const [ord, setOrd] = useState(0)
+
+    const {lang} = useSelector(state => state.lang)
+    const {users, cars, clients, apps, banks, orders_all} = Language
 
     useEffect(() => {
         axios.get(`${MainApi}/user/all`)
@@ -24,9 +29,9 @@ function Statistics() {
 
 
     useEffect(() => {
-        axios.get(`${MainApi}/car/user/all`)
+        axios.get(`${MainApi}/car/all`)
             .then((data) => {
-                setCar(data?.data?.getAllmowin?.length)
+                setCar(data?.data?.data?.length)
             });
     }, [])
 
@@ -34,19 +39,19 @@ function Statistics() {
     useEffect(() => {
         axios.get(`${MainApi}/client/all`)
             .then((data) => {
-                setClient(data?.data?.length)
+                setClient(data?.data?.data?.length)
             });
     }, [])
 
     useEffect(() => {
         axios.get(`${MainApi}/bank/all`)
             .then((data) => {
-                setBank(data?.data?.bank?.length)
+                setBank(data?.data?.data?.length)
             });
     }, [])
 
     useEffect(() => {
-        axios.get(`${MainApi}/maderator/all`)
+        axios.get(`${MainApi}/xodim/all`)
             .then((data) => {
                 setMad(data?.data?.data?.length)
             });
@@ -55,7 +60,8 @@ function Statistics() {
     useEffect(() => {
         axios.get(`${MainApi}/order/all`)
             .then((data) => {
-                setOrd(data?.data?.length)
+                console.log(data?.data,"data")
+                setOrd(data?.data?.data?.length)
             });
     }, [])
 
@@ -70,7 +76,7 @@ function Statistics() {
                                 <img src={priceTag} alt="" width={35}/>
                             </div>
                             <div>
-                                <h5 className="font-16">Barcha Foydalanuvchilar</h5>
+                                <h5 className="font-16">{users[lang]}</h5>
                             </div>
                             <h3 className="mt-4">
                                 {user}
@@ -85,7 +91,7 @@ function Statistics() {
                                 <img src={car} alt="" width={35}/>
                             </div>
                             <div>
-                                <h5 className="font-16">Barcha Avtomobillar</h5>
+                                <h5 className="font-16">{cars[lang]}</h5>
                             </div>
                             <h3 className="mt-4">
                                 {car}
@@ -100,7 +106,7 @@ function Statistics() {
                                 <img src={order} alt="" width={35}/>
                             </div>
                             <div>
-                                <h5 className="font-16">Barcha Klientlar</h5>
+                                <h5 className="font-16">{clients[lang]}</h5>
                             </div>
                             <h3 className="mt-4">
                                 {client}
@@ -115,7 +121,7 @@ function Statistics() {
                                 <img src={pageIcon} alt="" width={25}/>
                             </div>
                             <div>
-                                <h5 className="font-16">Barcha bankka tushgan arizalar</h5>
+                                <h5 className="font-16">{apps[lang]}</h5>
                             </div>
                             <h3 className="mt-4">
                                 {bank}
@@ -130,7 +136,7 @@ function Statistics() {
                                 <img src={pageIcon} alt="" width={25}/>
                             </div>
                             <div>
-                                <h5 className="font-16">Barcha Bank xodimi</h5>
+                                <h5 className="font-16">{banks[lang]}</h5>
                             </div>
                             <h3 className="mt-4">
                                 {mad}
@@ -145,7 +151,7 @@ function Statistics() {
                                 <img src={pageIcon} alt="" width={25}/>
                             </div>
                             <div>
-                                <h5 className="font-16">Barcha Buyurtmalar</h5>
+                                <h5 className="font-16">{orders_all[lang]}</h5>
                             </div>
                             <h3 className="mt-4">
                                 {ord}

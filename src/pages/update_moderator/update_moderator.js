@@ -6,12 +6,15 @@ import axios from "axios";
 import {MainApi} from "../../api";
 import {toast} from "react-toastify";
 import {useParams} from "react-router";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function UpdateModerator() {
     const {id} = useParams()
 
     const [form] = Form.useForm()
-
+    const {lang} = useSelector(state => state.lang)
+    const {success,name,req,mail,bank_name,phone,pass,save} = Language;
     useEffect(() => {
         if (!!id)
             axios.get(`${MainApi}/xodim/${id}`).then(res => {
@@ -21,7 +24,7 @@ function UpdateModerator() {
 
     const onFinish = (values) => {
         axios.put(`${MainApi}/xodim/${id}`, values).then(res => {
-            toast.success("Muvafaqiyali yangilandi")
+            toast.success(success[lang])
         }).catch(er => console.log(er))
     };
 
@@ -49,11 +52,11 @@ function UpdateModerator() {
                 >
                     <Form.Item
                         label="Ism"
-                        name="name"
+                        name={name[lang]}
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your name!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -61,12 +64,12 @@ function UpdateModerator() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Email"
+                        label={mail[lang]}
                         name="email"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your email!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -74,12 +77,12 @@ function UpdateModerator() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Password"
+                        label={pass[lang]}
                         name="password"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your password!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -87,12 +90,12 @@ function UpdateModerator() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Phone"
+                        label={phone[lang]}
                         name="phone"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your phone!',
+                                message:req[lang],
                             },
                         ]}
                     >
@@ -100,12 +103,12 @@ function UpdateModerator() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Bank"
+                        label={bank_name[lang]}
                         name="bank"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your bank!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -119,7 +122,7 @@ function UpdateModerator() {
                         }}
                     >
                         <Button type="primary" htmlType="submit">
-                            Submit
+                            {save[lang]}
                         </Button>
                     </Form.Item>
                 </Form>

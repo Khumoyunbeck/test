@@ -11,8 +11,6 @@ import { Language } from '../../lang/Languages'
 function Ourteam() {
     const { lang } = useSelector(state => state.lang)
 
-    console.log(lang)
-
     const { a9 } = Language
     const { tm1 } = Language
     const { tm2 } = Language

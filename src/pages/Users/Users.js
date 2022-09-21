@@ -6,11 +6,14 @@ import axios from "axios";
 import {MainApi} from "../../api";
 import {useEffect, useState} from "react";
 import Users from "../../components/users/users";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function UsersAdmin() {
     const location = useLocation()
     const [users, setUsers] = useState([])
-
+    const {lang} = useSelector(state => state.lang)
+    const {home,search} = Language;
     const geUsers = async () => {
         await axios
             .get(`${MainApi}/user/all`)
@@ -38,11 +41,11 @@ function UsersAdmin() {
                                 <Input className='rounded'/>
                             </Form.Item>
                             <Button className='rounded' type='primary'>
-                                Search
+                                {search[lang]}
                             </Button>
                         </form>
                         <Button className='rounded' type='primary' danger>
-                            <Link to='/'>Asosiyga qaytish</Link>
+                            <Link to='/'>{home[lang]}</Link>
                         </Button>
                     </Col>
                     <div style={{width: "100%"}}>

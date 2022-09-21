@@ -1,4 +1,6 @@
 import { Layout } from 'antd'
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 const Compare = ({ compare, setCompare }) => {
     const lists = [
@@ -23,12 +25,15 @@ const Compare = ({ compare, setCompare }) => {
         setCompare([...compare])
     }
 
+    const {lang} = useSelector(state => state.lang)
+    const {params,del} = Language;
+
     return (
         <div className="wcw">
             <table className='table table-hover'>
                 <thead>
                     <tr>
-                        <th>Parametrlar</th>
+                        <th>{params[lang]}</th>
                         {compare.map(car => (
                             <th className="thw">
                                 <img
@@ -54,7 +59,7 @@ const Compare = ({ compare, setCompare }) => {
                             <th></th>
                             {compare.map(car => (
                                 <td>
-                                    <button onClick={() => deleteItem(car._id)}>delete</button>
+                                    <button onClick={() => deleteItem(car._id)}>{del[lang]}</button>
                                 </td>
                             ))}
                         </tr>

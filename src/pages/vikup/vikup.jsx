@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import React, {useState} from 'react'
+import {useSelector} from 'react-redux'
 import axios from 'axios'
 // import VikupImg from '../../images/vikupAvto.png'
-import { Language } from '../../lang/Languages'
+import {Language} from '../../lang/Languages'
 import '../../components/style.css'
+import {MainApi} from "../../api";
 
 function Vikup() {
-    const [data, setData] = useState({ ismiz: '', phone: '' })
+    const [data, setData] = useState({ismiz: '', phone: ''})
 
-    const { lang } = useSelector(state => state.lang)
+    const {lang} = useSelector(state => state.lang)
 
     const order = async () => {
         await axios
-            .post('http://185.196.214.145:5000/order/add', data)
+            .post(`${MainApi}/order/add`, data)
             .then(res => console.log(res))
             .catch(err => new Error(err))
     }
@@ -34,7 +35,8 @@ function Vikup() {
         vikthirdteen,
         vikfourteen,
         m1,
-        m2
+        m2,
+        send
     } = Language
 
     return (
@@ -70,7 +72,7 @@ function Vikup() {
                             <div className='input-wrap'>
                                 <span className='material-symbols-outlined'>person</span>
                                 <input
-                                    onChange={e => setData({ ...data, ismiz: e.target.value })}
+                                    onChange={e => setData({...data, ismiz: e.target.value})}
                                     value={data.ismiz}
                                     type='text'
                                     className='form-control page_title_uz'
@@ -82,7 +84,7 @@ function Vikup() {
                             <div className='input-wrap'>
                                 <span className='material-symbols-outlined'>phone</span>
                                 <input
-                                    onChange={e => setData({ ...data, phone: e.target.value })}
+                                    onChange={e => setData({...data, phone: e.target.value})}
                                     value={data.phone}
                                     type='number'
                                     className='form-control page_title_uz'
@@ -94,7 +96,7 @@ function Vikup() {
                             </div>
                         </div>
                         <button onClick={order} className='more-btn'>
-                            Отправить
+                            {send[lang]}
                         </button>
                     </div>
                 </div>

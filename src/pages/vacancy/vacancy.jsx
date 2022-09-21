@@ -7,7 +7,6 @@ import '../../components/style.css'
 function Vacancy() {
     const { lang } = useSelector(state => state.lang)
 
-    console.log(lang)
 
     const { vac1, vac2, vac3, vac4, vac5, vac6, vac7, vac8, vac9, vac10, vac11, vac12, vac13, vac14, vac15, vac16, vac17, vac18, vac19, vac20, vac21, vac22, vac23, vac24,} = Language
   return (

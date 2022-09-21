@@ -6,8 +6,6 @@ import '../../components/style.css'
 function Quality() {
     const { lang } = useSelector(state => state.lang)
 
-    console.log(lang)
-
     const { qu1, qu2, qu3, qu4, qu5, qu6, qu7, qu8 } = Language
   return (
     <main>

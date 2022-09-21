@@ -6,12 +6,18 @@ import axios from "axios";
 import {MainApi} from "../../api";
 import {toast} from "react-toastify";
 import {useParams} from "react-router";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function UpdateClients() {
     const {id} = useParams()
     const [data, setData] = useState({})
 
     const [form] = Form.useForm()
+
+
+    const {lang} = useSelector(state => state.lang)
+    const {req,name,region,date,deleteOrd,Batafsil,success} = Language;
 
     useEffect(() => {
         if (!!id)
@@ -23,7 +29,7 @@ function UpdateClients() {
 
     const onFinish = (values) => {
         axios.put(`${MainApi}/client/${id}`, values).then(res => {
-            toast.success("Muvafaqiyali yangilandi")
+            toast.success(success[lang])
         }).catch(er => console.log(er))
     };
 
@@ -53,12 +59,12 @@ function UpdateClients() {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Ism"
+                        label={name[lang]}
                         name="name"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your name!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -66,12 +72,12 @@ function UpdateClients() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Region"
+                        label={region[lang]}
                         name="region"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your region!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -79,12 +85,12 @@ function UpdateClients() {
                     </Form.Item>
 
                     <Form.Item
-                        label="date"
+                        label={date[lang]}
                         name="date"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your password!',
+                                message: req[lang],
                             },
                         ]}
                     >

@@ -7,6 +7,7 @@ import Clients from "../clients/clients";
 import {Modal} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {MainApi} from "../../api";
+import {Language} from "../../lang/Languages";
 
 function ClientsAdmin() {
     const dispatch = useDispatch()
@@ -14,10 +15,13 @@ function ClientsAdmin() {
 
     const { clients, isLoading } = useSelector(state => state.client)
 
+    const {lang} = useSelector(state => state.lang)
+    const {deleteOrd,search,home,list,create} = Language
+
     const deleteClient = id => {
         Modal.confirm({
             centered: true,
-            title: "Klient o'chirish",
+            title: deleteOrd[lang],
             icon: <ExclamationCircleOutlined/>,
             onOk() {
                 axios
@@ -48,20 +52,20 @@ function ClientsAdmin() {
                             onmouseout="document.search.txt.value = ''"
                             onChange={e => setSearchTerm(e.target.value)}
                         />
-                        <span className='deff'>Search</span>
+                        <span className='deff'>{search[lang]}</span>
                     </form>
                 </div>
                 <Link to='/admin/orders' className='btn btn-danger btn-sm float-right'>
-                    Asosiyga qaytish
+                    {home[lang]}
                 </Link>
                 <Link
                     to='/admin/clients/add'
                     className='btn btn-success mr-3 mdi mdi-account-multiple-plus btn-sm float-right'
                 >
-                    Mijoz qo'shish
+                    {create[lang]}
                 </Link>
 
-                <h4 className='mt-0 mb-4 pt-2'>Barcha mijozlar ro'yhati</h4>
+                <h4 className='mt-0 mb-4 pt-2'>{list[lang]}</h4>
                 <Clients dataSource={clients} deleteClient={deleteClient}/>
             </div>
         </div>

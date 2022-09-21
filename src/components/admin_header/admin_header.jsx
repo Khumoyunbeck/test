@@ -14,7 +14,7 @@ function AdminHeader() {
     const {lang} = useSelector((state) => state.lang);
     const [type, setType] = useState(null)
 
-    const {applications} = Language;
+    const {applications, menu,add_car,moderators,clients,statistics,bank,user,info,orders} = Language;
 
     useEffect(() => {
         if (!!localStorage.getItem("user_token")) {
@@ -49,7 +49,7 @@ function AdminHeader() {
                 <div className="slimscroll-menu" id="remove-scroll">
                     <div id="sidebar-menu">
                         <ul className="metismenu" id="side-menu">
-                            <li className="menu-title">Menu</li>
+                            <li className="menu-title">{menu[lang]}</li>
                             {
                                 (type === "admin" || type === "moderator") &&
                                 <li>
@@ -57,7 +57,7 @@ function AdminHeader() {
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
                                             <img src={order} alt="" width={20}/>
                                         </i>
-                                        <span>Buyurtmalar</span>
+                                        <span>{orders[lang]}</span>
                                     </Link>
                                 </li>
                             }
@@ -68,7 +68,7 @@ function AdminHeader() {
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
                                             <img src={newsIcon} alt="" width={20}/>
                                         </i>
-                                        <span>Avtomobil qo'shish</span>
+                                        <span>{add_car[lang]}</span>
                                     </Link>
                                 </li>
                             }
@@ -79,7 +79,7 @@ function AdminHeader() {
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
                                             <img src={newsIcon} alt="" width={20}/>
                                         </i>
-                                        <span>Moderatorlar</span>
+                                        <span>{moderators[lang]}</span>
                                     </Link>
                                 </li>
                             }
@@ -90,7 +90,7 @@ function AdminHeader() {
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
                                             <img src={announcementIcon} alt="" width={20}/>
                                         </i>
-                                        <span>Bizning mijozlar</span>
+                                        <span>{clients[lang]}</span>
                                     </Link>
                                 </li>
                             }
@@ -101,7 +101,7 @@ function AdminHeader() {
                                         <i className="mdi mdi-trending-up bg-warning text-white">
                                             <img src={chartIcon} alt="" width={20}/>
                                         </i>
-                                        <span>Statistika</span>
+                                        <span>{statistics[lang]}</span>
                                     </Link>
                                 </li>
                             }
@@ -132,7 +132,7 @@ function AdminHeader() {
                                             <i className="mdi mdi-trending-up bg-warning text-white">
                                                 <img src={moderat} alt="" width={20}/>
                                             </i>
-                                            <span>Bank xodimi</span>
+                                            <span>{bank[lang]}</span>
                                         </div>
                                     </Link>
                                 </li>
@@ -148,7 +148,7 @@ function AdminHeader() {
                                             <i className="mdi mdi-trending-up bg-warning text-white">
                                                 <img src={bankUser} alt="" width={20}/>
                                             </i>
-                                            <span>Barcha foydalanuvchilar</span>
+                                            <span>{user[lang]}</span>
                                         </div>
                                     </Link>
                                 </li>
@@ -164,7 +164,7 @@ function AdminHeader() {
                                             <i className="mdi mdi-trending-up bg-warning text-white">
                                                 <img src={bankUser} alt="" width={20}/>
                                             </i>
-                                            <span>Malumotlar</span>
+                                            <span>{info[lang]}</span>
                                         </div>
                                     </Link>
                                 </li>

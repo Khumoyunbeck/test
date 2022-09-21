@@ -7,12 +7,15 @@ import axios from "axios";
 import {MainApi} from "../../api";
 import {Modal} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
+import {Language} from "../../lang/Languages";
 
 function AdminCards() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [cars, setCars] = useState([])
     const [type, setType] = useState("")
+    const {lang} = useSelector(state => state.lang)
+    const {deleteOrd,create,list,home,search} = Language;
 
     useEffect(() => {
         if (!!localStorage.getItem("user_token")) {
@@ -38,7 +41,7 @@ function AdminCards() {
     const deleteCar = (id) => {
         Modal.confirm({
             centered: true,
-            title: "Moshina o'chirish",
+            title: deleteOrd[lang],
             icon: <ExclamationCircleOutlined/>,
             onOk() {
                 axios
@@ -60,6 +63,8 @@ function AdminCards() {
         getCars();
     }, []);
 
+    console.log(cars,"cars")
+
     const data = useMemo(() => {
         return cars?.map(item => ({
             ...item,
@@ -80,7 +85,7 @@ function AdminCards() {
                                     name="txt"
                                     onmouseout="document.search.txt.value = ''"
                                 />
-                                <span className="deff">Search</span>
+                                <span className="deff">{search[lang]}</span>
                             </form>
 
                         </div>
@@ -88,15 +93,15 @@ function AdminCards() {
                             className="btn btn-danger btn-sm float-right"
                             onClick={() => logout()}
                         >
-                            Chiqish
+                            {home[lang]}
                         </div>
                         <Link
                             to="/admin/card/add"
                             className="btn btn-success mr-3 mdi mdi-account-multiple-plus btn-sm float-right"
                         >
-                            Avtomashina qo'shish
+                            {create[lang]}
                         </Link>
-                        <h4 className="mt-0 mb-4">Barcha Avtomashinalar ro'yhati</h4>
+                        <h4 className="mt-0 mb-4">{list[lang]}</h4>
                         {
                             type === "user" ?
                                 <Cars

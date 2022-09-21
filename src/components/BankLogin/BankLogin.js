@@ -2,6 +2,8 @@ import {useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {Radio} from 'antd';
 import axios from "../../api";
+import {Language} from "../../lang/Languages";
+import {useSelector} from "react-redux";
 
 function BankLogin() {
     const email = useRef()
@@ -49,6 +51,10 @@ function BankLogin() {
         if (!!token) navigate('/admin/cards')
     }, [token])
 
+    const {lang} = useSelector((state) => state.lang);
+
+    const {l, pass, mail} = Language;
+
     return (
         <div className="wr100">
             <div className='accountbg'></div>
@@ -72,7 +78,7 @@ function BankLogin() {
                         >
                             <div className='form-group'>
                                 <div className='col-12'>
-                                    <label>Email</label>
+                                    <label>{mail[lang]}</label>
                                     <input
                                         ref={email}
                                         className='form-control email_input'
@@ -91,7 +97,7 @@ function BankLogin() {
 
                             <div className='form-group'>
                                 <div className='col-12'>
-                                    <label>Password</label>
+                                    <label>{pass[lang]}</label>
                                     <input
                                         ref={password}
                                         className='form-control password_input'
@@ -114,7 +120,7 @@ function BankLogin() {
                                         className='btn btn-primary btn-block btn-lg waves-effect waves-light'
                                         type='submit'
                                     >
-                                        Login
+                                        {l[lang]}
                                     </button>
                                 </div>
                             </div>

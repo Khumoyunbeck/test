@@ -5,9 +5,31 @@ import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {MainApi} from "../../api";
 import axios from "axios";
 import {toast} from "react-toastify";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function Banks({dataSource, getBanks, deleteApplication}) {
     const [type, setType] = useState(null)
+    const {lang} = useSelector(state => state.lang)
+    const {
+        sure_status,
+        info_checking,
+        ph,
+        name,
+        sername,
+        father_name,
+        phone,
+        relative_number,
+        house_number,
+        relative_number2,
+        salary1,
+        pending,
+        active,
+        inactive,
+        status,
+        Batafsil,
+        deleteOrd
+    } = Language
 
     useEffect(() => {
         if (!!localStorage.getItem("user_token")) {
@@ -28,7 +50,7 @@ function Banks({dataSource, getBanks, deleteApplication}) {
         if (type === "bank") {
             Modal.confirm({
                 centered: true,
-                title: "Rostan ham status o'zgartirmoqchimisiz",
+                title: sure_status[lang],
                 icon: <ExclamationCircleOutlined/>,
                 onOk() {
                     axios
@@ -44,10 +66,10 @@ function Banks({dataSource, getBanks, deleteApplication}) {
 
     const onChange1 = (e, id, pending) => {
         if (type === "moderator") {
-            if (pending)
+            // if (pending)
                 Modal.confirm({
                     centered: true,
-                    title: "Rostan ham status o'zgartirmoqchimisiz",
+                    title: sure_status[lang],
                     icon: <ExclamationCircleOutlined/>,
                     onOk() {
                         axios
@@ -58,15 +80,15 @@ function Banks({dataSource, getBanks, deleteApplication}) {
                             .catch((err) => console.log(err));
                     },
                 })
-            else {
-                toast.warn("Malumot tekshirilmoqda")
-            }
+            // else {
+            //     toast.warn(info_checking[lang])
+            // }
         }
     };
 
     const columns = [
         {
-            title: 'photo',
+            title: ph[lang],
             dataIndex: 'photo',
             key: 'photo',
             render: (props) => {
@@ -76,47 +98,47 @@ function Banks({dataSource, getBanks, deleteApplication}) {
             }
         },
         {
-            title: 'Name',
+            title: name[lang],
             dataIndex: 'name',
             key: 'name',
         },
         {
-            title: 'Surname',
+            title: sername[lang],
             dataIndex: 'surname',
             key: 'surname',
         },
         {
-            title: 'Father name',
+            title: father_name[lang],
             dataIndex: 'father_name',
             key: 'father_name',
         },
         {
-            title: 'Phone',
+            title: phone[lang],
             dataIndex: 'phone',
             key: 'phone',
         },
         {
-            title: 'Qarindoshini nomeri',
+            title: relative_number[lang],
             dataIndex: 'relative_number',
             key: 'relative_number',
         },
         {
-            title: 'Uyini nomeri',
+            title: house_number[lang],
             dataIndex: 'house_number',
             key: 'house_number',
         },
         {
-            title: 'Qarindoshini nomeri 2',
+            title: relative_number2[lang],
             dataIndex: 'relative_number2',
             key: 'relative_number2',
         },
         {
-            title: 'Maosh',
+            title: salary1[lang],
             dataIndex: 'maosh',
             key: 'maosh',
         },
         {
-            title: 'Pending',
+            title: pending[lang],
             dataIndex: 'data',
             key: 'data',
             render: (value) => {
@@ -128,51 +150,51 @@ function Banks({dataSource, getBanks, deleteApplication}) {
                 } else
                     return (
                         <Button>
-                            {value?.pending ? "Active" : "Inactive"}
+                            {value?.pending ? active : inactive}
                         </Button>
                     )
             }
         },
         {
-            title: 'Status',
+            title: status[lang],
             dataIndex: 'mad',
             key: 'mad',
             render: (value) => {
                 if (type === "moderator") {
                     return (
-                        <Checkbox onChange={e => onChange1(e, value?._id,value.pending)} checked={value?.status}
+                        <Checkbox onChange={e => onChange1(e, value?._id, value.pending)} checked={value?.status}
                                   disabled={value?.status}/>
 
                     )
                 } else
                     return (
                         <Button>
-                            {value?.status ? "Active" : "Inactive"}
+                            {value?.status ? active : inactive}
                         </Button>
                     )
             }
         },
         {
-            title: 'Batafsil',
+            title: Batafsil[lang],
             dataIndex: '_id',
             key: '_id',
             render: (props) => {
                 return (
                     <Button type="primary">
                         <Link to={`/admin/applications/${props}`}>
-                            Batafsil
+                            {Batafsil[lang]}
                         </Link>
                     </Button>
                 )
             }
         },
-        !(type === "moderator") ? {
-            title: "O'chirish",
+        !(type === "bank") ? {
+            title: deleteOrd[lang],
             dataIndex: '_id',
             key: '_id',
             render: (props) => {
                 return (
-                    <Button type="ghost" onClick={() => deleteApplication(props)}>O'chirish</Button>
+                    <Button type="ghost" onClick={() => deleteApplication(props)}>{deleteOrd[lang]}</Button>
                 )
             }
         } : {},

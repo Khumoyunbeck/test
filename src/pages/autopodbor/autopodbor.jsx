@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Language } from '../../lang/Languages'
 import AutoPod from '../../images/autopodbor.jpg'
 import '../../components/style.css'
+import {MainApi} from "../../api";
 
 function AutoPodbor() {
     const { lang } = useSelector(state => state.lang)
@@ -13,7 +14,7 @@ function AutoPodbor() {
 
     const order = async () => {
         await axios
-            .post('http://185.196.214.145:5000/order/add', data)
+            .post(`${MainApi}/order/add`, data)
             .then(res => console.log(res))
             .catch(err => new Error(err))
     }

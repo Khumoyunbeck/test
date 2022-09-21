@@ -1,6 +1,8 @@
 import {useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import axios from "../../api";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function ModeratorLogin() {
     const email = useRef()
@@ -17,29 +19,33 @@ function ModeratorLogin() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (values?.email !== "" || values?.password !== "" ) {
-                axios.post("auth/login",
-                    {
-                        email: values?.email,
-                        password: values?.password,
-                    }
-                ).then(e => {
-                        localStorage.setItem("moderator_id", e?.data?._id)
-                        localStorage.setItem("moderator_token", e.data?.token)
-                        localStorage.removeItem("user_token")
-                        localStorage.removeItem("user_id")
-                        localStorage.removeItem("bank_token")
-                        localStorage.removeItem("bank_id")
-                        localStorage.removeItem("admin_token")
-                        localStorage.removeItem("admin_id")
-                        navigate('/admin/applications')
-                    }
-                ).catch(e => console.log(e))
+        if (values?.email !== "" || values?.password !== "") {
+            axios.post("auth/login",
+                {
+                    email: values?.email,
+                    password: values?.password,
+                }
+            ).then(e => {
+                    localStorage.setItem("moderator_id", e?.data?._id)
+                    localStorage.setItem("moderator_token", e.data?.token)
+                    localStorage.removeItem("user_token")
+                    localStorage.removeItem("user_id")
+                    localStorage.removeItem("bank_token")
+                    localStorage.removeItem("bank_id")
+                    localStorage.removeItem("admin_token")
+                    localStorage.removeItem("admin_id")
+                    navigate('/admin/applications')
+                }
+            ).catch(e => console.log(e))
         }
     }
     useEffect(() => {
         if (!!token) navigate('/admin/cards')
     }, [token])
+
+    const {lang} = useSelector((state) => state.lang);
+
+    const {l, pass, mail} = Language;
 
     return (
         <div className="wr100">
@@ -64,7 +70,7 @@ function ModeratorLogin() {
                         >
                             <div className='form-group'>
                                 <div className='col-12'>
-                                    <label>Email</label>
+                                    <label>{mail[lang]}</label>
                                     <input
                                         ref={email}
                                         className='form-control email_input'
@@ -83,7 +89,7 @@ function ModeratorLogin() {
 
                             <div className='form-group'>
                                 <div className='col-12'>
-                                    <label>Password</label>
+                                    <label>{pass[lang]}</label>
                                     <input
                                         ref={password}
                                         className='form-control password_input'
@@ -106,7 +112,7 @@ function ModeratorLogin() {
                                         className='btn btn-primary btn-block btn-lg waves-effect waves-light'
                                         type='submit'
                                     >
-                                        Login
+                                        {l[lang]}
                                     </button>
                                 </div>
                             </div>

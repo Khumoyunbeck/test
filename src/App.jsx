@@ -61,6 +61,7 @@ import 'swiper/css/scrollbar';
 import ModeratorLogin from "./components/ModeratorLogin/ModeratorLogin";
 import MadAdmin from "./pages/madAdmin/madAdmin";
 import CreateMad from "./pages/MadCreate/MadCreate";
+import Contact from "./pages/contact/Contact";
 
 function App() {
     const location = useLocation();
@@ -147,6 +148,7 @@ function App() {
                 <Route path="/useful" element={<Polezniy/>}/>
                 <Route path="/admin/applications/:id" element={<UpdateApplication/>}/>
                 <Route path="/applications/create" element={<CreditAuto/>}/>
+                <Route path="/contacts" element={<Contact/>}/>
             </Routes>
             <Button
                 shape="circle"

@@ -5,18 +5,24 @@ import AdminHeader from "../../components/admin_header/admin_header";
 import axios from "axios";
 import {MainApi} from "../../api";
 import {toast} from "react-toastify";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function CreateOrder(props) {
 
+    const {lang} = useSelector(state => state.lang)
+    const {name, name_r, phone_r, phone, save, success} = Language;
+
     const onFinish = (values) => {
         axios.post(`${MainApi}/order/add`, values).then(res => {
-            toast.success("Muvafaqiyali yaratildi")
+            toast.success(success[lang])
         }).catch(er => console.log(er))
     };
 
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+
 
     return (
         <div className="contain">
@@ -38,24 +44,24 @@ function CreateOrder(props) {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Ism"
+                        label={name[lang]}
                         name="name"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your name!',
+                                message: name_r[lang],
                             },
                         ]}
                     >
                         <Input/>
                     </Form.Item>
                     <Form.Item
-                        label="Phone"
+                        label={phone[lang]}
                         name="phone"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your phone!',
+                                message: phone_r[lang],
                             },
                         ]}
                     >
@@ -69,7 +75,7 @@ function CreateOrder(props) {
                         }}
                     >
                         <Button type="primary" htmlType="submit">
-                            Submit
+                            {save[lang]}
                         </Button>
                     </Form.Item>
                 </Form>

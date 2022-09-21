@@ -6,8 +6,6 @@ import '../../components/style.css'
 function Komissia() {
     const { lang } = useSelector(state => state.lang)
 
-    console.log(lang)
-
     const { ktitle, k1, k2, k3, k4, k5, k6, k7, k8, k9, k10, k11 } = Language
 
     return (

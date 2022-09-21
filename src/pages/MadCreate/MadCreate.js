@@ -5,12 +5,15 @@ import AdminHeader from "../../components/admin_header/admin_header";
 import axios from "axios";
 import {MainApi} from "../../api";
 import {toast} from "react-toastify";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function CreateMad(props) {
-
+    const {lang} = useSelector(state => state.lang)
+    const {req, mail,name,success,pass,save,region,phone} = Language;
     const onFinish = (values) => {
         axios.post(`${MainApi}/auth/add`, {...values, roles: "admin"}).then(res => {
-            toast.success("Muvafaqiyali yaratildi")
+            toast.success(success[lang])
         }).catch(er => console.log(er))
     };
 
@@ -38,12 +41,12 @@ function CreateMad(props) {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Ism"
+                        label={name[lang]}
                         name="name"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your name!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -51,12 +54,12 @@ function CreateMad(props) {
                     </Form.Item>
 
                     <Form.Item
-                        label="Email"
+                        label={mail[lang]}
                         name="email"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your email!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -64,12 +67,12 @@ function CreateMad(props) {
                     </Form.Item>
 
                     <Form.Item
-                        label="Password"
+                        label={pass[lang]}
                         name="password"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your password!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -77,12 +80,12 @@ function CreateMad(props) {
                     </Form.Item>
 
                     <Form.Item
-                        label="Phone"
+                        label={phone[lang]}
                         name="phone"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your phone!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -90,12 +93,12 @@ function CreateMad(props) {
                     </Form.Item>
 
                     <Form.Item
-                        label="Region"
+                        label={region[lang]}
                         name="region"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your region!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -109,7 +112,7 @@ function CreateMad(props) {
                         }}
                     >
                         <Button type="primary" htmlType="submit">
-                            Submit
+                            {save[lang]}
                         </Button>
                     </Form.Item>
                 </Form>

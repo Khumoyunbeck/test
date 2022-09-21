@@ -6,11 +6,15 @@ import Banks from "../../components/banks/banks";
 import axios from "axios";
 import {MainApi} from "../../api";
 import {useEffect, useState} from "react";
+import lang from "../../lang/lang";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function BanksAdmin() {
     const location = useLocation()
     const [banks, setBanks] = useState([])
-
+    const {lang} = useSelector(state => state.lang)
+    const {search,home,applications,applications_details} = Language;
     const getBanks = async () => {
         await axios
             .get(`${MainApi}/bank/all`)
@@ -30,19 +34,19 @@ function BanksAdmin() {
                     <Col span={24} className='d-flex justify-content-between align-items-center py-3'>
                         <h3>
                             {location.pathname === '/admin/applications'
-                                ? 'Tushgan arizalar'
-                                : 'Tushgan arizalar batafsil'}
+                                ? applications[lang]
+                                : applications_details[lang]}
                         </h3>
                         <form className='d-flex my-auto'>
                             <Form.Item name='search' className='mb-0'>
                                 <Input className='rounded'/>
                             </Form.Item>
                             <Button className='rounded' type='primary'>
-                                Search
+                                {search[lang]}
                             </Button>
                         </form>
                         <Button className='rounded' type='primary' danger>
-                            <Link to='/'>Asosiyga qaytish</Link>
+                            <Link to='/'>{home[lang]}</Link>
                         </Button>
                     </Col>
                     <div style={{width: "100%"}}>

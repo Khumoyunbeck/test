@@ -16,9 +16,12 @@ const CreditAuto = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
 
+
     const [salaryd, setSalaryd] = useState(false)
 
     const {lang} = useSelector(state => state.lang)
+    const {success} = Language;
+
     const {car} = useSelector(state => state.car)
     const [images1, setImages1] = useState([])
     const [images2, setImages2] = useState([])
@@ -83,7 +86,7 @@ const CreditAuto = () => {
             [images1, images2, images3].forEach(file => formData.append('photo', file));
         Object.entries(values).forEach(item => formData.append(item[0], item[1]))
         axios.post(`${MainApi}/bank/add`, formData).then(r => {
-            toast.success("Muvafaqiyatli yuklandi!")
+            toast.success(success[lang])
         }).catch(e =>
             toast.error("Xatolik yuz berdi!")
         )

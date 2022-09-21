@@ -114,7 +114,7 @@ function AddCardForm() {
                                 <div className='card-avto-body'>
                                     <h4 className='mt-0 header-title'>Yangi Avtomobil qo'shish</h4>
                                     {
-                                        data.map((field, index) => {
+                                        data.filter(i => i.key !== "status").map((field, index) => {
                                                 return (
                                                     <div className='form-group row' key={index}>
                                                         <label

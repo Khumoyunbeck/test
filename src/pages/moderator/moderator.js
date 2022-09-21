@@ -8,11 +8,16 @@ import {useEffect, useState} from "react";
 import Users from "../../components/users/users";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {toast} from "react-toastify";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function ModeratorsAdmin() {
     const location = useLocation()
     const [users, setUsers] = useState([])
     const navigate = useNavigate()
+
+    const {lang} = useSelector(state => state.lang)
+    const {search,create,home,success} = Language;
 
     const geUsers = async () => {
         await axios
@@ -39,7 +44,7 @@ function ModeratorsAdmin() {
                     .delete(`${MainApi}/xodim/${id}`)
                     .then(res => {
                         geUsers()
-                        toast.success("Muvafaqiyali o'chirildi")
+                        toast.success(success[lang])
                     })
                     .catch(err => {
                         console.log(err)
@@ -68,16 +73,16 @@ function ModeratorsAdmin() {
                                 <Input className='rounded'/>
                             </Form.Item>
                             <Button className='rounded' type='primary'>
-                                Search
+                                {search[lang]}
                             </Button>
                         </form>
                         <Col>
                             <Button className='rounded' type='primary' danger>
-                                <Link to='/'>Asosiyga qaytish</Link>
+                                <Link to='/'>{home[lang]}</Link>
                             </Button>
                             {" "}
                             <Button className='rounded' type='primary' onClick={() => handleNavigate()}>
-                                Xodim yaratish
+                                {create[lang]}
                             </Button>
                         </Col>
                     </Col>

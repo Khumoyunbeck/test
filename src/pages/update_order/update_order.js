@@ -6,6 +6,8 @@ import axios from "axios";
 import {MainApi} from "../../api";
 import {toast} from "react-toastify";
 import {useParams} from "react-router";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function UpdateOrder() {
     const {id} = useParams()
@@ -21,7 +23,7 @@ function UpdateOrder() {
 
     const onFinish = (values) => {
         axios.put(`${MainApi}/order/${id}`, values).then(res => {
-            toast.success("Muvafaqiyali yangilandi")
+            toast.success(success[lang])
         }).catch(er => console.log(er))
     };
 
@@ -29,6 +31,9 @@ function UpdateOrder() {
         console.log('Failed:', errorInfo);
     };
 
+
+    const {lang} = useSelector(state => state.lang)
+    const {name,name_r,phone_r,phone,success} = Language;
 
     return (
         <div className="contain">
@@ -48,24 +53,24 @@ function UpdateOrder() {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Ism"
+                        label={name[lang]}
                         name="name"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your name!',
+                                message: name_r[lang],
                             },
                         ]}
                     >
                         <Input disabled/>
                     </Form.Item>
                     <Form.Item
-                        label="Phone"
+                        label={phone[lang]}
                         name="phone"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your phone!',
+                                message: phone_r[lang],
                             },
                         ]}
                     >

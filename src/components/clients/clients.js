@@ -1,11 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Button, Table} from "antd";
 import {useNavigate} from "react-router";
+import lang from "../../lang/lang";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function Clients({dataSource, deleteClient}) {
     const navigate = useNavigate()
     const [type, setType] = useState(null)
 
+    const {lang} = useSelector(state => state.lang)
+    const {ph,name,region,date,deleteOrd,Batafsil} = Language;
 
     useEffect(() => {
         if (!!localStorage.getItem("user_token")) {
@@ -23,9 +28,10 @@ function Clients({dataSource, deleteClient}) {
     }, [])
 
 
-    const columns = [
+    const columns = useMemo(() => {
+        return [
         {
-            title: 'photo',
+            title: ph[lang],
             dataIndex: 'photo',
             key: 'photo',
             render: (props) => {
@@ -35,41 +41,42 @@ function Clients({dataSource, deleteClient}) {
             }
         },
         {
-            title: 'Ism',
+            title: name[lang],
             dataIndex: 'name',
             key: 'name',
         },
         {
-            title: 'Viloyati',
+            title: region[lang],
             dataIndex: 'region',
             key: 'region',
         },
         {
-            title: 'Date',
+            title: date[lang],
             dataIndex: 'Date',
             key: 'date',
         },
         {
-            title: "Batafsil",
+            title: Batafsil[lang],
             dataIndex: '_id',
             key: '_id',
             render: (props) => {
                 return (
-                    <Button type="ghost" onClick={() => navigate(`/admin/clients/${props}`)}>Batafsil</Button>
+                    <Button type="ghost" onClick={() => navigate(`/admin/clients/${props}`)}>{Batafsil[lang]}</Button>
                 )
             }
         },
         !(type === "moderator") ? {
-            title: "O'chirish",
+            title: deleteOrd[lang],
             dataIndex: '_id',
             key: '_id',
             render: (props) => {
                 return (
-                    <Button type="ghost" onClick={() => deleteClient(props)}>O'chirish</Button>
+                    <Button type="ghost" onClick={() => deleteClient(props)}>{deleteOrd[lang]}</Button>
                 )
             }
         } : {},
-    ];
+    ]},[lang]
+    );
 
     return (
         <div>

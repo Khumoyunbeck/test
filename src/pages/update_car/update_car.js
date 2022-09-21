@@ -11,6 +11,8 @@ import {Editor} from "react-draft-wysiwyg";
 import {ContentState, convertToRaw, EditorState} from "draft-js";
 import htmlToDraft from "html-to-draftjs";
 import draftToHtml from "draftjs-to-html";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function UpdateCar() {
     const {id} = useParams()
@@ -20,6 +22,33 @@ function UpdateCar() {
     const [op1, setOp1] = useState("")
     const [op2, setOp2] = useState("")
     const [data, setData] = useState({})
+
+    const {lang} = useSelector(state => state.lang)
+    const {
+        model,
+        marka1,
+        color1,
+        color2,
+        year,
+        dv,
+        yq,
+        yqr,
+        trans,
+        transr,
+        kuzuv,
+        kuzuvru,
+        opisaniyaru,
+        opisaniya,
+        perevod,
+        perevodru,
+        yurgani,
+        narxi,
+        aksiya,
+        status,
+        save,
+        success,
+        req
+    } = Language;
 
     useEffect(() => {
         if (!!id)
@@ -45,7 +74,7 @@ function UpdateCar() {
         formData.append("opisaniyaru", op2)
 
         axios.put(`${MainApi}/car/${id}`, formData).then(res => {
-            toast.success("Muvafaqiyali yangilandi")
+            toast.success(success[lang])
         }).catch(er => console.log(er))
     };
 
@@ -108,12 +137,12 @@ function UpdateCar() {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Model"
+                        label={model[lang]}
                         name="madel"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your model!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -188,7 +217,7 @@ function UpdateCar() {
                     {/*    </select>*/}
                     {/*</Form.Item>*/}
                     <Form.Item
-                        label="Marka"
+                        label={marka1[lang]}
                         name="marka"
                         rules={[
                             {
@@ -231,12 +260,12 @@ function UpdateCar() {
                     {/*</Form.Item>*/}
 
                     <Form.Item
-                        label="Color"
+                        label={color1[lang]}
                         name="color"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your color!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -253,12 +282,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Colorru"
+                        label={color2[lang]}
                         name="colorru"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your color ru!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -275,12 +304,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Yili"
+                        label={year[lang]}
                         name="yili"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your yili!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -296,12 +325,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Divigitel"
+                        label={dv[lang]}
                         name="divigitel"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your divigitel!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -309,12 +338,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Yoqilgi"
+                        label={yq[lang]}
                         name="yoqilgi"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your yoqilgi!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -331,12 +360,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Yoqilgi ru"
+                        label={yqr[lang]}
                         name="yoqilgiru"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your yoqilgi (ru)!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -353,12 +382,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Transmission"
+                        label={trans[lang]}
                         name="transmission"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your transmission!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -375,12 +404,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Transmission (ru)"
+                        label={transr[lang]}
                         name="transmissionru"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your transmissionru!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -397,12 +426,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Kuzuv"
+                        label={kuzuv[lang]}
                         name="kuzuv"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your kuzuv!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -418,12 +447,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Kuzuvru"
+                        label={kuzuvru[lang]}
                         name="kuzuvru"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your kuzuvru!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -439,12 +468,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Perevod"
+                        label={perevod[lang]}
                         name="perevod"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your perevod!',
+                                message:req[lang],
                             },
                         ]}
                     >
@@ -460,12 +489,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Perevod (ru)"
+                        label={perevodru[lang]}
                         name="perevodru"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your perevod (ru)!',
+                                message:req[lang],
                             },
                         ]}
                     >
@@ -481,7 +510,7 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Yurgani"
+                        label={yurgani[lang]}
                         name="yurgani"
                         rules={[
                             {
@@ -494,12 +523,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Narxi"
+                        label={narxi[lang]}
                         name="narxi"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your narxi!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -507,12 +536,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Aksiya"
+                        label={aksiya[lang]}
                         name="aksiya"
                         rules={[
                             {
                                 required: false,
-                                message: 'Please input your aksiya!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -528,12 +557,12 @@ function UpdateCar() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Opisaniya"
+                        label={opisaniya[lang]}
                         name="opisaniya"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your opisaniya!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -574,12 +603,12 @@ function UpdateCar() {
                     </Form.Item>
                     <div className=" m-b-20">
                         <Form.Item
-                            label="Opisaniya (ru)"
+                            label={opisaniyaru[lang]}
                             name="opisaniyaru"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your opisaniya!',
+                                    message: req[lang],
                                 },
                             ]}
                         >
@@ -621,12 +650,12 @@ function UpdateCar() {
                     </div>
 
                     <Form.Item
-                        label="Holati"
+                        label={status[lang]}
                         name="credit"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your credit!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -648,7 +677,7 @@ function UpdateCar() {
                         }}
                     >
                         <Button type="primary" htmlType="submit">
-                            Submit
+                            {save[lang]}
                         </Button>
                     </Form.Item>
                 </Form>

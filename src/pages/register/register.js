@@ -38,7 +38,7 @@ function Register() {
             message.warn("Fill the form completely")
         }
     }
-    const {name,mail,phone,region,pass} = Language
+    const {name,mail,phone,region,pass,l} = Language
 
     const {lang} = useSelector((state) => state.lang);
 
@@ -145,7 +145,7 @@ function Register() {
                                         className='btn btn-primary btn-block btn-lg waves-effect waves-light'
                                         type='submit'
                                     >
-                                        Login
+                                        {l[lang]}
                                     </button>
                                 </div>
                             </div>

@@ -5,11 +5,14 @@ import AdminHeader from "../../components/admin_header/admin_header";
 import axios from "axios";
 import {MainApi} from "../../api";
 import {toast} from "react-toastify";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function CreateApplication(props) {
 
     const [file, setFile] = useState([])
-
+    const {lang} = useSelector(state => state.lang)
+    const {success} = Language;
 
     const handleFile = e => {
         setFile([...e.target.files])
@@ -30,7 +33,7 @@ function CreateApplication(props) {
             formData.append("userId", localStorage.getItem("user_id"))
         }
         axios.post(`${MainApi}/bank/add`, formData).then(res => {
-            toast.success("Muvafaqiyali yaratildi")
+            toast.success(success[lang])
         }).catch(er => console.log(er))
     };
 

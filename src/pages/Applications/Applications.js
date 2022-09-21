@@ -8,11 +8,15 @@ import axios from "axios";
 import {MainApi} from "../../api";
 import {useEffect, useMemo, useState} from "react";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function CardsAdmin() {
     const location = useLocation()
     const [banks, setBanks] = useState([])
     const [type, setType] = useState(null)
+    const {lang} = useSelector(state => state.lang)
+    const {deleteOrd,search,home,list,create} = Language
 
     useEffect(() => {
         if (!!localStorage.getItem("user_token")) {
@@ -39,7 +43,7 @@ function CardsAdmin() {
     const deleteApplication = id => {
         Modal.confirm({
             centered: true,
-            title: "Klient o'chirish",
+            title: deleteOrd[lang],
             icon: <ExclamationCircleOutlined/>,
             onOk() {
                 axios
@@ -92,12 +96,12 @@ function CardsAdmin() {
                                 <Input className='rounded'/>
                             </Form.Item>
                             <Button className='rounded' type='primary'>
-                                Search
+                                {search[lang]}
                             </Button>
                         </form>
                         <div>
                             <Button type='primary' danger>
-                                <Link to='/'>Asosiyga qaytish</Link>
+                                <Link to='/'>{home[lang]}</Link>
                             </Button>
                             {" "}
                             {" "}

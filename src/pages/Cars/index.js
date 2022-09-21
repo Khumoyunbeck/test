@@ -18,7 +18,7 @@ const Car = ({addCompare}) => {
     const {lang} = useSelector(state => state.lang)
     const {cars} = useSelector(state => state.car)
 
-    const {madel, m8, yili, yoqilgi, transmission, yurgani, narxi, kredit} = Language
+    const {madel, m8, yili, yoqilgi, transmission, yurgani, narxi, kredit,send} = Language
 
     const handleSubmit = () => {
         axios.get(`${MainApi}/car/v1?yili=${year}&yurgani=${kilometr}&narxi=${price}&madel=${type}`).then(r => {
@@ -265,7 +265,7 @@ const Car = ({addCompare}) => {
                     </Collapse>
                 </div>
                 <div className="submit">
-                    <Button onClick={() => handleSubmit()}>Submit</Button>
+                    <Button onClick={() => handleSubmit()}>{send[lang]}</Button>
                 </div>
             </Col>
             <Col md={18}>

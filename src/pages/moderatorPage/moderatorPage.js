@@ -5,9 +5,13 @@ import {Modal} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {MainApi} from "../../api";
 import Mad from "../mad/mad";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function MadAdminPage() {
     const [mads, setMads] = useState([])
+    const {lang} = useSelector(state => state.lang)
+    const {deleteOrd,search,home,create,list} = Language;
 
     const getMads = async () => {
         await axios
@@ -19,7 +23,7 @@ function MadAdminPage() {
     const deleteMad = id => {
         Modal.confirm({
             centered: true,
-            title: "Klient o'chirish",
+            title: deleteOrd[lang],
             icon: <ExclamationCircleOutlined/>,
             onOk() {
                 axios
@@ -49,20 +53,20 @@ function MadAdminPage() {
                             name='txt'
                             onmouseout="document.search.txt.value = ''"
                         />
-                        <span className='deff'>Search</span>
+                        <span className='deff'>{search[lang]}</span>
                     </form>
                 </div>
                 <Link to='/admin/orders' className='btn btn-danger btn-sm float-right'>
-                    Asosiyga qaytish
+                    {home[lang]}
                 </Link>
                 <Link
-                    to='moderators/add'
+                    to='add'
                     className='btn btn-success mr-3 mdi mdi-account-multiple-plus btn-sm float-right'
                 >
-                    Moderator qo'shish
+                    {create[lang]}
                 </Link>
 
-                <h4 className='mt-0 mb-4 pt-2'>Barcha mijozlar ro'yhati</h4>
+                <h4 className='mt-0 mb-4 pt-2'>{list[lang]}</h4>
                 <Mad dataSource={mads} deleteClient={deleteMad}/>
             </div>
         </div>

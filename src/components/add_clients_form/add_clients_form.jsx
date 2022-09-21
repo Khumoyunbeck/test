@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { addClient, editClient, getClient } from '../../store/client/client'
+import {Language} from "../../lang/Languages";
 
 function AddClientsForm() {
     const dispatch = useDispatch()
@@ -38,6 +39,8 @@ function AddClientsForm() {
         if (!!id) dispatch(editClient(myData, id))
         else dispatch(addClient(myData))
     }
+    const {lang} = useSelector(state => state.lang)
+    const {ph,name,region,date,save,back} = Language;
 
     return (
         <div className='content announcements_list2'>
@@ -59,7 +62,7 @@ function AddClientsForm() {
                                     htmlFor='example-text-input'
                                     className='col-sm-2 col-form-label'
                                 >
-                                    Mijoz ismi o'zbek tilida
+                                    {name[lang]}
                                 </label>
                                 <div className='col-sm-10'>
                                     <input
@@ -78,7 +81,7 @@ function AddClientsForm() {
                                     htmlFor='example-text-input'
                                     className='col-sm-2 col-form-label'
                                 >
-                                    Qaysi viloyatdan
+                                    {region[lang]}
                                 </label>
                                 <div className='col-sm-10'>
                                     <input
@@ -97,7 +100,7 @@ function AddClientsForm() {
                                     htmlFor='example-text-input'
                                     className='col-sm-2 col-form-label'
                                 >
-                                    Sana
+                                    {date[lang]}
                                 </label>
                                 <div className='col-sm-10'>
                                     <input
@@ -112,10 +115,10 @@ function AddClientsForm() {
                             <div className='m-5'>
                                 <form encType='multipart/form-data'>
                                     <div className='download'>
-                                        <p>Mijoz Rasmini yuklash</p>
+                                        <p>{ph[lang]}</p>
                                     </div>
                                     <div className='files'>
-                                        <a href=' '>Fayllar</a>
+                                        <a href=' '></a>
                                     </div>
                                     <input
                                         onChange={event => handleFile(event)}
@@ -132,14 +135,14 @@ function AddClientsForm() {
                                     to='/admin/clients'
                                     className='button_sumbit_news btn btn-dark btn-sm float-right ml-3'
                                 >
-                                    Orqaga
+                                    {back[lang]}
                                 </Link>
                                 <button
                                     onClick={saveClient}
                                     type='button'
                                     className='button_sumbit_news btn btn-success btn-sm float-right ml-3'
                                 >
-                                    Saqlash
+                                    {save[lang]}
                                 </button>
                             </div>
                         </form>

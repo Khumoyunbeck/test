@@ -6,6 +6,8 @@ import axios from "axios";
 import {MainApi} from "../../api";
 import {toast} from "react-toastify";
 import {useParams} from "react-router";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function UpdateApplication() {
     const {id} = useParams()
@@ -13,7 +15,8 @@ function UpdateApplication() {
     const [form] = Form.useForm()
 
     const [file, setFile] = useState([])
-
+    const {lang} = useSelector(state => state.lang)
+    const {success,father_name,sername,phone,relative_number,relative_number2,house_number,ph,salary1,name,req,save} = Language;
 
     const handleFile = e => {
         setFile([...e.target.files])
@@ -55,7 +58,7 @@ function UpdateApplication() {
             formData.append("userId", localStorage.getItem("admin_id"))
         }
         axios.put(`${MainApi}/bank/${id}`, formData).then(res => {
-            toast.success("Muvafaqiyali yangilandi")
+            toast.success(success[lang])
         }).catch(er => console.log(er))
     };
 
@@ -82,12 +85,12 @@ function UpdateApplication() {
                     autoComplete="off"
                 >
                     <Form.Item
-                        label="Ism"
+                        label={name[lang]}
                         name="name"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your name!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -95,12 +98,12 @@ function UpdateApplication() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Surname"
+                        label={sername[lang]}
                         name="surname"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your surname!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -108,12 +111,12 @@ function UpdateApplication() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Father name"
+                        label={father_name[lang]}
                         name="father_name"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your father name!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -121,12 +124,12 @@ function UpdateApplication() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Phone"
+                        label={phone[lang]}
                         name="phone"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your phone!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -134,12 +137,12 @@ function UpdateApplication() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Relative number"
+                        label={relative_number[lang]}
                         name="relative_number"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your relative\' number!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -147,12 +150,12 @@ function UpdateApplication() {
                     </Form.Item>
 
                     <Form.Item
-                        label="House number"
+                        label={house_number[lang]}
                         name="house_number"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your house number!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -160,12 +163,12 @@ function UpdateApplication() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Relative number2"
+                        label={relative_number2[lang]}
                         name="relative_number2"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your relative number2!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -173,12 +176,12 @@ function UpdateApplication() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Maosh"
+                        label={salary1[lang]}
                         name="maosh"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your relative maosh!',
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -186,7 +189,7 @@ function UpdateApplication() {
                     </Form.Item>
 
                     <Form.Item
-                        label="Photo"
+                        label={ph[lang]}
                         name="photo"
                     >
                         <input
@@ -204,7 +207,7 @@ function UpdateApplication() {
                         }}
                     >
                         <Button type="primary" htmlType="submit">
-                            Submit
+                            {save[lang]}
                         </Button>
                     </Form.Item>
                 </Form>

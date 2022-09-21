@@ -5,6 +5,9 @@ import {MainApi} from "../../api";
 import {Button, Modal} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router";
+import lang from "../../lang/lang";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function AdminOrders() {
     const navigate = useNavigate()
@@ -23,7 +26,7 @@ function AdminOrders() {
     const deleteOrder = id => {
         Modal.confirm({
             centered: true,
-            title: "Order o'chirish",
+            title: deleteOrd[lang],
             icon: <ExclamationCircleOutlined/>,
             onOk() {
                 axios
@@ -42,6 +45,9 @@ function AdminOrders() {
         getOrders()
     }, [])
 
+    const {lang} = useSelector(state => state.lang)
+    const {search,home,create,list,deleteOrd} = Language;
+
     return (
         <div className='ml-5 admin_news_section'>
             <div className='row pt-5'>
@@ -54,19 +60,19 @@ function AdminOrders() {
                                 name='txt'
                                 onmouseout="document.search.txt.value = ''"
                             />
-                            <span className='deff'>Search</span>
+                            <span className='deff'>{search[lang]}</span>
                         </form>
                     </div>
                     {" "}
                     <div className="fg">
                         <Button onClick={() => navigate("/")} type="danger">
-                            Asosiy sahifaga o'tish
+                            {home[lang]}
                         </Button>
-                        <Button onClick={() => navigate("/admin/orders/create")} type="primary">
-                            Buyurtma yaratish
-                        </Button>
+                        {/*<Button onClick={() => navigate("/admin/orders/create")} type="primary">*/}
+                        {/*    {create[lang]}*/}
+                        {/*</Button>*/}
                     </div>
-                    <h4 className='mt-0 mb-4'>Buyurtma beruvchilar ro'yhati</h4>
+                    <h4 className='mt-0 mb-4'>{list[lang]}</h4>
                     <div className='table-responsive'>
                         <Orders dataSource={orders} deleteOrder={deleteOrder}/>
                     </div>

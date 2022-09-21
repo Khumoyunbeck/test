@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {Button, Table} from "antd";
+import {useSelector} from "react-redux";
+import {Language} from "../../lang/Languages";
 
 function Mad({dataSource, deleteMad}) {
     const [type, setType] = useState(null)
-
+    const {lang} = useSelector(state => state.lang)
+    const {name,mail,pass,phone,region,deleteOrd} = Language;
 
     useEffect(() => {
         if (!!localStorage.getItem("user_token")) {
@@ -23,37 +26,37 @@ function Mad({dataSource, deleteMad}) {
 
     const columns = [
         {
-            title: 'Ism',
+            title: name[lang],
             dataIndex: 'name',
             key: 'name',
         },
         {
-            title: 'Email',
+            title: mail[lang],
             dataIndex: 'email',
             key: 'email',
         },
         {
-            title: 'Password',
+            title: pass[lang],
             dataIndex: 'password',
             key: 'password',
         },
         {
-            title: 'Phone',
+            title: phone[lang],
             dataIndex: 'phone',
             key: 'phone',
         },
         {
-            title: 'Viloyati',
+            title: region[lang],
             dataIndex: 'region',
             key: 'region',
         },
         !(type === "moderator") ? {
-            title: "O'chirish",
+            title: deleteOrd[lang],
             dataIndex: '_id',
             key: '_id',
             render: (props) => {
                 return (
-                    <Button type="ghost" onClick={() => deleteMad(props)}>O'chirish</Button>
+                    <Button type="ghost" onClick={() => deleteMad(props)}>{deleteOrd[lang]}</Button>
                 )
             }
         } : {},
