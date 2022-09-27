@@ -60,7 +60,6 @@ function Statistics() {
     useEffect(() => {
         axios.get(`${MainApi}/order/all`)
             .then((data) => {
-                console.log(data?.data,"data")
                 setOrd(data?.data?.data?.length)
             });
     }, [])

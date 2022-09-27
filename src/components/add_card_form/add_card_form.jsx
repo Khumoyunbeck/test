@@ -8,6 +8,7 @@ import {fields} from './fields'
 import {Editor} from "react-draft-wysiwyg";
 import {convertToRaw, EditorState} from "draft-js";
 import draftToHtml from "draftjs-to-html";
+import {useMediaQuery} from "react-responsive";
 
 function AddCardForm() {
     const {id} = useParams()
@@ -24,7 +25,7 @@ function AddCardForm() {
     const [file, setFile] = useState([])
     const [op1, setOp1] = useState("")
     const [op2, setOp2] = useState("")
-
+    const is1024 = useMediaQuery({query: "(max-width: 1024px)"})
     const {opisaniya, opisaniyaru, photo} = Language
 
     const handleFile = e => {
@@ -93,7 +94,7 @@ function AddCardForm() {
     }, [fields])
 
     return (
-        <div className='content'>
+        <div className={`${is1024 ? "content1024" : "content"}`}>
             <form
                 autoComplete='off'
                 encType='multipart/form-data'
@@ -184,7 +185,7 @@ function AddCardForm() {
 
                                             }
                                         )}
-                                    <div className='pageBody' style={{display: 'flex'}}>
+                                    <div className='pageBody' >
                                         <label className='col-sm-2 col-form-label'>
                                             {opisaniya[lang]}
                                         </label>
@@ -223,7 +224,7 @@ function AddCardForm() {
                                             }}
                                         />
                                     </div>
-                                    <div className='pageBody m-t-40' style={{display: 'flex'}}>
+                                    <div className='pageBody m-t-40'>
                                         <label className='col-sm-2 col-form-label'>
                                             {opisaniyaru[lang]}
                                         </label>
@@ -283,7 +284,7 @@ function AddCardForm() {
                                                 />
                                             </form>
                                         </div>
-                                        <div className='btn-admin'>
+                                        <div className='btn-admin m-t-40'>
                                             <a
                                                 href='/admin/cards'
                                                 className='button_sumbit_news btn btn-dark btn-sm float-right ml-3'

@@ -8,6 +8,7 @@ import {MainApi} from "../../api";
 import {Modal} from "antd";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {Language} from "../../lang/Languages";
+import {useMediaQuery} from "react-responsive"
 
 function AdminCards() {
     const dispatch = useDispatch();
@@ -63,8 +64,6 @@ function AdminCards() {
         getCars();
     }, []);
 
-    console.log(cars,"cars")
-
     const data = useMemo(() => {
         return cars?.map(item => ({
             ...item,
@@ -72,22 +71,26 @@ function AdminCards() {
         }))
     }, [cars])
 
+    const is1024 = useMediaQuery({query: "(max-width: 1024px)"})
+
     return (
-        <div className="row pt-5 page_list">
+        <div className={`row pt-5 ${is1024 ? "page_list_mobile" : "page_list"} `}>
             <div className="col-xl-12">
                 <div className="card-avto">
                     <div className="card-avto-body page_body_admin">
                         <div div className="box page_box content_wrapper">
-                            <form name="search" className="search_form">
-                                <input
-                                    type="text"
-                                    className="input"
-                                    name="txt"
-                                    onmouseout="document.search.txt.value = ''"
-                                />
-                                <span className="deff">{search[lang]}</span>
-                            </form>
-
+                            {
+                                !is1024 &&
+                                <form name="search" className="search_form">
+                                    <input
+                                        type="text"
+                                        className="input"
+                                        name="txt"
+                                        onMouseOut="document.search.txt.value = ''"
+                                    />
+                                    <span className="deff">{search[lang]}</span>
+                                </form>
+                            }
                         </div>
                         <div
                             className="btn btn-danger btn-sm float-right"

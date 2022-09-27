@@ -739,5 +739,6 @@ export const Language = {
     send: ["Jo'natish", "Отправить"],
     bank_name: ["Bank nomi", ""],
     edit: ["O'zgartirish", ""],
-    desc: ["Xabar", ""]
+    desc: ["Xabar", ""],
+    file_needed: ["Faylni joylang",""]
 };

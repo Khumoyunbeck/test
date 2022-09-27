@@ -1261,6 +1261,10 @@ dt {
     width: 80%;
     margin-left: 250px !important;
 }
+.page_list_mobile{
+    width: 100%;
+    margin-left: 0 !important;
+}
 
 .page_body_admin a {
     /*padding: 7px 15px;*/
@@ -1284,6 +1288,9 @@ dt {
 
 .content {
     margin-left: 250px;
+}
+.content1024 {
+    margin-left: 0px;
 }
 
 .content-page .content {
@@ -3125,14 +3132,28 @@ ul.show {
 }
 
 .inp {
-    padding: 7px!important;
-    font-size: 16px!important;
+    padding: 7px !important;
+    font-size: 16px !important;
 }
+
 @media (max-width: 800px) {
-    .w-box{
-        flex-direction: column!important;
+    .w-box {
+        flex-direction: column !important;
     }
+
     .w-b1 {
-        width: 100%!important;
+        width: 100% !important;
     }
+}
+
+.excelWr {
+    margin-left: 350px;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.excelRow{
+    display: flex;
+    gap: 25px;
 }

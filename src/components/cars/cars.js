@@ -226,7 +226,11 @@ function Cars({dataSource, deleteCar, getCars}) {
 
     return (
         <div>
-            <Table dataSource={dataSource} columns={columns} scroll={{x: "max-content"}}/>
+            <Table
+                dataSource={dataSource}
+                columns={columns}
+                scroll={{x: "max-content"}}
+            />
         </div>
     );
 }
