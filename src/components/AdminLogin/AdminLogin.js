@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import axios from "../../api";
 
 function AdminLogin() {
     const email = useRef()
@@ -17,20 +18,27 @@ function AdminLogin() {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (values?.email !== "" || values?.password !== "") {
-            console.log(values)
-            if (values?.email === "rauto@gmail.com" && values?.password === "Admin1234!") {
-                localStorage.setItem("admin_id", "dsdknjdskl22lklk")
-                localStorage.setItem("admin_token", "SEDSKCBSDKJBCSKJLCBNKCNKL3O2J2RKNLKWF")
-                localStorage.removeItem("user_token")
-                localStorage.removeItem("user_id")
-                localStorage.removeItem("bank_token")
-                localStorage.removeItem("bank_id")
-                localStorage.removeItem("moderator_token")
-                localStorage.removeItem("moderator_id")
-                navigate('/admin/applications')
-            }
+            axios.post("admin/login",
+                {
+                    email: values?.email,
+                    password: values?.password,
+                }
+            ).then(
+                e => {
+                    localStorage.setItem("admin_id", e?.data?._id)
+                    localStorage.setItem("admin_token", e.data?.token)
+                    localStorage.removeItem("user_token")
+                    localStorage.removeItem("user_id")
+                    localStorage.removeItem("bank_token")
+                    localStorage.removeItem("bank_id")
+                    localStorage.removeItem("moderator_token")
+                    localStorage.removeItem("moderator_id")
+                    navigate('/admin/applications')
+                }
+            ).catch(e => console.log(e))
         }
     }
+
     useEffect(() => {
         if (!!token) navigate('/admin/cards')
     }, [token])
