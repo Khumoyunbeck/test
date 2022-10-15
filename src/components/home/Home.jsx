@@ -126,7 +126,7 @@ function Home({addCompare}) {
     }, []);
 
     const handleModal = async () => {
-        await axios.get(`${MainApi}/car/v1?yili=${data.yili_from}&yurgani=${data.yurgani_from}&narxi=${data.narxi_from}&&madel=`).then(r => {
+        await axios.get(`${MainApi}/car/query?yili_dan=${data.yili_from}&yurgani_dan=${data.yurgani_from}&narxi_dan=${data.narxi_from}&&madel=`).then(r => {
             setFCars(r?.data)
         }).catch(err => console.log("err", err))
     }

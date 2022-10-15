@@ -21,7 +21,7 @@ const Car = ({addCompare}) => {
     const {madel, m8, yili, yoqilgi, transmission, yurgani, narxi, kredit,send} = Language
 
     const handleSubmit = () => {
-        axios.get(`${MainApi}/car/v1?yili=${year}&yurgani=${kilometr}&narxi=${price}&madel=${type}`).then(r => {
+        axios.get(`${MainApi}/car/query?yili_dan=${year}&yurgani_dan=${kilometr}&narxi_dan=${price}&madel=${type}`).then(r => {
             setCarsData(r?.data)
         }).catch(err => message.error(err))
     }
