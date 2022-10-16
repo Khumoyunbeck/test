@@ -79,8 +79,6 @@ const Application_page = () => {
         }
     }, [id])
 
-    console.log(bank)
-
     return (
         <>
             {
