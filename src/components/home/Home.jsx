@@ -126,9 +126,12 @@ function Home({addCompare}) {
     }, []);
 
     const handleModal = async () => {
-        await axios.get(`${MainApi}/car/query?yili_dan=${data.yili_from}&yurgani_dan=${data.yurgani_from}&narxi_dan=${data.narxi_from}&&madel=`).then(r => {
-            setFCars(r?.data)
+        await axios.get(`${MainApi}/car/query?yili_dan=${data.yili_from}
+        &yili_ga=${data.yili_to}&yurgani_dan=${data.yurgani_from}&
+        yurgani_ga=${data.yurgani_to}&narxi_dan=${data.narxi_from}&narxi_ga=${data.narxi_to}&&madel=`).then(r => {
+            setFCars(r?.data?.data)
         }).catch(err => console.log("err", err))
+        setIsModalVisible(true);
     }
 
     cars.length > 0 &&
@@ -138,8 +141,9 @@ function Home({addCompare}) {
     SwiperCore.use([Navigation]);
 
     useEffect(() => {
-        if (!!fCars.length)
+        if (!!fCars.length) {
             setIsModalVisible(true);
+        }
     }, [fCars, data])
 
     return (

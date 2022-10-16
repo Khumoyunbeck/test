@@ -32,8 +32,8 @@ function AddClientsForm() {
 
     const saveClient = () => {
         let myData = new FormData()
-        myData.append('ismizuz', data.ismizuz)
-        myData.append('ismizru', data.ismizru)
+        myData.append('name', data.ismizuz)
+        myData.append('region', data.ismizru)
         myData.append('data', data.data)
         myData.append('photo', file)
         if (!!id) dispatch(editClient(myData, id))

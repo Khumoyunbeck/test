@@ -22,7 +22,7 @@ const Car = ({addCompare}) => {
 
     const handleSubmit = () => {
         axios.get(`${MainApi}/car/query?yili_dan=${year}&yurgani_dan=${kilometr}&narxi_dan=${price}&madel=${type}`).then(r => {
-            setCarsData(r?.data)
+            setCarsData(r?.data?.data)
         }).catch(err => message.error(err))
     }
 

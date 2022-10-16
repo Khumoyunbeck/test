@@ -12,7 +12,7 @@ function CreateMad(props) {
     const {lang} = useSelector(state => state.lang)
     const {req, mail,name,success,pass,save,region,phone} = Language;
     const onFinish = (values) => {
-        axios.post(`${MainApi}/auth/add`, {...values, roles: "admin"}).then(res => {
+        axios.post(`${MainApi}/auth/add`, {...values, roles: "moderator"}).then(res => {
             toast.success(success[lang])
         }).catch(er => console.log(er))
     };

@@ -52,8 +52,8 @@ function Clients({dataSource, deleteClient}) {
         },
         {
             title: date[lang],
-            dataIndex: 'Date',
-            key: 'date',
+            dataIndex: 'data',
+            key: 'data',
         },
         {
             title: Batafsil[lang],
