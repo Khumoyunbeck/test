@@ -160,7 +160,7 @@ function More() {
                                 />
                             </div>
                         </div>
-                        <div className='d-flex justify-content-center'>
+                        <div className='d-flex justify-content-center mb50'>
                             <Button className='me-2' onClick={() => createOrder()}>
                                 {m3[lang]}
                             </Button>

@@ -2258,6 +2258,7 @@ main .social .container {
     display: flex;
     justify-content: center;
     width: 100%;
+    margin-top: 50px;
 }
 
 .sale-card_wrapper > span {
@@ -2655,4 +2656,7 @@ td > button {
     background-color: #c25034;
     border-radius: 7px;
     color: #fff;
+}
+.mb50{
+    margin-bottom: 50px!important;
 }
