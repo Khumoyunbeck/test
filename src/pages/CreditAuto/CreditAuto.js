@@ -81,10 +81,13 @@ const CreditAuto = () => {
         return {__html: fill[lang]}
     }
 
+    const formData = new FormData()
+
     const onFinish = values => {
-        const formData = new FormData()
-            [images1, images2, images3].forEach(file => formData.append('photo', file));
-        Object.entries(values).forEach(item => formData.append(item[0], item[1]))
+            [images1, images2, images3]?.forEach(file => formData.append('photo', file));
+        console.log(Object.entries(values))
+        Object.entries(values)?.forEach(item => formData?.append(item[0], item[1]))
+        formData?.append("userId", "62f01613a99f362ac59bbbf7")
         axios.post(`${MainApi}/bank/add`, formData).then(r => {
             toast.success(success[lang])
         }).catch(e =>
