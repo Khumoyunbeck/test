@@ -18,12 +18,16 @@ const Car = ({addCompare}) => {
     const {lang} = useSelector(state => state.lang)
     const {cars} = useSelector(state => state.car)
 
-    const {madel, m8, yili, yoqilgi, transmission, yurgani, narxi, kredit,send} = Language
+    const {madel, m8, yili, yoqilgi, transmission, yurgani, narxi, kredit,filter,load} = Language
 
     const handleSubmit = () => {
         axios.get(`${MainApi}/car/query?yili_dan=${year}&yurgani_dan=${kilometr}&narxi_dan=${price}&madel=${type}`).then(r => {
             setCarsData(r?.data?.data)
         }).catch(err => message.error(err))
+    }
+
+    const handleLoad = () => {
+      window.location.reload()
     }
 
     useEffect(() => {
@@ -38,9 +42,9 @@ const Car = ({addCompare}) => {
 
     return (
         <Row gutter={20}>
-            <Col md={6}>
+            <Col md={4}>
                 <div style={{backgroundColor: '#f6f6f6'}}>
-                    <Collapse bordered={false} defaultActiveKey={[1, 2, 3, 4, 5, 6, 7, 8]}>
+                    <Collapse bordered={false}>
                         {/* Model */}
                         <Collapse.Panel header={madel[lang]} key={1}>
                             <Select style={{width: '100%'}} value={type} onChange={e => setType(e)}>
@@ -265,10 +269,11 @@ const Car = ({addCompare}) => {
                     </Collapse>
                 </div>
                 <div className="submit">
-                    <Button onClick={() => handleSubmit()}>{send[lang]}</Button>
+                    <Button onClick={() => handleSubmit()} type="primary">{filter[lang]}</Button>
+                    <Button onClick={() => handleLoad()} type="danger" className="ml20">{load[lang]}</Button>
                 </div>
             </Col>
-            <Col md={18}>
+            <Col md={20}>
                 <Row style={{width: "100%"}}>
                     {carsData?.length > 0 &&
                     carsData?.map((car, index) => {

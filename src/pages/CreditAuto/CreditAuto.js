@@ -16,11 +16,11 @@ const CreditAuto = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
 
-
+    const [bool, setBool] = useState(false)
     const [salaryd, setSalaryd] = useState(false)
 
     const {lang} = useSelector(state => state.lang)
-    const {success} = Language;
+    const {success,oferta_tol} = Language;
 
     const {car} = useSelector(state => state.car)
     const [images1, setImages1] = useState([])
@@ -84,15 +84,20 @@ const CreditAuto = () => {
     const formData = new FormData()
 
     const onFinish = values => {
+        if (bool) {
             [images1, images2, images3]?.forEach(file => formData.append('photo', file));
-        console.log(Object.entries(values))
-        Object.entries(values)?.forEach(item => formData?.append(item[0], item[1]))
-        formData?.append("userId", "62f01613a99f362ac59bbbf7")
-        axios.post(`${MainApi}/bank/add`, formData).then(r => {
-            toast.success(success[lang])
-        }).catch(e =>
-            toast.error("Xatolik yuz berdi!")
-        )
+            console.log(Object.entries(values))
+            Object.entries(values)?.forEach(item => formData?.append(item[0], item[1]))
+            formData?.append("userId", "62f01613a99f362ac59bbbf7")
+            axios.post(`${MainApi}/bank/add`, formData).then(r => {
+                toast.success(success[lang])
+            }).catch(e =>
+                toast.error("Xatolik yuz berdi!")
+            )
+        } else {
+            console.log("some")
+            toast.error(oferta_tol[lang])
+        }
     }
 
     const dummyRequest = ({file, onSuccess}) => {
@@ -135,6 +140,10 @@ const CreditAuto = () => {
     //     }
     // }, [images])
 
+    const onChange = (e) => {
+        setBool(e?.target?.checked)
+    }
+
     return (
         <div className='container'>
             {car && (
@@ -161,7 +170,7 @@ const CreditAuto = () => {
             >
                 <Row className='d-flex align-items-center' gutter={18}>
                     {/* surname, name, fathername */}
-                    <Col span={8}>
+                    <Col lg={8} md={12} sm={24}>
                         {/* Surname */}
                         <Form.Item
                             label={sername[lang]}
@@ -203,12 +212,12 @@ const CreditAuto = () => {
                         </Form.Item>
                     </Col>
                     {/* text */}
-                    <Col span={8}>
+                    <Col lg={8} md={12} sm={24}>
                         <p>{comment_input[lang]}</p>
                     </Col>
                     <Col span={8}/>
                     {/* phone */}
-                    <Col span={8}>
+                    <Col lg={8} md={12} sm={24}>
                         {/* personal_num */}
                         <Form.Item
                             label={personal_num[lang]}
@@ -237,7 +246,7 @@ const CreditAuto = () => {
                         </Form.Item>
                     </Col>
                     {/* phone */}
-                    <Col span={8}>
+                    <Col lg={8} md={12} sm={24}>
                         {/* home_num */}
                         <Form.Item
                             label={home_num[lang]}
@@ -257,11 +266,11 @@ const CreditAuto = () => {
                         </Form.Item>
                     </Col>
                     {/* text */}
-                    <Col span={8}>
+                    <Col lg={8} md={12} sm={24}>
                         <p>{comment_num[lang]}</p>
                     </Col>
                     {/* salary */}
-                    <Col span={8}>
+                    <Col lg={8} md={12} sm={24}>
                         <div className='ms-4 p-3' style={{backgroundColor: '#F3BB04'}}>
                             <Checkbox name='salary' onChange={e => setSalaryd(e.target.checked)}>
                                 {salary[lang]}
@@ -282,13 +291,13 @@ const CreditAuto = () => {
                             <Input disabled={!salaryd}/>
                         </Form.Item>
                     </Col>
-                    <Col span={16}/>
+                    <Col lg={16} sm={24}/>
                     {/* photos */}
                     {/* select photo */}
                     <p className='text-center'>{passport[lang]}</p>
-                    <Col span={8}/>
+                    <Col lg={8} md={12} sm={24}/>
 
-                    <Col span={24} className='text-end mb-2 d-flex'>
+                    <Col span={24} className='text-end mb-2 df'>
                         <div>
                             <input type="file" onChange={event => handleChange1(event)}/>
                         </div>
@@ -296,7 +305,7 @@ const CreditAuto = () => {
                             {passportid1[lang]}
                         </div>
                     </Col>
-                    <Col span={24} className='text-end mb-2 d-flex'>
+                    <Col span={24} className='text-end mb-2 df'>
                         <div>
                             <input type="file" onChange={event => handleChange2(event)}/>
                         </div>
@@ -304,7 +313,7 @@ const CreditAuto = () => {
                             {passportid2[lang]}
                         </div>
                     </Col>
-                    <Col span={24} className='text-end mb-2 d-flex'>
+                    <Col span={24} className='text-end mb-2 df'>
                         <div>
                             <input type="file" onChange={event => handleChange3(event)}/>
                         </div>
@@ -312,17 +321,17 @@ const CreditAuto = () => {
                             {passportid3[lang]}
                         </div>
                     </Col>
-                    <Col span={6}>
+                    <Col lg={6} md={12} sm={24}>
                         <div className='m-5'>
                             <img src={image1} alt='image1' width='100%'/>
                         </div>
                     </Col>
-                    <Col span={6}>
+                    <Col lg={6} md={12} sm={24}>
                         <div className='m-5'>
                             <img src={image2} alt='image1' width='100%'/>
                         </div>
                     </Col>
-                    <Col span={6}>
+                    <Col lg={6} md={12} sm={24}>
                         <div className='m-5'>
                             <img src={image3} alt='image1' width='100%'/>
                         </div>
@@ -333,10 +342,10 @@ const CreditAuto = () => {
                     {/*        <p dangerouslySetInnerHTML={createMarkup1()}/>*/}
                     {/*    </div>*/}
                     {/*</Col>*/}
-                    <Col span={12} className='px-5'>
-                        <Checkbox>{check[lang]}</Checkbox>
+                    <Col lg={12} sm={24} className='px-5'>
+                        <Checkbox value={bool} onChange={onChange}>{check[lang]}</Checkbox>
                     </Col>
-                    <Col span={12} className='text-end'>
+                    <Col lg={12} sm={24} className='text-end'>
                         <Button
                             className='me-5'
                             htmlType='submit'
@@ -348,22 +357,22 @@ const CreditAuto = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col span={6}>
+                    <Col lg={6} md={12} sm={24}>
                         <div className='m-5'>
                             <img src={img1} alt='image1' width='100%'/>
                         </div>
                     </Col>
-                    <Col span={6}>
+                    <Col lg={6} md={12} sm={24}>
                         <div className='m-5'>
                             <img src={img2} alt='image1' width='100%'/>
                         </div>
                     </Col>
-                    <Col span={6}>
+                    <Col lg={6} md={12} sm={24}>
                         <div className='m-5'>
                             <img src={img3} alt='image1' width='100%'/>
                         </div>
                     </Col>
-                    <Col span={6}>
+                    <Col lg={6} md={12} sm={24}>
                         <div className='m-5'>
                             <img src={img4} alt='image1' width='100%'/>
                             <p style={{fontSize: 14}} dangerouslySetInnerHTML={createMarkup2()}/>

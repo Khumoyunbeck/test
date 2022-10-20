@@ -60,7 +60,7 @@ function Cars({dataSource, deleteCar, getCars}) {
 
 
     const onChange = (e, id) => {
-        if (type === "moderator") {
+        if (type === "moderator" || type === "admin") {
             Modal.confirm({
                 centered: true,
                 title: "Rostan ham status o'zgartirmoqchimisiz",
@@ -185,7 +185,7 @@ function Cars({dataSource, deleteCar, getCars}) {
                 dataIndex: 'data',
                 key: 'data',
                 render: (value) => {
-                    if (type === "moderator") {
+                    if (type === "moderator" || type === "admin") {
                         return (
                             <Checkbox
                                 onChange={e => onChange(e, value?._id)}

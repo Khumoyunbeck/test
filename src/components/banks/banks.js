@@ -160,7 +160,7 @@ function Banks({dataSource, getBanks, deleteApplication}) {
             dataIndex: 'mad',
             key: 'mad',
             render: (value) => {
-                if (type === "moderator") {
+                if (type === "moderator" || type === "admin") {
                     return (
                         <Checkbox onChange={e => onChange1(e, value?._id, value.pending)} checked={value?.status}
                                   disabled={value?.status}/>

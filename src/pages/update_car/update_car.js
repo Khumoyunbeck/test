@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Form, Input, Select} from 'antd';
+import {Button, Form, Image, Input, Row, Select} from 'antd';
 import "./update_car.css"
 import AdminHeader from "../../components/admin_header/admin_header";
 import axios from "axios";
@@ -22,6 +22,8 @@ function UpdateCar() {
     const [op1, setOp1] = useState("")
     const [op2, setOp2] = useState("")
     const [data, setData] = useState({})
+    const [imgs, setImgs] = useState([])
+    const [imgs1, setImgs1] = useState([])
 
     const {lang} = useSelector(state => state.lang)
     const {
@@ -60,8 +62,6 @@ function UpdateCar() {
 
     const onFinish = (values) => {
         const formData = new FormData()
-        console.log(op1, "op1")
-        console.log(op2, "op2")
         Object.keys(values).forEach(
             key =>
                 key !== 'photo' &&
@@ -72,7 +72,8 @@ function UpdateCar() {
 
         formData.append("opisaniya", op1)
         formData.append("opisaniyaru", op2)
-
+        if (!!imgs1.length)
+            imgs1.forEach(file => formData.append('photo', file))
         axios.put(`${MainApi}/car/${id}`, formData).then(res => {
             toast.success(success[lang])
         }).catch(er => console.log(er))
@@ -97,6 +98,10 @@ function UpdateCar() {
         setOp2(draftToHtml(convertToRaw(editorState.getCurrentContent())).toString())
     }
 
+    const handleNavigate = (e) => {
+        setImgs1(Object.values(e.target.files))
+    }
+
     useEffect(() => {
         if (data?.opisaniya) {
             const {contentBlocks, entityMap} = htmlToDraft(data?.opisaniya);
@@ -117,7 +122,9 @@ function UpdateCar() {
             setOp2(data?.opisaniyaru)
         }
 
+        setImgs(data?.photo)
     }, [data])
+
 
     return (
         <div className="contain pb50">
@@ -473,7 +480,7 @@ function UpdateCar() {
                         rules={[
                             {
                                 required: true,
-                                message:req[lang],
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -494,7 +501,7 @@ function UpdateCar() {
                         rules={[
                             {
                                 required: true,
-                                message:req[lang],
+                                message: req[lang],
                             },
                         ]}
                     >
@@ -661,7 +668,7 @@ function UpdateCar() {
                     >
                         <Select>
                             {
-                                fields.find(i => i.key === "status").select.map((y, k) => {
+                                fields.find(i => i.key === "credit").select.map((y, k) => {
                                     return (
                                         <Option value={y.value}>{y.label}</Option>
                                     )
@@ -669,18 +676,54 @@ function UpdateCar() {
                             }
                         </Select>
                     </Form.Item>
-
                     <Form.Item
                         wrapperCol={{
                             offset: 8,
                             span: 16,
                         }}
+                        style={{marginTop: "30px"}}
                     >
                         <Button type="primary" htmlType="submit">
                             {save[lang]}
                         </Button>
                     </Form.Item>
                 </Form>
+
+                <div style={{marginLeft: "260px"}}>
+                    <Input type="file" multiple onChange={e => handleNavigate(e)}/>
+                    <Row gutter={[20, 20]}>
+                        {
+                            imgs1?.length ?
+                                imgs1?.map((i, k) => {
+                                    let a = null
+                                    if (i) {
+                                        let reader = new FileReader();
+                                        reader.onload = (e) => {
+                                            a = e.target.result
+                                        };
+                                        reader.readAsDataURL(i);
+                                    }
+                                    return (
+                                        <Image
+                                            width={200}
+                                            src={a}
+                                            key={k}
+                                        />
+                                    )
+                                })
+                                :
+                                imgs?.map((i, k) => {
+                                    return (
+                                        <Image
+                                            width={200}
+                                            src={i}
+                                            key={k}
+                                        />
+                                    )
+                                })
+                        }
+                    </Row>
+                </div>
             </div>
         </div>
     )

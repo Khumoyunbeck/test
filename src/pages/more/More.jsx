@@ -31,7 +31,7 @@ function More() {
     const navigate = useNavigate()
     const {lang} = useSelector(state => state.lang)
 
-    const {mark, m7, m8, m9, m10, m11, m12, m13, m14, m5, m1, m2, m3, m4, kreditcal, kredit} = Language
+    const {mark, m7, m8, m9, m10, m11, m12, m13, m14, m5, m1, m2, m3, m4, kreditcal, kredit, status} = Language
 
     function createMarkup() {
         return {__html: lang === '0' ? car.opisaniya : car.opisaniyaru}
@@ -89,41 +89,95 @@ function More() {
                         </Swiper>
                     </div>
                     <div className='about__card'>
-                        <p className='about__text'>
-                            <img src={star_img} alt='star'/> {mark[lang]} : . . . . . . . . . . . .
-                            . . {car.marka}
+                        <p className='about__text secP'>
+                            <div>
+                                <img src={star_img} alt='star'/> {mark[lang]}:
+                            </div>
+                            <span className="span"/>
+                            <div>
+                                {car.marka}
+                            </div>
                         </p>
-                        <p className='about__text'>
-                            <img src={star_b_img} alt='star'/> {m7[lang]} : . . . . . . . . . . . .
-                            . . {car.madel}
+                        <p className='about__text secP'>
+                            <div>
+                                <img src={star_b_img} alt='star'/> {m7[lang]}:
+                            </div>
+                            <span className="span"/>
+                            <div>
+                                {car.madel}
+                            </div>
                         </p>
-                        <p className='about__text'>
-                            <img src={paint_img} alt='star'/> {m8[lang]} : . . . . . . . . . . . .
-                            . . . . . {lang === '0' ? car.color : car.colorru}
+                        <p className='about__text secP'>
+                            <div>
+                                <img src={paint_img} alt='star'/> {m8[lang]}:
+                            </div>
+                            <span className="span"/>
+                            <div>
+                                {lang === '0' ? car.color : car.colorru}
+                            </div>
                         </p>
-                        <p className='about__text'>
-                            <img src={date_img} alt='star'/> {m9[lang]} : . . . . . . . . . . . . .
-                            . {car.yili}
+                        <p className='about__text secP'>
+                            <div>
+                                <img src={date_img} alt='star'/> {m9[lang]}:
+                            </div>
+                            <span className="span"/>
+                            <div>
+                                {car.yili}
+                            </div>
                         </p>
-                        <p className='about__text'>
-                            <img src={cube_img} alt='star'/> {m10[lang]} : . . . . . . . . . . .
-                            {car.divigitel}
+                        <p className='about__text secP'>
+                            <div>
+                                <img src={cube_img} alt='star'/> {m10[lang]}:
+                            </div>
+                            <span className="span"/>
+                            <div>
+                                {car.divigitel}
+                            </div>
                         </p>
-                        <p className='about__text'>
-                            <img src={fuel_img} alt='star'/> {m11[lang]}:. . . . . . . . . . . . .
-                            . . . . . {lang === '0' ? car.yoqilgi : car.yoqilgiru}
+                        <p className='about__text secP'>
+                            <div>
+                                <img src={fuel_img} alt='star'/> {m11[lang]}:
+                            </div>
+                            <span className="span"/>
+                            <div>
+                                {lang === '0' ? car.yoqilgi : car.yoqilgiru}
+                            </div>
                         </p>
-                        <p className='about__text'>
-                            <img src={setting_img} alt='star'/> {m12[lang]} : . . . . . . . . . .
-                            {lang === '0' ? car.transmission : car.transmissionru}
+                        <p className='about__text secP'>
+                            <div>
+                                <img src={setting_img} alt='star'/> {m12[lang]}:
+                            </div>
+                            <span className="span"/>
+                            <div>
+                                {lang === '0' ? car.transmission : car.transmissionru}
+                            </div>
                         </p>
-                        <p className='about__text'>
-                            <img src={car_img} alt='star'/> {m13[lang]} : . . . . . . . . . . . . .
-                            . . . . {lang === '0' ? car.kuzuv : car.kuzuvru}
+                        <p className='about__text secP'>
+                            <div>
+                                <img src={car_img} alt='star'/> {m13[lang]}:
+                            </div>
+                            <span className="span"/>
+                            <div>
+                                {lang === '0' ? car.kuzuv : car.kuzuvru}
+                            </div>
                         </p>
-                        <p className='about__text'>
-                            <img src={speed_img} alt='star'/> {m14[lang]}: . . . . . . . . . . . .
-                            . . . . . {car?.yurgani}
+                        <p className='about__text secP'>
+                            <div>
+                                <img src={speed_img} alt='star'/> {m14[lang]}:
+                            </div>
+                            <span className="span"/>
+                            <div>
+                                {car?.yurgani}
+                            </div>
+                        </p>
+                        <p className='about__text secP'>
+                            <div>
+                                <img src={speed_img} alt='star'/> {status[lang]}:
+                            </div>
+                            <span className="span"/>
+                            <div>
+                                {car?.credit}
+                            </div>
                         </p>
                     </div>
                     <div className='sale-card pt50p'>

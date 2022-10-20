@@ -103,7 +103,9 @@ function Home({addCompare}) {
     const getClients = async () => {
         await axios
             .get(`${MainApi}/client/all`)
-            .then((res) => setClients(res?.data?.data))
+            .then((res) => {
+                setClients(res?.data?.data)
+            })
             .catch((err) => new Error(err));
     };
 
@@ -250,7 +252,7 @@ function Home({addCompare}) {
                     <div className="cards__row">
                         <Row style={{width: "100%"}}>
                             {cars.length > 0 &&
-                            cars.filter(y => y.aksiya === "").map((car, index) => {
+                            cars?.map((car, index) => {
                                     if (index < 6 && car?.status) {
                                         return (
                                             <Col xxl={6} xl={8} l={8} md={12} sm={24}>
@@ -469,7 +471,7 @@ function Home({addCompare}) {
                                 {cars?.length &&
                                 cars?.map(
                                     (item, index) => {
-                                        if (!!item.aksiya && item?.status)
+                                        if (item.aksiya === "Aksiya" && item?.status)
                                             return (
                                                 <SwiperSlide className="swiper-slide" key={index}>
                                                     <div className=" cards-slider__card card">
@@ -550,7 +552,6 @@ function Home({addCompare}) {
                         </div>
                         <div className=" swiper clients-swiper-slide">
                             <Swiper
-                                slidesPerView={4}
                                 spaceBetween={30}
                                 autoplay={{delay: 3000, disableOnInteraction: false}}
                                 loop={true}
@@ -560,17 +561,21 @@ function Home({addCompare}) {
                                 className="swiper-wrapper"
                             >
                                 {clients.length &&
-                                clients?.map((item, index) => (
-                                    <SwiperSlide className="swiper-slide" key={index}>
-                                        <div className="clients__item">
-                                            <div className="clients__img">
-                                                <img src={item?.photo} alt="icons"/>
+                                clients?.map((item, index) => {
+                                        console.log(item,"item")
+                                    return(
+                                        <SwiperSlide className="swiper-slide" key={index}>
+                                            <div className="clients__item">
+                                                <div className="clients__img">
+                                                    <img src={item?.photo} alt="icons"/>
+                                                </div>
+                                                <div className="clients__name">{item?.name}</div>
+                                                <div className="clients__name">{item?.region}</div>
                                             </div>
-                                            <div className="clients__name">{item?.name}</div>
-                                            <div className="clients__name">{item?.region}</div>
-                                        </div>
-                                    </SwiperSlide>
-                                ))}
+                                        </SwiperSlide>
+                                    )
+                                }
+                                )}
                             </Swiper>
                         </div>
                     </div>

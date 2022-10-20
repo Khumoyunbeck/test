@@ -30,8 +30,9 @@ const Compare = ({ compare, setCompare }) => {
 
     return (
         <div className="wcw">
-            <table className='table table-hover'>
-                <thead>
+            <div className="w456">
+                <table className='table table-hover ertw'>
+                    <thead>
                     <tr>
                         <th>{params[lang]}</th>
                         {compare.map(car => (
@@ -44,8 +45,8 @@ const Compare = ({ compare, setCompare }) => {
                             </th>
                         ))}
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     {lists.map(list => (
                         <tr>
                             <th>{list.text}</th>
@@ -54,6 +55,7 @@ const Compare = ({ compare, setCompare }) => {
                             ))}
                         </tr>
                     ))}
+                    <br/>
                     {compare.length > 0 && (
                         <tr>
                             <th></th>
@@ -64,8 +66,9 @@ const Compare = ({ compare, setCompare }) => {
                             ))}
                         </tr>
                     )}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }

@@ -316,12 +316,12 @@ export const fields = [
         key: 'aksiya',
         label: aksiya,
         select: [
-            { value: 'Kerak emas', name: 'Kerak emas' },
-            { value: '', name: 'Aksiya' },
+            { value: 'Not_aksiya', name: 'Kerak emas' },
+            { value: 'Aksiya', name: 'Aksiya' },
         ],
     },
     {
-        key: 'status',
+        key: 'credit',
         label: status,
         select: [
             { value: 'Yangi', name: 'Yangi' },

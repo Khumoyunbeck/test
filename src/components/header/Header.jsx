@@ -179,7 +179,7 @@ const Header = (props) => {
                                 info@rauto.uz
                             </a>
                         </div>
-                        <div className="headers__icons ">
+                        <div className="headers__icons">
                             <button
                                 className="translator mr-3"
                                 onClick={() => dispatch(changeLang("0"))}
@@ -224,14 +224,14 @@ const Header = (props) => {
                                     />
                                 </button>
                             </div>
-                            <a href="/compare" className="headers__icons-item">
+                            <Link to="/compare" className="headers__icons-item">
                                 <button
                                     onClick={props.showCompare}
                                     className="material-symbols-outlined"
                                 >
                                     balance
                                 </button>
-                            </a>
+                            </Link>
                             <div className="dropdown">
                                 <button className="dropbtn">
                                     <img
@@ -251,7 +251,6 @@ const Header = (props) => {
                                 <span></span>
                             </a>
                         </div>
-
                         <div className="menu headers__item">
                             <div className="menu__body">
                                 <h2 className="menu__title">Меню</h2>
@@ -412,7 +411,6 @@ const Header = (props) => {
                                         </button>
                                     </div>
                                 </div>
-
                                 <div className="menu__block">
                                     <div className="dropdown ">
                                         <button className="dropbtn dropbtn_color">
@@ -452,7 +450,6 @@ const Header = (props) => {
                                         />{" "}
                                         +99895 169 09 88
                                     </a>
-
                                     <a href="#" className="headers__link">
                                         <img src={mail_i} className="headers____icon" alt="icon"/>
                                         info@rauto.uz
@@ -500,7 +497,6 @@ const Header = (props) => {
                                 <img src={logo_icon} alt="logo"/>
                             </Link>
                         </div>
-
                         <nav className="headers__nav nav">
                             <p className="headers__nav-item">
                 <span className="headers__nav-icon">

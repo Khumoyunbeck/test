@@ -740,5 +740,8 @@ export const Language = {
     bank_name: ["Bank nomi", ""],
     edit: ["O'zgartirish", ""],
     desc: ["Xabar", ""],
-    file_needed: ["Faylni joylang",""]
+    file_needed: ["Faylni joylang", ""],
+    oferta_tol: ["Ofertaga rozimisiz?", ""],
+    filter: ["Saralash", ""],
+    load: ["Yangilash", ""],
 };

@@ -78,7 +78,7 @@ function AdminCards() {
             <div className="col-xl-12">
                 <div className="card-avto">
                     <div className="card-avto-body page_body_admin">
-                        <div div className="box page_box content_wrapper">
+                        <div className="box page_box content_wrapper">
                             {
                                 !is1024 &&
                                 <form name="search" className="search_form">

@@ -38,10 +38,6 @@ function AddCardForm() {
     const {car, code} = useSelector(state => state.car)
 
     useEffect(() => {
-        if (!!code) navigate('/admin/cards')
-    }, [code])
-
-    useEffect(() => {
         if (!!car) Object.keys(car).forEach(key => setValue(key, car[key]))
     }, [car])
 
