@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
-import {Button, Card, Checkbox, Col, Form, Input, Row} from 'antd'
+import {Button, Card, Checkbox, Col, Form, Input, Row, Select} from 'antd'
 import {getCar} from '../../store/car/car'
 import {Language} from '../../lang/Languages'
 import {toast} from "react-toastify";
@@ -20,7 +20,7 @@ const CreditAuto = () => {
     const [salaryd, setSalaryd] = useState(false)
 
     const {lang} = useSelector(state => state.lang)
-    const {success,oferta_tol} = Language;
+    const {success, oferta_tol} = Language;
 
     const {car} = useSelector(state => state.car)
     const [images1, setImages1] = useState([])
@@ -59,6 +59,9 @@ const CreditAuto = () => {
         passportimage,
         check,
         fill,
+        inn,
+        req,
+        bank_name
     } = Language
 
     useEffect(() => {
@@ -86,7 +89,6 @@ const CreditAuto = () => {
     const onFinish = values => {
         if (bool) {
             [images1, images2, images3]?.forEach(file => formData.append('photo', file));
-            console.log(Object.entries(values))
             Object.entries(values)?.forEach(item => formData?.append(item[0], item[1]))
             formData?.append("userId", "62f01613a99f362ac59bbbf7")
             axios.post(`${MainApi}/bank/add`, formData).then(r => {
@@ -95,7 +97,6 @@ const CreditAuto = () => {
                 toast.error("Xatolik yuz berdi!")
             )
         } else {
-            console.log("some")
             toast.error(oferta_tol[lang])
         }
     }
@@ -291,10 +292,85 @@ const CreditAuto = () => {
                             <Input disabled={!salaryd}/>
                         </Form.Item>
                     </Col>
+
                     <Col lg={16} sm={24}/>
                     {/* photos */}
                     {/* select photo */}
-                    <p className='text-center'>{passport[lang]}</p>
+                    <Col lg={8} md={12} sm={24}>
+                        <Form.Item
+                            label={inn[lang]}
+                            name='INN'
+                            rules={[
+                                {
+                                    required: true,
+                                    message: req[lang],
+                                },
+                            ]}
+                        >
+                            <Select
+                                showSearch
+                                defaultValue=""
+                                options={[
+                                    {
+                                        value: '308064151',
+                                        label: 'OOO "AVTO SAVDO KONSALT"',
+                                    },
+                                    {
+                                        value: '308656103',
+                                        label: 'ООО "AVTOKOM KONSALT"',
+                                    },
+                                    {
+                                        value: '308198824',
+                                        label: 'ООО "AUTO SALE NEXT"',
+                                    },
+                                    {
+                                        value: '309012674',
+                                        label: 'OOO AVTO KOMISSION TRADE',
+                                    },
+                                    {
+                                        value: '308338695',
+                                        label: 'OOO "MIR AVTO CAR"',
+                                    },
+                                    {
+                                        value: '308544187',
+                                        label: 'ООО "TRADE KONSALT"',
+                                    },
+                                    {
+                                        value: '308072919',
+                                        label: 'OOO"GRAND AVTO"',
+                                    },
+                                ]}
+                            />
+                        </Form.Item>
+                        {/* qarindosh_num */}
+                        <Form.Item
+                            label={bank_name[lang]}
+                            name='bank_name'
+                            rules={[
+                                {
+                                    required: true,
+                                    message: req[lang],
+                                },
+                            ]}
+                        >
+                            <Select
+                                defaultValue="Anor bank"
+                                options={[
+                                    {
+                                        value: 'Anor bank',
+                                        label: 'Anor bank',
+                                    }
+                                ]}
+                            />
+                        </Form.Item>
+                    </Col>
+                    <br/>
+                    <Col lg={8} md={12} sm={24}/>
+                    <Col lg={8} md={12} sm={24}/>
+
+                    <Col>
+                        <p className='text-center'>{passport[lang]}</p>
+                    </Col>
                     <Col lg={8} md={12} sm={24}/>
 
                     <Col span={24} className='text-end mb-2 df'>

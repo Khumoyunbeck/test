@@ -85,7 +85,7 @@ function App() {
             .then((res) => setIsOpen(false))
             .catch((err) => new Error(err));
     };
-    console.log(compare)
+
     return (
         <Fragment>
             {!/admin/g.test(location.pathname) &&
