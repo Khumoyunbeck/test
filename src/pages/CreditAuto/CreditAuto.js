@@ -15,7 +15,7 @@ import img4 from "../../assets/img/credit/Group4.jpg"
 const CreditAuto = () => {
     const {id} = useParams()
     const dispatch = useDispatch()
-
+    const [sec, setSec] = useState("")
     const [bool, setBool] = useState(false)
     const [salaryd, setSalaryd] = useState(false)
 
@@ -89,8 +89,19 @@ const CreditAuto = () => {
     const onFinish = values => {
         if (bool) {
             [images1, images2, images3]?.forEach(file => formData.append('photo', file));
-            Object.entries(values)?.forEach(item => formData?.append(item[0], item[1]))
-            formData?.append("userId", "62f01613a99f362ac59bbbf7")
+            Object.entries(values)?.forEach(item => {
+                if (item[0] === "phone" || item[0] === "relative_number" || item[0] === "house_number" || item[0] === "relative_number2") {
+                    formData?.append(item[0], item[1].replace(/\+/g, '')
+                        .replace(/\s/g, '')
+                        .replace(/-/g, '').replace(/[{()}]/g, ''))
+                } else {
+                    if (item[0] === "maosh" && item[1] === undefined) {
+                        formData?.append(item[0], "")
+                    } else {
+                        formData?.append(item[0], item[1])
+                    }
+                }
+            })
             axios.post(`${MainApi}/bank/add`, formData).then(r => {
                 toast.success(success[lang])
             }).catch(e =>
@@ -143,6 +154,41 @@ const CreditAuto = () => {
 
     const onChange = (e) => {
         setBool(e?.target?.checked)
+    }
+
+    const data = [
+        {
+            value: '308064151',
+            label: 'OOO "AVTO SAVDO KONSALT"',
+        },
+        {
+            value: '308656103',
+            label: 'ООО "AVTOKOM KONSALT"',
+        },
+        {
+            value: '308198824',
+            label: 'ООО "AUTO SALE NEXT"',
+        },
+        {
+            value: '309012674',
+            label: 'OOO AVTO KOMISSION TRADE',
+        },
+        {
+            value: '308338695',
+            label: 'OOO "MIR AVTO CAR"',
+        },
+        {
+            value: '308544187',
+            label: 'ООО "TRADE KONSALT"',
+        },
+        {
+            value: '308072919',
+            label: 'OOO"GRAND AVTO"',
+        },
+    ];
+
+    const onChange1 = (e) => {
+        setSec(data?.filter(i => i.value.toString() === e.target.value.toString())[0].label)
     }
 
     return (
@@ -298,52 +344,6 @@ const CreditAuto = () => {
                     {/* select photo */}
                     <Col lg={8} md={12} sm={24}>
                         <Form.Item
-                            label={inn[lang]}
-                            name='INN'
-                            rules={[
-                                {
-                                    required: true,
-                                    message: req[lang],
-                                },
-                            ]}
-                        >
-                            <Select
-                                showSearch
-                                defaultValue=""
-                                options={[
-                                    {
-                                        value: '308064151',
-                                        label: 'OOO "AVTO SAVDO KONSALT"',
-                                    },
-                                    {
-                                        value: '308656103',
-                                        label: 'ООО "AVTOKOM KONSALT"',
-                                    },
-                                    {
-                                        value: '308198824',
-                                        label: 'ООО "AUTO SALE NEXT"',
-                                    },
-                                    {
-                                        value: '309012674',
-                                        label: 'OOO AVTO KOMISSION TRADE',
-                                    },
-                                    {
-                                        value: '308338695',
-                                        label: 'OOO "MIR AVTO CAR"',
-                                    },
-                                    {
-                                        value: '308544187',
-                                        label: 'ООО "TRADE KONSALT"',
-                                    },
-                                    {
-                                        value: '308072919',
-                                        label: 'OOO"GRAND AVTO"',
-                                    },
-                                ]}
-                            />
-                        </Form.Item>
-                        {/* qarindosh_num */}
-                        <Form.Item
                             label={bank_name[lang]}
                             name='bank_name'
                             rules={[
@@ -354,7 +354,7 @@ const CreditAuto = () => {
                             ]}
                         >
                             <Select
-                                defaultValue="Anor bank"
+                                defaultValue=""
                                 options={[
                                     {
                                         value: 'Anor bank',
@@ -362,6 +362,27 @@ const CreditAuto = () => {
                                     }
                                 ]}
                             />
+                        </Form.Item>
+
+                        {/* qarindosh_num */}
+                        <Row>
+                            <Col lg={8} md={0} sm={0}>
+                            </Col>
+                            <Col lg={16} md={24} sm={24}>
+                                {sec}
+                            </Col>
+                        </Row>
+                        <Form.Item
+                            label={inn[lang]}
+                            name='INN'
+                            rules={[
+                                {
+                                    required: true,
+                                    message: req[lang],
+                                },
+                            ]}
+                        >
+                            <Input onChange={onChange1}/>
                         </Form.Item>
                     </Col>
                     <br/>

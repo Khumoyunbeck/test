@@ -5,10 +5,9 @@ import {message} from "antd";
 import {Language} from "../../lang/Languages";
 import {useSelector} from "react-redux";
 
-
 // import {MainApi} from "../../config";
 
-function Register() {
+function Register({setStep, setK}) {
     const email = useRef()
     const password = useRef()
     const [values, setValues] = useState({
@@ -27,10 +26,8 @@ function Register() {
         e.preventDefault()
         if (values?.name !== "" || values?.email !== "" || values?.password !== "") {
             axios.post(`user/add`, values).then(e => {
-                    localStorage.setItem("user_token", "KLJLJKKJLJKLKJLJKKHGIGHGHKJKJKJLKKLJKJLJLKJKLHJJKJK");
-                    localStorage.removeItem("bank_token")
-                    localStorage.removeItem("admin_token")
-                    navigate("/admin/cards")
+                    setStep("code")
+                    setK(e?.data?.data?.key)
                 }
             )
                 .catch(err => console.error(err))
@@ -38,7 +35,7 @@ function Register() {
             message.warn("Fill the form completely")
         }
     }
-    const {name,mail,phone,region,pass,l} = Language
+    const {name, mail, phone, region, pass, l} = Language
 
     const {lang} = useSelector((state) => state.lang);
 

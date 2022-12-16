@@ -75,6 +75,8 @@ function CardsAdmin() {
             house_number: item?.house_number,
             relative_number2: item?.relative_number2,
             maosh: item?.maosh,
+            INN:item?.INN,
+            bank_name:item?.bank_name,
             data: {_id: item?._id, pending: item?.pending, status: item?.status},
             mad: {_id: item?._id, status: item?.status, pending: item?.pending}
         }))

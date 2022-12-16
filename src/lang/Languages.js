@@ -744,5 +744,6 @@ export const Language = {
     oferta_tol: ["Ofertaga rozimisiz?", ""],
     filter: ["Saralash", ""],
     load: ["Yangilash", ""],
-    inn:["INN",""]
+    inn:["INN",""],
+    sms:["SMS kodni ni kiriting","Введите SMS-код"],
 };

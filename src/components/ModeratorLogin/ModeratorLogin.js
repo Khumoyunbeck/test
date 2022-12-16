@@ -20,14 +20,16 @@ function ModeratorLogin() {
     const handleSubmit = (e) => {
         e.preventDefault()
         if (values?.email !== "" || values?.password !== "") {
-            axios.post("auth/login",
+            axios.post("bank/login",
                 {
-                    email: values?.email,
-                    password: values?.password,
+                    phone: values?.email,
+                    INN: values?.password,
                 }
             ).then(e => {
-                    localStorage.setItem("moderator_id", e?.data?._id)
-                    localStorage.setItem("moderator_token", e.data?.token)
+                    localStorage.setItem("moderator_id", e?.data?.data?._id)
+                    localStorage.setItem("moderator_phone", e?.data?.data?.phone)
+                    localStorage.setItem("moderator_inn", e?.data?.data?.INN)
+                    localStorage.setItem("moderator_token", "oisuaisuxapoiuxapuxpoooooooooxsinksxlkaxnlkxnksmanxklmaxlkmas")
                     localStorage.removeItem("user_token")
                     localStorage.removeItem("user_id")
                     localStorage.removeItem("bank_token")
@@ -74,10 +76,10 @@ function ModeratorLogin() {
                                     <input
                                         ref={email}
                                         className='form-control email_input'
-                                        type='email'
+                                        type='phone'
                                         required
-                                        name='email'
-                                        placeholder='Email'
+                                        name='phone'
+                                        placeholder='Phone'
                                         value={values?.email}
                                         onChange={event => setValues({
                                             ...values,
@@ -92,11 +94,11 @@ function ModeratorLogin() {
                                     <label>{pass[lang]}</label>
                                     <input
                                         ref={password}
-                                        className='form-control password_input'
-                                        type='password'
+                                        className='form-control'
+                                        type='number'
                                         required
-                                        name='password'
-                                        placeholder='Password'
+                                        name='INN'
+                                        placeholder='INN'
                                         value={values?.password}
                                         onChange={event => setValues({
                                             ...values,

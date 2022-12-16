@@ -32,7 +32,7 @@ import Cars from "./pages/Cars";
 import CreditAuto from "./pages/CreditAuto/CreditAuto";
 import Applications from "./pages/Applications/Applications";
 import Polezniy from "./pages/polezniye/polezniye";
-import "antd/dist/antd.min.css";
+import 'antd/dist/antd.css';
 import "./App.css";
 import axios from "axios";
 import Quality from "./pages/quality/quality";

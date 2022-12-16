@@ -8,8 +8,6 @@ import '../../components/style.css'
 function Aboutus() {
     const { lang } = useSelector(state => state.lang)
 
-    console.log(lang)
-
     const { a1, ab1, ab2, ab3, ab4, ab5, ab6, ab7, ab8 } = Language
   return (
     <main>

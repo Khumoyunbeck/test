@@ -19,10 +19,13 @@ import facebook_icon from "../../assets/icons/facebook.png";
 import telegram_i from '../../images/telegram_i.png'
 import icon_location from "../../assets/icons/location_white.png";
 import instagram_icon from "../../assets/icons/instagram.png";
-//Import lang
 import {changeLang} from "../../store/language";
-//Styles
 import "../style.css";
+import {TbHeartHandshake} from "react-icons/tb";
+import {AiOutlineCar, AiOutlineInfoCircle} from "react-icons/ai";
+import {IoStorefrontOutline} from "react-icons/io5";
+import {MdPhoneEnabled} from "react-icons/md";
+import {HiUser} from "react-icons/hi";
 
 const Header = (props) => {
     const dispatch = useDispatch();
@@ -500,7 +503,7 @@ const Header = (props) => {
                         <nav className="headers__nav nav">
                             <p className="headers__nav-item">
                 <span className="headers__nav-icon">
-                  <span className="material-symbols-outlined">store</span>
+                    <IoStorefrontOutline className="iconCol"/>
                 </span>
                                 <p className="headers__nav-link tooltips">
                                     {asosiy[lang]}
@@ -516,15 +519,13 @@ const Header = (props) => {
                             </p>
                             <Link to="/cars" className="headers__nav-item">
                 <span className="headers__nav-icon">
-                  <span className="material-symbols-outlined">
-                    directions_car
-                  </span>
+               <AiOutlineCar  className="iconCol"/>
                 </span>
                                 <span className="headers__nav-link">{Avtomobillar[lang]}</span>
                             </Link>
                             <p className="headers__nav-item">
                 <span className="headers__nav-icon">
-                  <span className="material-symbols-outlined">handshake</span>
+                <TbHeartHandshake  className="iconCol"/>
                 </span>
                                 <p className="headers__nav-link tooltips">
                                     {Xizmatlar[lang]}
@@ -563,7 +564,7 @@ const Header = (props) => {
                             </p>
                             <a href="" className="headers__nav-item">
                 <span className="headers__nav-icon">
-                  <span className="material-symbols-outlined">info</span>
+                <AiOutlineInfoCircle  className="iconCol"/>
                 </span>
                                 <p className="headers__nav-link tooltips">{Kompaniya[lang]}
                                     <ul className="tooltipstexttt">
@@ -589,15 +590,13 @@ const Header = (props) => {
                             </a>
                             <a href="" className="headers__nav-item">
                 <span className="headers__nav-icon">
-                  <span className="material-symbols-outlined">
-                    phone_enabled
-                  </span>
+               <MdPhoneEnabled  className="iconCol"/>
                 </span>
                                 <span className="headers__nav-link">{Kontaktlar[lang]}</span>
                             </a>
                             <Link to={"/user"} className="headers__nav-item">
                 <span className="headers__nav-icon">
-                  <span className="material-symbols-outlined">person</span>
+           <HiUser  className="iconCol"/>
                 </span>
                                 <span className="headers__nav-link tooltips">
                                     {Kirish[lang]}

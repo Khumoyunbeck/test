@@ -4,7 +4,6 @@ import {Link} from "react-router-dom";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {MainApi} from "../../api";
 import axios from "axios";
-import {toast} from "react-toastify";
 import {useSelector} from "react-redux";
 import {Language} from "../../lang/Languages";
 
@@ -28,7 +27,9 @@ function Banks({dataSource, getBanks, deleteApplication}) {
         inactive,
         status,
         Batafsil,
-        deleteOrd
+        deleteOrd,
+        bank_name,
+        inn
     } = Language
 
     useEffect(() => {
@@ -67,19 +68,19 @@ function Banks({dataSource, getBanks, deleteApplication}) {
     const onChange1 = (e, id, pending) => {
         if (type === "moderator") {
             // if (pending)
-                Modal.confirm({
-                    centered: true,
-                    title: sure_status[lang],
-                    icon: <ExclamationCircleOutlined/>,
-                    onOk() {
-                        axios
-                            .put(`${MainApi}/bank/proccess/${id}`)
-                            .then((res) => {
-                                getBanks()
-                            })
-                            .catch((err) => console.log(err));
-                    },
-                })
+            Modal.confirm({
+                centered: true,
+                title: sure_status[lang],
+                icon: <ExclamationCircleOutlined/>,
+                onOk() {
+                    axios
+                        .put(`${MainApi}/bank/proccess/${id}`)
+                        .then((res) => {
+                            getBanks()
+                        })
+                        .catch((err) => console.log(err));
+                },
+            })
             // else {
             //     toast.warn(info_checking[lang])
             // }
@@ -111,6 +112,16 @@ function Banks({dataSource, getBanks, deleteApplication}) {
             title: father_name[lang],
             dataIndex: 'father_name',
             key: 'father_name',
+        },
+        {
+            title: bank_name[lang],
+            dataIndex: 'bank_name',
+            key: 'bank_name',
+        },
+        {
+            title: inn[lang],
+            dataIndex: 'INN',
+            key: 'INN',
         },
         {
             title: phone[lang],
@@ -160,7 +171,7 @@ function Banks({dataSource, getBanks, deleteApplication}) {
             dataIndex: 'mad',
             key: 'mad',
             render: (value) => {
-                if (type === "moderator" || type === "admin") {
+                if (type === "admin") {
                     return (
                         <Checkbox onChange={e => onChange1(e, value?._id, value.pending)} checked={value?.status}
                                   disabled={value?.status}/>
@@ -174,7 +185,7 @@ function Banks({dataSource, getBanks, deleteApplication}) {
                     )
             }
         },
-        {
+        (type === "admin") ? {
             title: Batafsil[lang],
             dataIndex: '_id',
             key: '_id',
@@ -187,8 +198,8 @@ function Banks({dataSource, getBanks, deleteApplication}) {
                     </Button>
                 )
             }
-        },
-        !(type === "bank") ? {
+        } : {},
+        (type === "admin") ? {
             title: deleteOrd[lang],
             dataIndex: '_id',
             key: '_id',
@@ -202,7 +213,9 @@ function Banks({dataSource, getBanks, deleteApplication}) {
 
     return (
         <div>
-            <Table dataSource={dataSource} columns={columns} scroll={{x: "max-content"}}/>
+            <Table dataSource={type === "moderator" ? dataSource?.filter(
+                i => i?.phone?.toString() === localStorage.getItem("moderator_phone") && i?.INN?.toString() === localStorage.getItem("moderator_inn")) : dataSource}
+                   columns={columns} scroll={{x: "max-content"}}/>
         </div>
     );
 }

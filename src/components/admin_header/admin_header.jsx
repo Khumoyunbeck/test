@@ -51,7 +51,7 @@ function AdminHeader() {
                         <ul className="metismenu" id="side-menu">
                             <li className="menu-title">{menu[lang]}</li>
                             {
-                                (type === "admin" || type === "moderator") &&
+                                (type === "admin") &&
                                 <li>
                                     <Link to="/admin/orders" className="waves-effect">
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
@@ -62,7 +62,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "user" || type === "admin" || type === "moderator") &&
+                                (type === "user" || type === "admin") &&
                                 <li>
                                     <Link to="/admin/cards" className="waves-effect">
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
@@ -84,7 +84,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "admin" || type === "moderator") &&
+                                (type === "admin") &&
                                 <li>
                                     <Link to="/admin/clients" className="waves-effect">
                                         <i className="mdi  mdi-message-text-outline text-white bg-warning">
@@ -95,7 +95,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "admin" || type === "moderator") &&
+                                (type === "admin") &&
                                 <li>
                                     <Link to="/admin/statistic/all" className="waves-effect">
                                         <i className="mdi mdi-trending-up bg-warning text-white">
@@ -122,7 +122,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "admin" || type === "moderator") &&
+                                (type === "admin") &&
                                 <li>
                                     <Link
                                         to="/admin/moderators"
@@ -138,7 +138,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "admin" || type === "moderator") &&
+                                (type === "admin") &&
                                 <li>
                                     <Link
                                         to="/admin/users"
@@ -154,7 +154,7 @@ function AdminHeader() {
                                 </li>
                             }
                             {
-                                (type === "admin" || type === "moderator") &&
+                                (type === "admin") &&
                                 <li>
                                     <Link
                                         to="/admin/info"
