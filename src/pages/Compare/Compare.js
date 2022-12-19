@@ -1,19 +1,21 @@
-import { Layout } from 'antd'
 import {useSelector} from "react-redux";
 import {Language} from "../../lang/Languages";
 
 const Compare = ({ compare, setCompare }) => {
+    const { lang } = useSelector(state => state.lang)
+    const {params,del,Narxi,brend,Model,m8,year,dvigatel_hajmi,m11,kuzuv,perevod,yurgan_yoli} = Language;
+
     const lists = [
-        { text: 'Narxi', key: 'narxi' },
-        { text: 'Brend', key: 'marka' },
-        { text: 'Model', key: 'madel' },
-        { text: 'Rang', key: 'color' },
-        { text: 'Yili', key: 'yili' },
-        { text: 'Dvigatel hajmi', key: 'divigitel' },
-        { text: "Yoqilg'i", key: 'yoqilgi' },
-        { text: 'Kuzov turi', key: 'kuzuv' },
-        { text: 'Привод', key: 'perevod' },
-        { text: "Yurgan yo'li", key: 'yurgani' },
+        { text: Narxi[lang], key: 'narxi' },
+        { text: brend[lang], key: 'marka' },
+        { text: Model[lang], key: 'madel' },
+        { text: m8[lang], key: 'color' },
+        { text: year[lang], key: 'yili' },
+        { text: dvigatel_hajmi[lang], key: 'divigitel' },
+        { text: m11[lang], key: 'yoqilgi' },
+        { text: kuzuv[lang], key: 'kuzuv' },
+        { text: perevod[lang], key: 'perevod' },
+        { text: yurgan_yoli[lang], key: 'yurgani' },
     ]
 
     function deleteItem(id) {
@@ -24,9 +26,6 @@ const Compare = ({ compare, setCompare }) => {
         })
         setCompare([...compare])
     }
-
-    const {lang} = useSelector(state => state.lang)
-    const {params,del} = Language;
 
     return (
         <div className="wcw">

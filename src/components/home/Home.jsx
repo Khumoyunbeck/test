@@ -303,18 +303,18 @@ function Home({addCompare}) {
                                             value={[data.yili_from, data.yili_to]}/>
                                     <Row gutter={16}>
                                         <Col span={12}>
-                                            <label htmlFor="">Dan</label>
+                                            <label htmlFor="">{twelve[lang]}</label>
                                             <div>
                                                 <Input value={data?.yili_from} addonAfter='yil'
                                                        onChange={value => setData({
                                                            ...data,
-                                                           yili_from: value?.target?.value
+                                                           yili_frotwelvem: value?.target?.value
                                                        })}
                                                 />
                                             </div>
                                         </Col>
                                         <Col span={12}>
-                                            <label htmlFor="">Dan</label>
+                                            <label htmlFor="">{Gacha[lang]}</label>
                                             <div>
                                                 <Input value={data?.yili_to} addonAfter='yil'
                                                        onChange={value => setData({
@@ -337,7 +337,7 @@ function Home({addCompare}) {
                                         <Col span={12}>
                                             <div>
                                                 <label htmlFor="">
-                                                    Dan
+                                                    {twelve[lang]}
                                                 </label>
                                                 <Input value={data?.yurgani_from} addonAfter='km'
                                                        onChange={value => setData({
@@ -350,7 +350,7 @@ function Home({addCompare}) {
                                         <Col span={12}>
                                             <div>
                                                 <label htmlFor="">
-                                                    Gacha
+                                                    {Gacha[lang]}
                                                 </label>
                                                 <Input value={data?.yurgani_to} addonAfter='km'
                                                        onChange={value => setData({
@@ -372,7 +372,7 @@ function Home({addCompare}) {
                                     <Row gutter={16}>
                                         <Col span={12}>
                                             <div>
-                                                <label>Dan</label>
+                                                <label>{twelve[lang]}</label>
                                                 <Input value={data?.narxi_from} addonAfter="so'm"
                                                        onChange={value => setData({
                                                            ...data,
@@ -383,7 +383,7 @@ function Home({addCompare}) {
                                         </Col>
                                         <Col span={12}>
                                             <div>
-                                                <label>Gacha</label>
+                                                <label>{Gacha[lang]}</label>
                                                 <Input value={data?.narxi_to} addonAfter="so'm"
                                                        onChange={value => setData({
                                                            ...data,
