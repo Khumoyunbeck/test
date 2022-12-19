@@ -1,5 +1,5 @@
 import React from 'react'
-// import team0 from "../../images/team0.png"
+import team0 from "../../assets/img/p.jpg"
 import { useSelector } from 'react-redux'
 import team1 from "../../images/team1.png"
 import team2 from "../../images/team2.png"
@@ -30,20 +30,14 @@ function Ourteam() {
             <div className='container mt-2'>
                 <div className='row'>
                     <div className='col-lg-4'>
-                        <div className='card p-1'>
-                            {/* <img src={team0} className="team-img" alt='img0' /> */}
+                        <div className='card'>
+                            <img src={team0} className="team-img-two" alt='img0' />
                             <div className='card-body text-center'>
                                 <ul>
                                     <li>{tm1[lang]}</li>
-                                    <li className='team_list'><span class="material-symbols-outlined">
+                                    <li className='team_list'><span className="material-symbols-outlined">
                                         work
                                     </span>{tm2[lang]}</li>
-                                    <li className='team_list'><span class="material-symbols-outlined">
-                                        contact_mail
-                                    </span>jasur1155@mail.com</li>
-                                    <li className='team_list'><span class="material-symbols-outlined">
-                                        phone_iphone
-                                    </span>+998907701020</li>
                                 </ul>
                             </div>
                         </div>

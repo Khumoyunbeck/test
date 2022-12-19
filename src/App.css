@@ -2820,7 +2820,9 @@ table.focus-on tbody tr.focused td {
     width: 100%;
     object-position: center;
     object-fit: cover;
+    height: 400px;
 }
+
 
 .upload_button_3 a {
     color: midnightblue;
@@ -3202,5 +3204,10 @@ ul.show {
         margin-bottom: 30px;
         border-bottom: 1px solid gray;
         padding-bottom: 20px;
+    }
+}
+@media (max-width: 1200px) {
+    .team-img-two {
+        height: 300px;
     }
 }
