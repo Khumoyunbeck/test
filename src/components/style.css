@@ -160,8 +160,16 @@ body {
     box-shadow: 0 0px 5px #888;
 }
 
+.narx-aniqla {
+    margin-top: 50px !important;
+}
+
 .headers__icon {
     width: 15px;
+}
+
+.headers__icon-compare {
+    width: 20px;
 }
 
 .headers_close_icon {
@@ -838,6 +846,10 @@ address {
     animation: transform_x 7s linear infinite alternate;
 }
 
+.slider__title span:last-child{
+    padding-left: 30px;
+}
+
 .slider {
     background: url(../assets/img/slider-wraper.jpg) center/cover no-repeat;
 }
@@ -986,7 +998,6 @@ body .swiper-button-prev:after {
     color: #555;
     background: transparent;
     max-width: 540px;
-    position: relative;
 }
 
 .slider__body-title {
@@ -1701,7 +1712,8 @@ textarea {
 }
 
 .clients__item {
-    max-width: 320px;
+    max-width: 260px;
+    width: 100%;
     margin: 10px auto;
     padding: 0 10px 10px 10px;
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);

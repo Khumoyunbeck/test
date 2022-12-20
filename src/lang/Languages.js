@@ -43,7 +43,7 @@ export const Language = {
 
     //Kontaktlar
     contacts: ["Biz bilan bog'lanish", "Связаться с нами"],
-    ishVaqt1: ["Du.- Ju.: 9:00-17:00", "Пн.- Пт.: 9:00–17:00"],
+    ishVaqt1: ["Du.- Ju.: 9:00-18:00", "Пн.- Пт.: 9:00–18:00"],
     ishVaqt2: ["Shan.: 9:00-16:00", "Cб.: 9:00–16:00"],
     ishVaqt3: ["Yak.: Dam olish", "Вс.:Выходной"],
 
@@ -52,9 +52,9 @@ export const Language = {
         "O'zbekistondagi foydali avtokredit",
         "Выгодный автокредит в Узбекистане",
     ],
-    second: ["Yordam beramiz", "Поможем"],
-    third: ["sotib oling yoki soting ", "купить или продать "],
-    fourth: ["mashina arzon narxda!", "автомобиль по выгодной цене!"],
+    second: ["Avtomashinalarni", "Поможем"],
+    third: ["sotishga yoki sotib olishga ", "купить или продать "],
+    fourth: ["yordam beramiz!", "автомобиль по выгодной цене!"],
     five: ["KONSULTATSIYA", "КОНСУЛЬТАЦИЯ"],
     six: ["Bizning hozirgi mijozlarimiz soni", "Наши текущие клиенты"],
     seven: ["Avtomashinalar", "Новые поступления"],
@@ -67,14 +67,23 @@ export const Language = {
     fourteen: ["Avtomobilni sotish", "Продажа автомобиля"],
 
     //Homepage second
+    kuzovA: ["Xetchbek", "Хетчбек"],
+    kuzovB: ["Krossover", "Кроссовер"],
+    kuzovC: ["Sedan", "Седан"],
+    kuzovD: ["Universal", "Универсал"],
     Gacha: ["Gacha", "К"],
     Kilometr: ["Kilometr", "Километраж"],
     Narxi: ["Narxi", "Цена"],
-    NarxiniAniqlash: ["Narxini aniqlash", "УЗНАТЬ СТОИМОСТЬ"],
+    NarxiniAniqlash: ["Narxini aniqlash", "Узнать стомость"],
     Marka: ["Marka", "Марка"],
     Model: ["Model", "Модель"],
     Probeg: ["Yurgani", "Пробег"],
+    narxiA: ["Mashinangiz markasi. Masalan: Chevrolet", "Марка вашего автомобиля. Например: Chevrolet"],
+    narxiB: ["Mashinangiz modeli. Masalan: Malibu", "Модель вашего автомобиля. Например: Malibu"],
+    narxiC: ["Ish. chiqarilgan yili", "Год выпуска вашего автомобиля (цифрами). Например: 2007"],
+    narxiD: ["Yurgan masofasi", "Пробег в км. вашего автомобиля (цифрами). Например: 25000"],
     Aloqa: ["Aloqa ma'lumotlari", "Контактные данные"],
+    mailA: ["Elek. pochta", "Ваш Email"],
     AFZALLIK: ["BIZDAGI AFZALLIKLAR", "НАШИ ПРЕИМУЩЕСТВА"],
     Minimal: ["Minimal hujjatlar", "Минимум документов"],
     pasport: [

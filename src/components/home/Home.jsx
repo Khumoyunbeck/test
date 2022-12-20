@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {Language} from "../../lang/Languages";
+import { Language } from "../../lang/Languages";
 import slide_one from "../../assets/img/slider/rauto-imgmn2.png";
 import slide_two from "../../assets/img/slider/damas.png";
 import slide_three from "../../assets/img/slider/infnexia-tinified.png";
@@ -9,25 +9,25 @@ import advantage_img1 from "../../assets/icons/ico1.png";
 import advantage_img2 from "../../assets/icons/ico3.png";
 import advantage_img3 from "../../assets/icons/ico4.png";
 
-import {Swiper, SwiperSlide} from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "../style.css";
 import "swiper/css";
 import "swiper/css/navigation";
 // import required modules
-import SwiperCore, {A11y, Autoplay, Navigation, Pagination, Scrollbar} from "swiper";
-import {Link} from "react-router-dom";
+import SwiperCore, { A11y, Autoplay, Navigation, Pagination, Scrollbar } from "swiper";
+import { Link } from "react-router-dom";
 import CardCar from "../card_car/Card_car";
-import {injectStyle} from "react-toastify/dist/inject-style";
-import {useSelector} from "react-redux";
-import {MainApi} from "../../api";
-import {Col, Input, Row, Slider} from "antd";
-import {StyledModal} from "./home.e";
+import { injectStyle } from "react-toastify/dist/inject-style";
+import { useSelector } from "react-redux";
+import { MainApi } from "../../api";
+import { Col, Input, Row, Slider } from "antd";
+import { StyledModal } from "./home.e";
 
 if (typeof window !== "undefined") {
     injectStyle();
 }
 
-function Home({addCompare}) {
+function Home({ addCompare }) {
     const [num, setNum] = useState("");
     const [fCars, setFCars] = useState([]);
     const [cars, setCars] = useState([]);
@@ -44,7 +44,7 @@ function Home({addCompare}) {
         narxi_to: 500000000
     })
 
-    const {lang} = useSelector((state) => state.lang);
+    const { lang } = useSelector((state) => state.lang);
 
     const {
         six,
@@ -79,7 +79,17 @@ function Home({addCompare}) {
         AKSIYALAR_CHEGIRMALAR,
         Batafsil,
         BARCHA_TAKLIFLAR,
-        yili
+        kuzovA,
+        kuzovB, 
+        kuzovC, 
+        kuzovD,
+        narxiA,
+        narxiB,
+        narxiC,
+        narxiD,
+        m1,
+        m2,
+        mailA,
     } = Language;
 
     const handleOk = () => {
@@ -110,15 +120,15 @@ function Home({addCompare}) {
     };
 
     const onChange1 = (value) => {
-        setData({...data, yili_to: value[1], yili_from: value[0]})
+        setData({ ...data, yili_to: value[1], yili_from: value[0] })
     };
 
     const onChange2 = (value) => {
-        setData({...data, yurgani_to: value[1], yurgani_from: value[0]})
+        setData({ ...data, yurgani_to: value[1], yurgani_from: value[0] })
     };
 
     const onChange3 = (value) => {
-        setData({...data, narxi_to: value[1], narxi_from: value[0]})
+        setData({ ...data, narxi_to: value[1], narxi_from: value[0] })
     };
     ;
 
@@ -137,9 +147,9 @@ function Home({addCompare}) {
     }
 
     cars.length > 0 &&
-    cars.forEach((item) => !!!num && !!item.aksiya && setNum("aksiya"));
+        cars.forEach((item) => !!!num && !!item.aksiya && setNum("aksiya"));
 
-// install Swiper modules
+    // install Swiper modules
     SwiperCore.use([Navigation]);
 
     useEffect(() => {
@@ -152,18 +162,18 @@ function Home({addCompare}) {
         <div className="wrapper">
             <>
                 <StyledModal title="Saralangan moshinalar" visible={isModalVisible} onOk={handleOk}
-                             onCancel={handleCancel}
-                             className="w100" style={{width: "100%", resize: "auto"}}>
-                    <Row style={{width: "100%"}}>
+                    onCancel={handleCancel}
+                    className="w100" style={{ width: "100%", resize: "auto" }}>
+                    <Row style={{ width: "100%" }}>
                         {fCars.length > 0 &&
-                        fCars.map((car, index) => {
+                            fCars.map((car, index) => {
                                 return (
                                     <Col xl={8} md={12} sm={24}>
-                                        <CardCar key={index} car={car} addCompare={addCompare}/>
+                                        <CardCar key={index} car={car} addCompare={addCompare} />
                                     </Col>
                                 )
                             }
-                        )}
+                            )}
                     </Row>
                 </StyledModal>
             </>
@@ -174,49 +184,47 @@ function Home({addCompare}) {
                         <span>Sayt test rejimida ishlamoqda</span>
                         <span>Сайт работает в тестовом режиме</span>
                     </div>
-                    <div className="row-slide">
-                        <div className="slider__body">
-                            <h2 className="slider__body-title">{first[lang]}</h2>
-                            <div className="slider__body-descr">
-                                {second[lang]}
-                                <span>
-                  <a href="/"> {third[lang]}</a>
-                </span>
-                                {fourth[lang]}
-                            </div>
-                            <button className="slider__body-button">
-                                <a href="/">{five[lang]}</a>
-                            </button>
+                    <div className="slider__body">
+                        <h2 className="slider__body-title">{first[lang]}</h2>
+                        <div className="slider__body-descr">
+                            <p>{second[lang]}
+                                <Link to="/vikupAvto"><span> {third[lang]}</span></Link>
+                                {fourth[lang]}</p>
                         </div>
+                        <button className="slider__body-button">
+                            <a href="/">{five[lang]}</a>
+                        </button>
+                    </div>
+                    <div className="row-slide">
                         <div className="slider__container">
                             <div className="swiper swiper-slide-big">
                                 <Swiper
                                     spaceBetween={30}
-                                    autoplay={{delay: 3000, disableOnInteraction: false}}
+                                    autoplay={{ delay: 3000, disableOnInteraction: false }}
                                     loop={true}
-                                    pagination={{clickable: true}}
+                                    pagination={{ clickable: true }}
                                     modules={[Autoplay, Pagination, Navigation]}
                                     className="swiper-wrapper"
                                 >
                                     <SwiperSlide className="swiper-slide">
-                                        <a href="/">
-                                            <img src={slide_one} alt="img"/>
-                                        </a>
+                                        <p>
+                                            <img src={slide_one} alt="img" />
+                                        </p>
                                     </SwiperSlide>
                                     <SwiperSlide className="swiper-slide">
-                                        <a href="/">
-                                            <img src={slide_two} alt="img"/>
-                                        </a>
+                                        <p>
+                                            <img src={slide_two} alt="img" />
+                                        </p>
                                     </SwiperSlide>
                                     <SwiperSlide className="swiper-slide">
-                                        <a href="/">
-                                            <img src={slide_three} alt="img"/>
-                                        </a>
+                                        <p>
+                                            <img src={slide_three} alt="img" />
+                                        </p>
                                     </SwiperSlide>
                                     <SwiperSlide className="swiper-slide">
-                                        <a href="/">
-                                            <img src={slide_four} alt="img"/>
-                                        </a>
+                                        <p>
+                                            <img src={slide_four} alt="img" />
+                                        </p>
                                     </SwiperSlide>
                                 </Swiper>
                             </div>
@@ -250,24 +258,24 @@ function Home({addCompare}) {
                         <span></span>
                     </div>
                     <div className="cards__row">
-                        <Row style={{width: "100%"}}>
+                        <Row style={{ width: "100%" }}>
                             {cars.length > 0 &&
-                            cars?.map((car, index) => {
+                                cars?.map((car, index) => {
                                     if (index < 6 && car?.status) {
                                         return (
                                             <Col xxl={6} xl={8} l={8} md={12} sm={24}>
-                                                <CardCar key={index} car={car} addCompare={addCompare}/>
+                                                <CardCar key={index} car={car} addCompare={addCompare} />
                                             </Col>
                                         )
                                     }
                                 }
-                            )}
+                                )}
                         </Row>
 
                     </div>
                     <Link
                         to="/cars"
-                        style={{width: "fit-content"}}
+                        style={{ width: "fit-content" }}
                         className="cards__button"
                     >
                         {eight[lang]}
@@ -281,16 +289,16 @@ function Home({addCompare}) {
                                 <h4 className="form__item-name">{ten[lang]}</h4>
                                 <div className="form__item">
                                     <select name="met"
-                                            onChange={event => setData({
-                                                ...data,
-                                                kuzov: event.target.value
-                                            })}
+                                        onChange={event => setData({
+                                            ...data,
+                                            kuzov: event.target.value
+                                        })}
                                     >
-                                        <option value="Хетчбек">Хетчбек</option>
-                                        <option value="Кроссовер">Кроссовер</option>
-                                        <option value="Седан">Седан</option>
+                                        <option value="Хетчбек">{kuzovA[lang]}</option>
+                                        <option value="Кроссовер">{kuzovB[lang]}</option>
+                                        <option value="Седан">{kuzovC[lang]}</option>
                                         <option selected value="4">
-                                            Универсал
+                                            {kuzovD[lang]}
                                         </option>
                                     </select>
                                 </div>
@@ -300,16 +308,16 @@ function Home({addCompare}) {
                                         {data.yili_from} {"-"} {data.yili_to}
                                     </div>
                                     <Slider range min={2000} max={2023} onChange={onChange1}
-                                            value={[data.yili_from, data.yili_to]}/>
+                                        value={[data.yili_from, data.yili_to]} />
                                     <Row gutter={16}>
                                         <Col span={12}>
                                             <label htmlFor="">{twelve[lang]}</label>
                                             <div>
                                                 <Input value={data?.yili_from} addonAfter='yil'
-                                                       onChange={value => setData({
-                                                           ...data,
-                                                           yili_frotwelvem: value?.target?.value
-                                                       })}
+                                                    onChange={value => setData({
+                                                        ...data,
+                                                        yili_frotwelvem: value?.target?.value
+                                                    })}
                                                 />
                                             </div>
                                         </Col>
@@ -317,10 +325,10 @@ function Home({addCompare}) {
                                             <label htmlFor="">{Gacha[lang]}</label>
                                             <div>
                                                 <Input value={data?.yili_to} addonAfter='yil'
-                                                       onChange={value => setData({
-                                                           ...data,
-                                                           yili_to: value?.target?.value
-                                                       })}
+                                                    onChange={value => setData({
+                                                        ...data,
+                                                        yili_to: value?.target?.value
+                                                    })}
                                                 />
                                             </div>
                                         </Col>
@@ -332,7 +340,7 @@ function Home({addCompare}) {
                                         {data.yurgani_from} {"-"} {data.yurgani_to}
                                     </div>
                                     <Slider range min={0} max={1000000} onChange={onChange2}
-                                            value={[data.yurgani_from, data.yurgani_to]}/>
+                                        value={[data.yurgani_from, data.yurgani_to]} />
                                     <Row gutter={16}>
                                         <Col span={12}>
                                             <div>
@@ -340,10 +348,10 @@ function Home({addCompare}) {
                                                     {twelve[lang]}
                                                 </label>
                                                 <Input value={data?.yurgani_from} addonAfter='km'
-                                                       onChange={value => setData({
-                                                           ...data,
-                                                           yurgani_from: value?.target?.value
-                                                       })}
+                                                    onChange={value => setData({
+                                                        ...data,
+                                                        yurgani_from: value?.target?.value
+                                                    })}
                                                 />
                                             </div>
                                         </Col>
@@ -353,10 +361,10 @@ function Home({addCompare}) {
                                                     {Gacha[lang]}
                                                 </label>
                                                 <Input value={data?.yurgani_to} addonAfter='km'
-                                                       onChange={value => setData({
-                                                           ...data,
-                                                           yurgani_to: value?.target?.value
-                                                       })}
+                                                    onChange={value => setData({
+                                                        ...data,
+                                                        yurgani_to: value?.target?.value
+                                                    })}
                                                 />
                                             </div>
                                         </Col>
@@ -368,16 +376,16 @@ function Home({addCompare}) {
                                         {data.narxi_from} - {data.narxi_to} so'm
                                     </div>
                                     <Slider range min={0} max={1000000000} onChange={onChange3}
-                                            value={[data.narxi_from, data.narxi_to]}/>
+                                        value={[data.narxi_from, data.narxi_to]} />
                                     <Row gutter={16}>
                                         <Col span={12}>
                                             <div>
                                                 <label>{twelve[lang]}</label>
                                                 <Input value={data?.narxi_from} addonAfter="so'm"
-                                                       onChange={value => setData({
-                                                           ...data,
-                                                           narxi_from: value?.target?.value
-                                                       })}
+                                                    onChange={value => setData({
+                                                        ...data,
+                                                        narxi_from: value?.target?.value
+                                                    })}
                                                 />
                                             </div>
                                         </Col>
@@ -385,16 +393,16 @@ function Home({addCompare}) {
                                             <div>
                                                 <label>{Gacha[lang]}</label>
                                                 <Input value={data?.narxi_to} addonAfter="so'm"
-                                                       onChange={value => setData({
-                                                           ...data,
-                                                           narxi_to: value?.target?.value
-                                                       })}
+                                                    onChange={value => setData({
+                                                        ...data,
+                                                        narxi_to: value?.target?.value
+                                                    })}
                                                 />
                                             </div>
                                         </Col>
                                     </Row>
                                 </div>
-                                <div style={{marginTop: "50px"}}>
+                                <div style={{ marginTop: "50px" }}>
                                     <button className="form__button" onClick={() => handleModal()}>{nine[lang]}</button>
                                 </div>
                             </div>
@@ -402,24 +410,24 @@ function Home({addCompare}) {
                                 <h3 className="form__title">{NarxiniAniqlash[lang]}</h3>
                                 <h4 className="form__item-name">{Marka[lang]}</h4>
                                 <div className="form__item">
-                                    <input type="text" placeholder="Марка вашего автомобиля"/>
+                                    <input type="text" placeholder={narxiA[lang]} />
                                 </div>
                                 <h4 className="form__item-name">{Model[lang]}</h4>
                                 <div className="form__item">
-                                    <input type="text" placeholder="Модель вашего автомобиля"/>
+                                    <input type="text" placeholder={narxiB[lang]} />
                                 </div>
                                 <h4 className="form__item-name">{eleven[lang]}</h4>
                                 <div className="form__item">
                                     <input
-                                        type="text"
-                                        placeholder="Год выпуска вашего автомобиля (цифрами). Например: 2007"
+                                        type="number"
+                                        placeholder={narxiC[lang]}
                                     />
                                 </div>
                                 <h4 className="form__item-name">{Probeg[lang]}</h4>
                                 <div className="form__item">
                                     <input
-                                        type="text"
-                                        placeholder="Пробег в км. вашего автомобиля (цифрами). Например: 25000"
+                                        type="number"
+                                        placeholder={narxiD[lang]}
                                     />
                                 </div>
                                 <h4 className="form__item-name form__item-name-row">
@@ -427,16 +435,16 @@ function Home({addCompare}) {
                                 </h4>
                                 <div className="form__list">
                                     <div className="form__item">
-                                        <input type="text" placeholder="Ваше Имя"/>
+                                        <input type="text" placeholder={m1[lang]} />
                                     </div>
                                     <div className="form__item">
-                                        <input type="text" placeholder="Ваш Телефон"/>
+                                        <input type="number" placeholder={m2[lang]} />
                                     </div>
                                     <div className="form__item">
-                                        <input type="text" placeholder="Ваш Email"/>
+                                        <input type="email" placeholder={mailA[lang]} />
                                     </div>
                                 </div>
-                                <button className="form__button">{Narxi[lang]}</button>
+                                <button className="form__button narx-aniqla">{NarxiniAniqlash[lang]}</button>
                             </div>
                         </div>
                     </div>
@@ -465,45 +473,45 @@ function Home({addCompare}) {
                                 }}
                                 spaceBetween={30}
                                 modules={[Navigation, Pagination, Scrollbar, A11y]}
-                                pagination={{clickable: true}}
+                                pagination={{ clickable: true }}
                                 className="cards-slider__cadrs swiper-wrapper"
                             >
                                 {cars?.length &&
-                                cars?.map(
-                                    (item, index) => {
-                                        if (item.aksiya === "Aksiya" && item?.status)
-                                            return (
-                                                <SwiperSlide className="swiper-slide" key={index}>
-                                                    <div className=" cards-slider__card card">
-                                                        <div className="card__img">
-                                                            <img src={item.photo[0]} alt="img" className="img"/>
+                                    cars?.map(
+                                        (item, index) => {
+                                            if (item.aksiya === "Aksiya" && item?.status)
+                                                return (
+                                                    <SwiperSlide className="swiper-slide" key={index}>
+                                                        <div className=" cards-slider__card card">
+                                                            <div className="card__img">
+                                                                <img src={item.photo[0]} alt="img" className="img" />
+                                                            </div>
+                                                            <a href=" " className="card__title">
+                                                                {item.madel}
+                                                            </a>
+                                                            <ul className="card__info"></ul>
+                                                            <div className="card__line"></div>
+                                                            <div className="card__price">
+                                                                <strong className="red">
+                                                                    {Number(item.narxi)
+                                                                        .toLocaleString()
+                                                                        .replace(/,/g, " ")}
+                                                                </strong>{" "}
+                                                                <span>UZS</span>
+                                                            </div>
+                                                            <div className="card__buttons">
+                                                                <Link
+                                                                    to={`more/${item._id}`}
+                                                                    className="card__button-mini"
+                                                                >
+                                                                    {Batafsil[lang]}
+                                                                </Link>
+                                                            </div>
                                                         </div>
-                                                        <a href=" " className="card__title">
-                                                            {item.madel}
-                                                        </a>
-                                                        <ul className="card__info"></ul>
-                                                        <div className="card__line"></div>
-                                                        <div className="card__price">
-                                                            <strong className="red">
-                                                                {Number(item.narxi)
-                                                                    .toLocaleString()
-                                                                    .replace(/,/g, " ")}
-                                                            </strong>{" "}
-                                                            <span>UZS</span>
-                                                        </div>
-                                                        <div className="card__buttons">
-                                                            <Link
-                                                                to={`more/${item._id}`}
-                                                                className="card__button-mini"
-                                                            >
-                                                                {Batafsil[lang]}
-                                                            </Link>
-                                                        </div>
-                                                    </div>
-                                                </SwiperSlide>
-                                            )
-                                    }
-                                )}
+                                                    </SwiperSlide>
+                                                )
+                                        }
+                                    )}
                             </Swiper>
                         </div>
                         {!!num && (
@@ -522,21 +530,21 @@ function Home({addCompare}) {
                         <div className="advantages__row">
                             <div className="advantages__item">
                                 <div className="advantages__img">
-                                    <img src={advantage_img1} alt="icons"/>
+                                    <img src={advantage_img1} alt="icons" />
                                 </div>
                                 <div className="advantages__name">{Minimal[lang]}</div>
                                 <div className="advantages__descr">{pasport[lang]}</div>
                             </div>
                             <div className="advantages__item">
                                 <div className="advantages__img">
-                                    <img src={advantage_img2} alt="icons"/>
+                                    <img src={advantage_img2} alt="icons" />
                                 </div>
                                 <div className="advantages__name">{Jozibador[lang]}</div>
                                 <div className="advantages__descr">{BizdaFoydali[lang]}</div>
                             </div>
                             <div className="advantages__item">
                                 <div className="advantages__img">
-                                    <img src={advantage_img3} alt="icons"/>
+                                    <img src={advantage_img3} alt="icons" />
                                 </div>
                                 <div className="advantages__name">{Ertaroq[lang]}</div>
                                 <div className="advantages__descr">{IstalganSana[lang]}</div>
@@ -553,29 +561,29 @@ function Home({addCompare}) {
                         <div className=" swiper clients-swiper-slide">
                             <Swiper
                                 spaceBetween={30}
-                                autoplay={{delay: 3000, disableOnInteraction: false}}
+                                autoplay={{ delay: 3000, disableOnInteraction: false }}
                                 loop={true}
                                 modules={[Autoplay, Pagination, Navigation]}
                                 navigation={true}
-                                pagination={{clickable: true}}
+                                pagination={{ clickable: true }}
                                 className="swiper-wrapper"
                             >
                                 {clients.length &&
-                                clients?.map((item, index) => {
-                                        console.log(item,"item")
-                                    return(
-                                        <SwiperSlide className="swiper-slide" key={index}>
-                                            <div className="clients__item">
-                                                <div className="clients__img">
-                                                    <img src={item?.photo} alt="icons"/>
+                                    clients?.map((item, index) => {
+                                        console.log(item, "item")
+                                        return (
+                                            <SwiperSlide className="swiper-slide" key={index}>
+                                                <div className="clients__item">
+                                                    <div className="clients__img">
+                                                        <img src={item?.photo} alt="icons" />
+                                                    </div>
+                                                    <div className="clients__name">{item?.name}</div>
+                                                    <div className="clients__name">{item?.region}</div>
                                                 </div>
-                                                <div className="clients__name">{item?.name}</div>
-                                                <div className="clients__name">{item?.region}</div>
-                                            </div>
-                                        </SwiperSlide>
-                                    )
-                                }
-                                )}
+                                            </SwiperSlide>
+                                        )
+                                    }
+                                    )}
                             </Swiper>
                         </div>
                     </div>

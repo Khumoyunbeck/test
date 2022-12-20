@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
-import {Language} from "../../lang/Languages";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { Language } from "../../lang/Languages";
 // Import images
 import header_icon from "../../assets/icons/location.svg";
 import header_icon_two from "../../assets/icons/smartphone.svg";
@@ -15,17 +15,19 @@ import close_i from "../../assets/icons/close.png";
 import arrow_i from "../../assets/icons/arrow.png";
 import phone_i from "../../assets/icons/phone.png";
 import mail_i from "../../assets/icons/mail.png";
+import calendar_i from "../../images/calendar.png";
+import balance_i from "../../images/scales.png";
 import facebook_icon from "../../assets/icons/facebook.png";
 import telegram_i from '../../images/telegram_i.png'
 import icon_location from "../../assets/icons/location_white.png";
 import instagram_icon from "../../assets/icons/instagram.png";
-import {changeLang} from "../../store/language";
+import { changeLang } from "../../store/language";
 import "../style.css";
-import {TbHeartHandshake} from "react-icons/tb";
-import {AiOutlineCar, AiOutlineInfoCircle} from "react-icons/ai";
-import {IoStorefrontOutline} from "react-icons/io5";
-import {MdPhoneEnabled} from "react-icons/md";
-import {HiUser} from "react-icons/hi";
+import { TbHeartHandshake } from "react-icons/tb";
+import { AiOutlineCar, AiOutlineInfoCircle } from "react-icons/ai";
+import { IoStorefrontOutline } from "react-icons/io5";
+import { MdPhoneEnabled } from "react-icons/md";
+import { HiUser } from "react-icons/hi";
 
 const Header = (props) => {
     const dispatch = useDispatch();
@@ -33,7 +35,7 @@ const Header = (props) => {
     const [collapseTwoOpen, setCollapseTwoOpen] = useState(false);
     const [collapseThreeOpen, setCollapseThreeOpen] = useState(false);
 
-    const {lang} = useSelector((state) => state.lang);
+    const { lang } = useSelector((state) => state.lang);
 
     const {
         asosiy,
@@ -132,28 +134,28 @@ const Header = (props) => {
                 <div className="headers__info">
                     <div className="containers">
                         <div className="headers__location">
-                            <img src={header_icon} className="headers__icon" alt="location"/>
+                            <img src={header_icon} className="headers__icon" alt="location" />
                             <span>{adres[lang]}</span>
                             <div className="dropdown dropdown_time">
                                 <button className="dropbtn">
-                                    <span className="material-symbols-outlined">schedule</span>
+                                    <img src={calendar_i} className="headers__icon" alt="work-time" />
                                     {ishVaqt1[lang]}
                                 </button>
                                 <div className="dropdown-content">
-                  <span>
-                    <span className="material-symbols-outlined">schedule</span>
-                      {ishVaqt1[lang]}
-                  </span>
-                                    <br/>
                                     <span>
-                    <span className="material-symbols-outlined">schedule</span>
+                                        <img src={calendar_i} className="headers__icon" alt="work-time" />
+                                        {ishVaqt1[lang]}
+                                    </span>
+                                    <br />
+                                    <span>
+                                        <img src={calendar_i} className="headers__icon" alt="work-time" />
                                         {ishVaqt2[lang]}
-                  </span>
-                                    <br/>
+                                    </span>
+                                    <br />
                                     <span>
-                    <span className="material-symbols-outlined">schedule</span>
+                                        <img src={calendar_i} className="headers__icon" alt="work-time" />
                                         {ishVaqt3[lang]}
-                  </span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -173,13 +175,13 @@ const Header = (props) => {
                                     <a href="tel: +998971250988">+998 97 125-09-88</a>
                                 </div>
                             </div>
-                            <a href="mailto:info@rauto.uz" className="headers__email">
+                            <a href="mailto:@retailauto@mail.ru" className="headers__email">
                                 <img
                                     src={header_icon_three}
                                     className="headers__icon"
                                     alt="icon"
                                 />
-                                info@rauto.uz
+                                retailauto@mail.ru
                             </a>
                         </div>
                         <div className="headers__icons">
@@ -187,25 +189,25 @@ const Header = (props) => {
                                 className="translator mr-3"
                                 onClick={() => dispatch(changeLang("0"))}
                             >
-                                <img src={uzFlag} alt="translator" width="20px"/>
+                                <img src={uzFlag} alt="translator" width="20px" />
                             </button>
                             <button
                                 className="translator mr-3"
                                 onClick={() => dispatch(changeLang("1"))}
                             >
-                                <img src={ruFlag} alt="translator" width="20px"/>
+                                <img src={ruFlag} alt="translator" width="20px" />
                             </button>
                             <Link to="/compare" className="headers__icons-item">
                                 <button
                                     onClick={props.showCompare}
                                     className="material-symbols-outlined"
                                 >
-                                    balance
+                                    <img src={balance_i} className="headers__icon-compare" alt="compare-icon" />
                                 </button>
                             </Link>
-                            <a href="/" onClick={search} className="headers__icons-item">
+                            <div onClick={search} className="headers__icons-item">
                                 <div className="search-input">
-                                    <input type="text"/>
+                                    <input type="text" />
                                     <span className="close-search"></span>
                                 </div>
                                 <button className="search">
@@ -215,7 +217,7 @@ const Header = (props) => {
                                         alt="location"
                                     />
                                 </button>
-                            </a>
+                            </div>
                         </div>
                         <div className="headers__respons">
                             <div>
@@ -232,7 +234,7 @@ const Header = (props) => {
                                     onClick={props.showCompare}
                                     className="material-symbols-outlined"
                                 >
-                                    balance
+                                    <img src={balance_i} className="headers__icon" alt="work-time" />
                                 </button>
                             </Link>
                             <div className="dropdown">
@@ -404,48 +406,43 @@ const Header = (props) => {
                                             className="translator mr-3"
                                             onClick={() => dispatch(changeLang("0"))}
                                         >
-                                            <img src={uzFlag} alt="translator" width="20px"/>
+                                            <img src={uzFlag} alt="translator" width="20px" />
                                         </button>
                                         <button
                                             className="translator mr-3"
                                             onClick={() => dispatch(changeLang("1"))}
                                         >
-                                            <img src={ruFlag} alt="translator" width="20px"/>
+                                            <img src={ruFlag} alt="translator" width="20px" />
                                         </button>
                                     </div>
                                 </div>
                                 <div className="menu__block">
                                     <div className="dropdown ">
                                         <button className="dropbtn dropbtn_color">
-                      <span className="material-symbols-outlined">
-                        schedule
-                      </span>
+                                            <img src={calendar_i} className="headers__icon" alt="work-time" />
                                             {ishVaqt1[lang]}
                                         </button>
                                         <div className="dropdown-content">
-                      <span>
-                        <span className="material-symbols-outlined">
-                          schedule
-                        </span>
-                          {ishVaqt1[lang]}
-                      </span>
-                                            <br/>
                                             <span>
-                        <span className="material-symbols-outlined">
-                          schedule
-                        </span>
+                                                <img src={calendar_i} className="headers__icon" alt="work-time" />
+
+                                                {ishVaqt1[lang]}
+                                            </span>
+                                            <br />
+                                            <span>
+                                                <img src={calendar_i} className="headers__icon" alt="work-time" />
+
                                                 {ishVaqt2[lang]}
-                      </span>
-                                            <br/>
+                                            </span>
+                                            <br />
                                             <span>
-                        <span className="material-symbols-outlined">
-                          schedule
-                        </span>
+                                                <img src={calendar_i} className="headers__icon" alt="work-time" />
+
                                                 {ishVaqt3[lang]}
-                      </span>
+                                            </span>
                                         </div>
                                     </div>
-                                    <a href="#" className="headers__link">
+                                    <a href="tel: +998951690988" className="headers__link">
                                         <img
                                             src={phone_i}
                                             className="headers____icon"
@@ -453,9 +450,9 @@ const Header = (props) => {
                                         />{" "}
                                         +99895 169 09 88
                                     </a>
-                                    <a href="#" className="headers__link">
-                                        <img src={mail_i} className="headers____icon" alt="icon"/>
-                                        info@rauto.uz
+                                    <a href="mailto:@retailauto@mail.ru" className="headers__link">
+                                        <img src={mail_i} className="headers____icon" alt="icon" />
+                                        retailauto@mail.ru
                                     </a>
                                 </div>
                                 <div className="menu__block menu__social">
@@ -497,14 +494,14 @@ const Header = (props) => {
                     <div className="container">
                         <div className="headers__logo">
                             <Link to="/">
-                                <img src={logo_icon} alt="logo"/>
+                                <img src={logo_icon} alt="logo" />
                             </Link>
                         </div>
                         <nav className="headers__nav nav">
                             <p className="headers__nav-item">
-                <span className="headers__nav-icon">
-                    <IoStorefrontOutline className="iconCol"/>
-                </span>
+                                <span className="headers__nav-icon">
+                                    <IoStorefrontOutline className="iconCol" />
+                                </span>
                                 <p className="headers__nav-link tooltips">
                                     {asosiy[lang]}
                                     <ul className="tooltipstext">
@@ -518,15 +515,15 @@ const Header = (props) => {
                                 </p>
                             </p>
                             <Link to="/cars" className="headers__nav-item">
-                <span className="headers__nav-icon">
-               <AiOutlineCar  className="iconCol"/>
-                </span>
+                                <span className="headers__nav-icon">
+                                    <AiOutlineCar className="iconCol" />
+                                </span>
                                 <span className="headers__nav-link">{Avtomobillar[lang]}</span>
                             </Link>
                             <p className="headers__nav-item">
-                <span className="headers__nav-icon">
-                <TbHeartHandshake  className="iconCol"/>
-                </span>
+                                <span className="headers__nav-icon">
+                                    <TbHeartHandshake className="iconCol" />
+                                </span>
                                 <p className="headers__nav-link tooltips">
                                     {Xizmatlar[lang]}
                                     <ul className="tooltipstextt">
@@ -563,9 +560,9 @@ const Header = (props) => {
                                 </p>
                             </p>
                             <a href="" className="headers__nav-item">
-                <span className="headers__nav-icon">
-                <AiOutlineInfoCircle  className="iconCol"/>
-                </span>
+                                <span className="headers__nav-icon">
+                                    <AiOutlineInfoCircle className="iconCol" />
+                                </span>
                                 <p className="headers__nav-link tooltips">{Kompaniya[lang]}
                                     <ul className="tooltipstexttt">
                                         <Link to="/aboutus">
@@ -589,24 +586,24 @@ const Header = (props) => {
                                 </p>
                             </a>
                             <a href="" className="headers__nav-item">
-                <span className="headers__nav-icon">
-               <MdPhoneEnabled  className="iconCol"/>
-                </span>
+                                <span className="headers__nav-icon">
+                                    <MdPhoneEnabled className="iconCol" />
+                                </span>
                                 <span className="headers__nav-link">{Kontaktlar[lang]}</span>
                             </a>
                             <Link to={"/user"} className="headers__nav-item">
-                <span className="headers__nav-icon">
-           <HiUser  className="iconCol"/>
-                </span>
+                                <span className="headers__nav-icon">
+                                    <HiUser className="iconCol" />
+                                </span>
                                 <span className="headers__nav-link tooltips">
                                     {Kirish[lang]}
-                </span>
+                                </span>
                             </Link>
                         </nav>
                     </div>
                 </div>
             </header>
-            <div style={{height: 170}}/>
+            <div style={{ height: 170 }} />
         </React.Fragment>
     );
 };
